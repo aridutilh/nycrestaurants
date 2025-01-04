@@ -7,19 +7,23 @@ import streamlit as st
 def load_nyc_restaurant_data():
     """Load NYC restaurant inspection data from the Open Data API"""
     url = "https://data.cityofnewyork.us/resource/43nn-pn8j.csv"
+    return fetch_data(url)
 
+def fetch_data(url, query_params=None):
+    """Fetch data from NYC Open Data API with optional query parameters"""
     try:
-        # Read data directly from API
-        response = requests.get(url)
-        response.raise_for_status()  # Raise an exception for bad status codes
+        # Make API request with query parameters if provided
+        response = requests.get(url, params=query_params)
+        response.raise_for_status()
 
         # Read CSV data
         df = pd.read_csv(io.StringIO(response.text))
 
+        if df.empty:
+            return pd.DataFrame()
+
         # Clean and process the data
         df['inspection_date'] = pd.to_datetime(df['inspection_date'], errors='coerce')
-
-        # Drop rows with missing critical values
         df = df.dropna(subset=['latitude', 'longitude', 'score'])
 
         # Convert score to numeric, handling missing values
@@ -30,58 +34,44 @@ def load_nyc_restaurant_data():
         # Add year column for time-lapse
         df['year'] = df['inspection_date'].dt.year
 
-        # Fill NA values in string columns with empty strings for better search
+        # Fill NA values in string columns with empty strings
         string_columns = ['dba', 'building', 'street', 'grade']
         df[string_columns] = df[string_columns].fillna('')
-
-        # Ensure all necessary columns exist
-        required_columns = ['dba', 'building', 'street', 'score', 'grade', 
-                          'latitude', 'longitude', 'year']
-
-        if not all(col in df.columns for col in required_columns):
-            missing_cols = [col for col in required_columns if col not in df.columns]
-            raise ValueError(f"Missing required columns: {missing_cols}")
 
         return df
 
     except requests.RequestException as e:
         st.error(f"Error fetching data from API: {str(e)}")
         return pd.DataFrame()
-    except ValueError as e:
-        st.error(f"Error processing data: {str(e)}")
-        return pd.DataFrame()
     except Exception as e:
         st.error(f"Unexpected error: {str(e)}")
         return pd.DataFrame()
 
-def filter_data_by_year(df, year):
-    """Filter dataset by specific year"""
-    return df[df['year'] == year]
-
 def search_restaurants(df, query):
-    """Search restaurants by name or address"""
-    if df is None or df.empty:
-        return pd.DataFrame()
-
-    query = query.lower().strip()
+    """Search restaurants using direct API query"""
     if not query:
         return pd.DataFrame()
 
-    # Create a combined search field for better matching
-    df['search_text'] = (
-        df['dba'].str.lower() + ' ' + 
-        df['building'].str.lower() + ' ' + 
-        df['street'].str.lower()
-    )
+    # API endpoint for searching
+    base_url = "https://data.cityofnewyork.us/resource/43nn-pn8j.csv"
 
-    # Search in the combined field
-    mask = df['search_text'].str.contains(query, na=False)
+    # Construct API query parameters
+    query = query.lower().strip()
+    query_params = {
+        '$where': f"lower(dba) like '%{query}%' OR lower(building) like '%{query}%' OR lower(street) like '%{query}%'",
+        '$order': 'inspection_date DESC',
+        '$limit': 50
+    }
 
-    # Get unique restaurants (latest inspection for each)
-    results = df[mask].sort_values('inspection_date', ascending=False)
-    results = results.drop_duplicates(subset=['camis'])
+    # Fetch fresh data from API with search parameters
+    results = fetch_data(base_url, query_params)
 
-    # Drop the temporary search column
-    results = results.drop(columns=['search_text'])
+    if not results.empty:
+        # Get unique restaurants (latest inspection for each)
+        results = results.drop_duplicates(subset=['camis'])
 
-    return results.head(50)  # Limit to 50 results for better performance
+    return results
+
+def filter_data_by_year(df, year):
+    """Filter dataset by specific year"""
+    return df[df['year'] == year]
