@@ -5,7 +5,7 @@ port = 5000
 
 [theme]
 primaryColor = "#FF6B00"  # Warm Garfield Orange
-backgroundColor = "#FFF8F0"  # Soft Cream
-secondaryBackgroundColor = "#FFF4E6"  # Light Orange
-textColor = "#333333"  # Dark Gray for better readability
-font = "sans serif"
+backgroundColor = "#1A1A1A"  # Dark background
+secondaryBackgroundColor = "#252525"  # Darker cards
+textColor = "#E1E1E1"  # Light text for contrast
+font = "Inter"
