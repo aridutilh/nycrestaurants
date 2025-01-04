@@ -1,43 +1,118 @@
-/* Pizza Parlor Theme Styling */
-@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Roboto:wght@400;700&display=swap');
+/* Garfield-themed Pizza Parlor Styling */
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Comic+Neue:wght@400;700&display=swap');
 
 .stApp {
     background-image: 
         linear-gradient(rgba(255,255,255,0.95), rgba(255,255,255,0.95)),
-        repeating-linear-gradient(45deg, #f5f5f5 0px, #f5f5f5 10px, #ffffff 10px, #ffffff 20px);
+        repeating-linear-gradient(45deg, #FFF4E6 0px, #FFF4E6 10px, #ffffff 10px, #ffffff 20px);
 }
 
 .main-header {
     font-family: 'Lobster', cursive;
-    color: #D73502;
+    color: #FF6B00;
     text-align: center;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
     padding: 1rem;
+    margin-bottom: 2rem;
+}
+
+.main-header h1 {
+    font-size: 3rem !important;
+    margin-bottom: 0.5rem !important;
+}
+
+.main-header p {
+    font-family: 'Comic Neue', cursive !important;
+    font-size: 1.2rem !important;
+    color: #666;
 }
 
 .search-container {
     background: white;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(255, 107, 0, 0.1);
+    border: 2px solid #FF6B00;
+    margin: 1rem 0;
 }
 
 .restaurant-card {
     background: white;
+    padding: 20px;
+    border-radius: 12px;
+    border-left: 5px solid #FF6B00;
+    margin: 15px 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease;
+}
+
+.restaurant-card:hover {
+    transform: translateX(5px);
+}
+
+.restaurant-card h2 {
+    color: #FF6B00;
+    font-family: 'Comic Neue', cursive;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.violation-details {
+    background: #FFF4E6;
     padding: 15px;
     border-radius: 8px;
-    border-left: 5px solid #D73502;
-    margin: 10px 0;
+    margin-top: 10px;
+}
+
+.violation-details p {
+    font-family: 'Comic Neue', cursive;
+    margin: 8px 0;
+    line-height: 1.4;
+}
+
+/* Custom Streamlit Elements */
+.stButton button {
+    background-color: #FF6B00 !important;
+    color: white !important;
+    font-family: 'Comic Neue', cursive !important;
+    border: none !important;
+    padding: 0.5rem 1rem !important;
+    border-radius: 25px !important;
+    font-weight: bold !important;
+    transition: transform 0.2s ease !important;
+}
+
+.stButton button:hover {
+    transform: scale(1.05) !important;
 }
 
 /* Loading animation */
-@keyframes spin {
-    from {transform: rotate(0deg);}
-    to {transform: rotate(360deg);}
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
 }
 
-.loading-pizza {
-    animation: spin 2s linear infinite;
-    font-size: 2rem;
+.loading-icon {
+    font-size: 2.5rem;
     display: inline-block;
+    animation: bounce 1s infinite;
+}
+
+/* Custom tabs styling */
+.stTabs [data-baseweb="tab-list"] {
+    gap: 8px;
+    background-color: #FFF4E6;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.stTabs [data-baseweb="tab"] {
+    font-family: 'Comic Neue', cursive !important;
+    font-weight: bold !important;
+    color: #666 !important;
+}
+
+.stTabs [aria-selected="true"] {
+    background-color: #FF6B00 !important;
+    color: white !important;
 }
