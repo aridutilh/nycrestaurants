@@ -13,16 +13,16 @@ def get_rating_class_and_message(score):
         }
     elif score <= 27:
         return {
-            'class': 'rating-great',
+            'class': 'rating-good',
             'icon': '😸',
-            'text': 'Great',
+            'text': 'Good',
             'message': "Not bad! Almost as good as my Monday meals!"
         }
     elif score <= 40:
         return {
-            'class': 'rating-good',
+            'class': 'rating-fine',
             'icon': '😾',
-            'text': 'Good',
+            'text': 'Fine',
             'message': "It's acceptable... but I've had better naps!"
         }
     else:

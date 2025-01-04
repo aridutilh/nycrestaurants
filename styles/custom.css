@@ -272,12 +272,12 @@ p, span, div {
     color: #4CAF50;
 }
 
-.rating-great .rating-icon {
+.rating-good .rating-icon {
     animation: wobble 3s infinite;
     color: #8BC34A;
 }
 
-.rating-good .rating-icon {
+.rating-fine .rating-icon {
     animation: spin 4s infinite linear;
     color: #FFC107;
 }
@@ -298,11 +298,11 @@ p, span, div {
     color: #4CAF50;
 }
 
-.rating-great .rating-text {
+.rating-good .rating-text {
     color: #8BC34A;
 }
 
-.rating-good .rating-text {
+.rating-fine .rating-text {
     color: #FFC107;
 }
 
