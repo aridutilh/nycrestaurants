@@ -11,8 +11,17 @@ st.set_page_config(
     page_title="NYC Restaurant Safety Explorer",
     page_icon="🍕",
     layout="wide",
-    initial_sidebar_state="collapsed"
+    initial_sidebar_state="collapsed",
+    menu_items={
+        'Get Help': None,
+        'Report a bug': None,
+        'About': None
+    }
 )
+
+# Disable session state metrics
+if 'metrics' not in st.session_state:
+    st.session_state['metrics'] = False
 
 # Load custom CSS
 with open('styles/custom.css') as f:
