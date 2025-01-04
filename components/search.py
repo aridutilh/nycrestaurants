@@ -20,9 +20,13 @@ def render_search(df):
             if len(results) > 0:
                 st.write(f"Found {len(results)} results:")
 
-                for _, row in results.iterrows():
-                    with st.expander(f"🏪 {row['dba']} - {row['building']} {row['street']}"):
-                        render_restaurant_details(row)
+                # Create columns for the grid layout
+                cols = st.columns(2)
+                for idx, row in results.iterrows():
+                    col_idx = idx % 2
+                    with cols[col_idx]:
+                        with st.expander(f"🏪 {row['dba']} - {row['building']} {row['street']}"):
+                            render_restaurant_details(row)
             else:
                 st.warning("No restaurants found matching your search.")
 
