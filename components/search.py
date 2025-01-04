@@ -20,13 +20,26 @@ def render_search(df):
             if len(results) > 0:
                 st.write(f"Found {len(results)} results:")
 
-                # Create columns for the grid layout
-                cols = st.columns(2)
+                # Create a container for search results
+                st.markdown("""
+                    <style>
+                    .search-results {
+                        display: grid;
+                        grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+                        gap: 20px;
+                        padding: 10px;
+                    }
+                    </style>
+                    <div class='search-results'>
+                """, unsafe_allow_html=True)
+
+                # Calculate optimal number of columns based on screen width
+                
                 for idx, row in results.iterrows():
-                    col_idx = idx % 2
-                    with cols[col_idx]:
-                        with st.expander(f"🏪 {row['dba']} - {row['building']} {row['street']}"):
-                            render_restaurant_details(row)
+                    with st.expander(f"🏪 {row['dba']} - {row['building']} {row['street']}", expanded=False):
+                        render_restaurant_details(row)
+
+                st.markdown("</div>", unsafe_allow_html=True)
             else:
                 st.warning("No restaurants found matching your search.")
 

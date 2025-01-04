@@ -43,28 +43,33 @@
     margin: 1.5rem 0;
 }
 
-.search-results-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-    margin-top: 20px;
+/* Improved grid layout for search results */
+.stExpander {
+    border: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+/* Override Streamlit's default expander styles */
+.streamlit-expanderHeader {
+    background-color: #2A2A2A !important;
+    border-radius: 12px !important;
+    border: 1px solid rgba(255,107,0,0.1) !important;
+    margin-bottom: 10px !important;
+}
+
+.streamlit-expanderContent {
+    border: none !important;
+    background: transparent !important;
 }
 
 .restaurant-card {
     background: #2A2A2A;
     padding: 20px;
     border-radius: 15px;
-    border-left: 6px solid #FF6B00;
-    margin: 20px 0;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    border: 1px solid rgba(255,107,0,0.1);
+    margin-bottom: 20px;
     transition: all 0.3s ease;
-    height: fit-content;
-}
-
-.restaurant-card:hover {
-    transform: translateX(5px);
-    box-shadow: 0 6px 16px rgba(255,107,0,0.2);
-    background: #2F2F2F;
 }
 
 .restaurant-card h2 {
@@ -76,6 +81,7 @@
     letter-spacing: -0.02em;
 }
 
+/* Enhanced info grid layout */
 .restaurant-info-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -85,7 +91,7 @@
 
 .restaurant-info-item {
     background: #252525;
-    padding: 10px;
+    padding: 12px;
     border-radius: 8px;
     border: 1px solid rgba(255,107,0,0.1);
 }
@@ -97,23 +103,42 @@
     font-size: 0.9rem;
 }
 
+/* Improved violation details section */
 .violation-details {
     background: #252525;
     padding: 20px;
     border-radius: 12px;
-    margin-top: 15px;
-    border: 1px solid rgba(255,107,0,0.1);
+    margin: 15px 0;
+    border: 1px solid rgba(255,107,0,0.2);
+}
+
+.violation-details strong {
+    color: #FF6B00;
+    display: block;
+    margin-bottom: 8px;
+    font-size: 1rem;
 }
 
 .violation-details p {
-    font-family: 'Inter', sans-serif;
-    margin: 10px 0;
-    line-height: 1.6;
-    color: #E1E1E1;
-    opacity: 0.9;
+    margin: 8px 0;
+    line-height: 1.4;
 }
 
-/* Custom Streamlit Elements */
+/* Map container styling */
+.map-container {
+    margin-top: 20px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(255,107,0,0.1);
+}
+
+.search-results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
 .stButton button {
     background: linear-gradient(135deg, #FF6B00 0%, #FF8534 100%) !important;
     color: white !important;
