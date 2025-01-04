@@ -1,12 +1,12 @@
-/* Modern Dark Theme with Garfield Accents */
+/* Modern Retro Theme with Grid Pattern */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 .stApp {
-    background-color: #FFA07A;
+    background-color: #FFBE76;
     background-image: 
-        linear-gradient(rgba(255, 160, 122, 0.97), rgba(255, 160, 122, 0.97)),
-        repeating-linear-gradient(0deg, transparent 0px, transparent 49px, rgba(248, 150, 112, 0.2) 50px),
-        repeating-linear-gradient(90deg, transparent 0px, transparent 49px, rgba(248, 150, 112, 0.2) 50px);
+        linear-gradient(rgba(255, 190, 118, 0.97), rgba(255, 190, 118, 0.97)),
+        repeating-linear-gradient(0deg, transparent 0px, transparent 49px, rgba(250, 145, 29, 0.2) 50px),
+        repeating-linear-gradient(90deg, transparent 0px, transparent 49px, rgba(250, 145, 29, 0.2) 50px);
 }
 
 /* Main container styling */
@@ -16,9 +16,9 @@
     text-align: center;
     padding: 2rem;
     margin: 2rem auto;
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.95);
     border-radius: 20px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 32px rgba(250, 145, 29, 0.15);
     max-width: 1200px;
 }
 
@@ -31,7 +31,6 @@
 }
 
 .main-header p {
-    font-family: 'Inter', sans-serif !important;
     font-size: 1.3rem !important;
     color: #333;
     font-weight: 400;
@@ -39,10 +38,10 @@
 
 /* Search container and results */
 .search-container {
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.95);
     padding: 2rem;
     border-radius: 20px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 32px rgba(250, 145, 29, 0.15);
     margin: 2rem auto;
     max-width: 1200px;
 }
@@ -58,7 +57,7 @@
 .stExpander {
     background: white !important;
     border-radius: 20px !important;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1) !important;
+    box-shadow: 0 4px 16px rgba(250, 145, 29, 0.15) !important;
     transition: transform 0.3s ease;
 }
 
@@ -89,10 +88,10 @@
 }
 
 .restaurant-info-item {
-    background: rgba(255, 160, 122, 0.1);
+    background: rgba(250, 145, 29, 0.1);
     padding: 1rem;
     border-radius: 12px;
-    border: 2px solid rgba(255, 160, 122, 0.2);
+    border: 2px solid rgba(250, 145, 29, 0.2);
 }
 
 .restaurant-info-item strong {
@@ -108,9 +107,9 @@
     padding: 1.5rem;
     text-align: center;
     margin: 1rem 0;
-    background: rgba(255, 160, 122, 0.1);
+    background: white;
     border-radius: 16px;
-    border: 2px solid rgba(255, 160, 122, 0.2);
+    border: 2px solid rgba(250, 145, 29, 0.2);
 }
 
 .rating-icon {
@@ -120,85 +119,56 @@
 }
 
 .rating-text {
-    font-family: 'Inter', sans-serif;
     font-size: 1.2rem;
     font-weight: bold;
-    color: #1A1A1A;
     margin: 0.5rem 0;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    display: inline-block;
 }
 
 .rating-message {
-    font-family: 'Inter', sans-serif;
     font-style: italic;
     color: #666;
+    margin-top: 0.5rem;
 }
 
-/* Rating animations */
-@keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+/* Rating specific styles */
+.rating-excellent .rating-text {
+    background: #61CBBE;
+    color: white;
 }
 
-.rating-excellent .rating-icon {
-    animation: bounce 2s infinite;
-    color: #4CAF50;
+.rating-good .rating-text {
+    background: #61CBBE;
+    opacity: 0.8;
+    color: white;
 }
 
-.rating-good .rating-icon {
-    animation: bounce 2.5s infinite;
-    color: #8BC34A;
+.rating-fine .rating-text {
+    background: #FA911D;
+    color: white;
 }
 
-.rating-fine .rating-icon {
-    animation: bounce 3s infinite;
-    color: #FFC107;
-}
-
-.rating-poor .rating-icon {
-    animation: bounce 1.5s infinite;
-    color: #F44336;
-}
-
-/* Map styling */
-.map-container {
-    margin-top: 1.5rem;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-}
-
-/* Button styling */
-.stButton button {
-    background: #1A1A1A !important;
-    color: white !important;
-    font-family: 'Inter', sans-serif !important;
-    border: none !important;
-    padding: 0.8rem 1.5rem !important;
-    border-radius: 12px !important;
-    font-weight: 600 !important;
-    transition: all 0.3s ease !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
-}
-
-.stButton button:hover {
-    transform: translateY(-2px) !important;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2) !important;
+.rating-poor .rating-text {
+    background: #FA911D;
+    opacity: 0.8;
+    color: white;
 }
 
 /* Input styling */
 .stTextInput input {
     background: white !important;
-    border: 2px solid rgba(255, 160, 122, 0.2) !important;
+    border: 2px solid rgba(250, 145, 29, 0.2) !important;
     border-radius: 12px !important;
     padding: 0.8rem 1rem !important;
-    font-family: 'Inter', sans-serif !important;
     color: #1A1A1A !important;
     transition: all 0.3s ease !important;
 }
 
 .stTextInput input:focus {
-    border-color: #FF6B00 !important;
-    box-shadow: 0 0 0 4px rgba(255, 160, 122, 0.2) !important;
+    border-color: #FA911D !important;
+    box-shadow: 0 0 0 4px rgba(250, 145, 29, 0.2) !important;
 }
 
 /* Tabs styling */
@@ -207,33 +177,80 @@
     background-color: white;
     padding: 1rem;
     border-radius: 16px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 16px rgba(250, 145, 29, 0.15);
 }
 
 .stTabs [data-baseweb="tab"] {
-    font-family: 'Inter', sans-serif !important;
     font-weight: 600 !important;
     color: #666 !important;
     padding: 0.8rem 1.5rem !important;
-    background: rgba(255, 160, 122, 0.1);
+    background: rgba(250, 145, 29, 0.1);
     border-radius: 12px;
     transition: all 0.3s ease;
 }
 
 .stTabs [aria-selected="true"] {
-    background: #1A1A1A !important;
+    background: #FA911D !important;
     color: white !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Metrics styling */
+.stMetric {
+    background: white !important;
+    padding: 1rem !important;
+    border-radius: 12px !important;
+    border: 1px solid rgba(250, 145, 29, 0.2) !important;
+    box-shadow: 0 4px 16px rgba(250, 145, 29, 0.15);
+}
+
+.stMetric label {
+    color: #666 !important;
+}
+
+.stMetric .metric-value {
+    color: #FA911D !important;
+    font-weight: 600 !important;
+}
+
+/* Button styling */
+.stButton button {
+    background: #FA911D !important;
+    color: white !important;
+    border: none !important;
+    padding: 0.8rem 1.5rem !important;
+    border-radius: 12px !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+}
+
+.stButton button:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 16px rgba(250, 145, 29, 0.3) !important;
+    background: #61CBBE !important;
+}
+
+/* Map container */
+.map-container {
+    margin-top: 20px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(250, 145, 29, 0.2);
+    box-shadow: 0 4px 16px rgba(250, 145, 29, 0.15);
+}
+
+/* Text colors */
+p, span, div {
+    color: #333;
 }
 
 .restaurant-card {
     background: white;
     padding: 20px;
     border-radius: 15px;
-    border: 1px solid rgba(255,160,122,0.1);
+    border: 1px solid rgba(250,145,29,0.1);
     margin-bottom: 20px;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 16px rgba(250, 145, 29, 0.15);
 }
 
 .restaurant-card h2 {
@@ -244,7 +261,6 @@
     font-weight: 700;
     letter-spacing: -0.02em;
 }
-
 
 .search-results-grid {
     display: grid;
@@ -258,8 +274,8 @@
     padding: 20px;
     border-radius: 12px;
     margin: 15px 0;
-    border: 1px solid rgba(255,160,122,0.2);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(250,145,29,0.2);
+    box-shadow: 0 4px 16px rgba(250, 145, 29, 0.15);
 }
 
 .violation-details strong {
@@ -273,33 +289,6 @@
     margin: 8px 0;
     line-height: 1.4;
 }
-
-.map-container {
-    margin-top: 20px;
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid rgba(255,160,122,0.1);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-}
-
-.stMetric {
-    background: white !important;
-    padding: 1rem !important;
-    border-radius: 12px !important;
-    border: 1px solid rgba(255,160,122,0.1) !important;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-}
-
-.stMetric label {
-    color: #666 !important;
-    opacity: 0.8;
-}
-
-.stMetric .metric-value {
-    color: #1A1A1A !important;
-    font-weight: 600 !important;
-}
-
-p, span, div {
-    color: #333;
+.stButton button{
+  box-shadow: 0 4px 12px rgba(250, 145, 29, 0.1) !important;
 }
