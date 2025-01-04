@@ -30,6 +30,10 @@ def load_nyc_restaurant_data():
         # Add year column for time-lapse
         df['year'] = df['inspection_date'].dt.year
 
+        # Fill NA values in string columns with empty strings for better search
+        string_columns = ['dba', 'building', 'street', 'grade']
+        df[string_columns] = df[string_columns].fillna('')
+
         # Ensure all necessary columns exist
         required_columns = ['dba', 'building', 'street', 'score', 'grade', 
                           'latitude', 'longitude', 'year']
@@ -59,8 +63,25 @@ def search_restaurants(df, query):
     if df is None or df.empty:
         return pd.DataFrame()
 
-    query = query.lower()
-    mask = (df['dba'].str.lower().str.contains(query, na=False) |
-            df['building'].str.lower().str.contains(query, na=False) |
-            df['street'].str.lower().str.contains(query, na=False))
-    return df[mask].drop_duplicates(subset=['camis'])
+    query = query.lower().strip()
+    if not query:
+        return pd.DataFrame()
+
+    # Create a combined search field for better matching
+    df['search_text'] = (
+        df['dba'].str.lower() + ' ' + 
+        df['building'].str.lower() + ' ' + 
+        df['street'].str.lower()
+    )
+
+    # Search in the combined field
+    mask = df['search_text'].str.contains(query, na=False)
+
+    # Get unique restaurants (latest inspection for each)
+    results = df[mask].sort_values('inspection_date', ascending=False)
+    results = results.drop_duplicates(subset=['camis'])
+
+    # Drop the temporary search column
+    results = results.drop(columns=['search_text'])
+
+    return results.head(50)  # Limit to 50 results for better performance

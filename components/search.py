@@ -1,21 +1,22 @@
 import streamlit as st
+import pandas as pd
 from utils.data_loader import search_restaurants
 
 def render_search(df):
     """Render the restaurant search component"""
     st.markdown("<div class='search-container'>", unsafe_allow_html=True)
-    
+
     search_query = st.text_input(
         "Search restaurants by name or address",
         placeholder="Enter restaurant name or address..."
     )
-    
+
     if search_query:
         results = search_restaurants(df, search_query)
-        
+
         if len(results) > 0:
             st.write(f"Found {len(results)} results:")
-            
+
             for _, row in results.iterrows():
                 st.markdown(
                     f"""
@@ -30,5 +31,5 @@ def render_search(df):
                 )
         else:
             st.warning("No restaurants found matching your search.")
-    
+
     st.markdown("</div>", unsafe_allow_html=True)
