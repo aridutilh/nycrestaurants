@@ -2,10 +2,14 @@
 headless = true
 address = "0.0.0.0"
 port = 5000
+enableCORS = false
+enableXsrfProtection = false
+maxUploadSize = 200
+gatherUsageStats = false
 
 [theme]
-primaryColor = "#FF6B00"  # Warm Garfield Orange
-backgroundColor = "#1A1A1A"  # Dark background
-secondaryBackgroundColor = "#252525"  # Darker cards
-textColor = "#E1E1E1"  # Light text for contrast
-font = "Inter"
+primaryColor = "#FA911D"  # Warm accent orange
+backgroundColor = "#FFBE76"  # Warm background
+secondaryBackgroundColor = "#FFFFFF"  # White for cards
+textColor = "#1A1A1A"  # Dark text for contrast
+font = "sans serif"
