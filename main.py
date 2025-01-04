@@ -77,21 +77,43 @@ if st.session_state.data_loaded and st.session_state.data is not None:
             - Average safety score: **{avg_score:.1f}** (lower is better)
             - {worst_score:.0f} points was the highest (worst) score recorded
 
-            ### Understanding Scores
-            Restaurant scores are calculated based on violation points:
-            - **Grade A**: 0-13 points (Excellent)
-            - **Grade B**: 14-27 points (Good)
-            - **Grade C**: 28+ points (Poor)
+            ### Understanding Restaurant Grades
+            Our grading system helps you make informed dining decisions:
 
-            ### Timing Matters
-            - Inspections happen throughout the year
-            - Scores can vary by season and inspection type
-            - Regular inspections help maintain high safety standards
+            #### 🏆 Grade A (0-13 points) - Excellent
+            - Exceptional food safety practices
+            - Minor or no violations found
+            - Regular cleaning and maintenance
+            - Well-trained staff
+            - Recommended for dining
 
-            ### Data Insights
-            - Violations are weighted based on health risk
-            - Critical violations carry more points
-            - Repeat violations face stricter penalties
+            #### ⭐ Grade B (14-27 points) - Good
+            - Generally safe food handling
+            - Some violations present
+            - Issues being addressed
+            - More frequent inspections
+            - Exercise normal caution
+
+            #### ⚠️ Grade C (28+ points) - Poor
+            - Significant violations found
+            - Major food safety concerns
+            - Requires immediate attention
+            - Under close monitoring
+            - Consider alternative options
+
+            ### How Scores Are Calculated
+            - Each violation carries points based on health risk level
+            - Critical violations (food temperature, contamination): 5-7 points
+            - Major violations (facility maintenance, procedures): 3-5 points
+            - Minor violations (labeling, non-food surfaces): 1-2 points
+            - Repeat violations receive additional points
+
+            ### Making Informed Choices
+            - Always check the current grade and inspection date
+            - Lower scores indicate better performance
+            - Consider recent inspection history
+            - Look for trends in violation types
+            - Grade changes can indicate improving or declining standards
 
             ### About This Tool
             This application visualizes health inspection data from NYC's Department of Health, 
