@@ -4,6 +4,17 @@ from utils.map_utils import create_restaurant_map
 
 def render_restaurant_details(row):
     """Render detailed view for a single restaurant"""
+    violation_details = ""
+    if pd.notna(row['violation_code']):
+        violation_details = f"""
+            <div class='violation-details'>
+                <strong>Violation Details</strong>
+                <p><strong>Code:</strong> {row['violation_code']}</p>
+                <p><strong>Description:</strong> {row['violation_description']}</p>
+                <p><strong>Action:</strong> {row['action']}</p>
+            </div>
+        """
+
     st.markdown(
         f"""
         <div class='restaurant-card'>
@@ -38,18 +49,11 @@ def render_restaurant_details(row):
                 </div>
             </div>
 
-            {f"""
-            <div class='violation-details'>
-                <strong>Violation Details</strong>
-                <p><strong>Code:</strong> {row['violation_code']}</p>
-                <p><strong>Description:</strong> {row['violation_description']}</p>
-                <p><strong>Action:</strong> {row['action']}</p>
-            </div>
-            """ if pd.notna(row['violation_code']) else ""}
+            {violation_details}
 
             <div style="margin-top: 20px;">
                 <h3>📍 Location</h3>
-                {create_restaurant_map(row)}
+                {create_restaurant_map(row).to_html()}
             </div>
         </div>
         """,
