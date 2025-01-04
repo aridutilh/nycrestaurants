@@ -21,22 +21,8 @@ def render_search(df):
                 st.write(f"Found {len(results)} results:")
 
                 for _, row in results.iterrows():
-                    st.markdown(
-                        f"""
-                        <div class='restaurant-card'>
-                            <h3>{row['dba']}</h3>
-                            <p>📍 {row['building']} {row['street']}</p>
-                            <p>🏆 Grade: {row['grade'] if pd.notna(row['grade']) else 'N/A'}</p>
-                            <p>📊 Score: {int(row['score']) if pd.notna(row['score']) else 'N/A'}</p>
-                        </div>
-                        """,
-                        unsafe_allow_html=True
-                    )
-
-                    # Add expandable section for violation history
-                    if pd.notna(row['violation_code']) or pd.notna(row['violation_description']):
-                        with st.expander("View Inspection Details"):
-                            render_restaurant_details(row)
+                    with st.expander(f"🏪 {row['dba']} - {row['building']} {row['street']}"):
+                        render_restaurant_details(row)
             else:
                 st.warning("No restaurants found matching your search.")
 

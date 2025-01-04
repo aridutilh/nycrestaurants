@@ -22,19 +22,18 @@ def render_restaurant_details(row):
     # Violations and Notes Section
     if pd.notna(row['violation_code']) or pd.notna(row['violation_description']):
         st.markdown("### 📋 Violation Details")
-        with st.expander("View Violation Information", expanded=False):
-            st.markdown(
-                f"""
-                <div class='violation-details'>
-                    <p><strong>Violation Code:</strong> {row['violation_code'] if pd.notna(row['violation_code']) else 'N/A'}</p>
-                    <p><strong>Description:</strong> {row['violation_description'] if pd.notna(row['violation_description']) else 'No description available'}</p>
-                    <p><strong>Critical Flag:</strong> {row['critical_flag'] if pd.notna(row['critical_flag']) else 'N/A'}</p>
-                    <p><strong>Action:</strong> {row['action'] if pd.notna(row['action']) else 'N/A'}</p>
-                    <p><strong>Inspection Type:</strong> {row['inspection_type'] if pd.notna(row['inspection_type']) else 'N/A'}</p>
-                </div>
-                """,
-                unsafe_allow_html=True
-            )
+        st.markdown(
+            f"""
+            <div class='violation-details'>
+                <p><strong>Violation Code:</strong> {row['violation_code'] if pd.notna(row['violation_code']) else 'N/A'}</p>
+                <p><strong>Description:</strong> {row['violation_description'] if pd.notna(row['violation_description']) else 'No description available'}</p>
+                <p><strong>Critical Flag:</strong> {row['critical_flag'] if pd.notna(row['critical_flag']) else 'N/A'}</p>
+                <p><strong>Action:</strong> {row['action'] if pd.notna(row['action']) else 'N/A'}</p>
+                <p><strong>Inspection Type:</strong> {row['inspection_type'] if pd.notna(row['inspection_type']) else 'N/A'}</p>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
 
     # Display restaurant location on map
     st.subheader("📍 Location")
