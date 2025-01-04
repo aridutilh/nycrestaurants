@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 from utils.data_loader import search_restaurants
 from components.header import render_loading
+from components.restaurant_details import render_restaurant_details
 
 def render_search(df):
     """Render the restaurant search component"""
@@ -31,6 +32,11 @@ def render_search(df):
                         """,
                         unsafe_allow_html=True
                     )
+
+                    # Add expandable section for violation history
+                    if pd.notna(row['violation_code']) or pd.notna(row['violation_description']):
+                        with st.expander("View Inspection Details"):
+                            render_restaurant_details(row)
             else:
                 st.warning("No restaurants found matching your search.")
 
