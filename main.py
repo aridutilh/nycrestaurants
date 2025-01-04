@@ -54,30 +54,52 @@ if st.session_state.data_loaded and st.session_state.data is not None:
         render_search(st.session_state.data)
 
     with tabs[2]:
+        # Calculate interesting statistics
+        df = st.session_state.data
+        total_inspections = len(df)
+        grade_a_count = len(df[df['grade'] == 'A'])
+        grade_a_percentage = (grade_a_count / total_inspections) * 100
+        avg_score = df['score'].mean()
+        worst_score = df['score'].max()
+        best_neighborhood = df.groupby('boro')['score'].mean().idxmin()
+
         st.markdown(
-            """
-            ## About This App
+            f"""
+            ## About NYC Restaurant Safety
 
-            Welcome to the NYC Restaurant Safety Explorer! This application visualizes health inspection 
-            data from restaurants across New York City, helping you make informed dining decisions.
+            When analyzing restaurant safety across New York City neighborhoods, we've discovered some 
+            fascinating patterns in our data. For instance, {best_neighborhood} leads with the best 
+            average safety scores, showing a strong commitment to food safety standards.
 
-            ### Data Source
-            Data is sourced from the [NYC Open Data API](https://data.cityofnewyork.us/Health/DOHMH-New-York-City-Restaurant-Inspection-Results/43nn-pn8j) 
-            and is updated regularly.
-
-            ### How to Use
-            - Use the Map View to explore restaurant safety scores across NYC
-            - Search for specific restaurants by name or address
-            - View detailed inspection history and violation information
-            - Use the time-lapse feature to see changes over years
+            ### By the Numbers
+            - **{total_inspections:,}** total inspections conducted
+            - **{grade_a_percentage:.1f}%** of restaurants maintain an A grade
+            - Average safety score: **{avg_score:.1f}** (lower is better)
+            - {worst_score:.0f} points was the highest (worst) score recorded
 
             ### Understanding Scores
-            - Lower scores are better
-            - Grade A: 0-13 points
-            - Grade B: 14-27 points
-            - Grade C: 28+ points
+            Restaurant scores are calculated based on violation points:
+            - **Grade A**: 0-13 points (Excellent)
+            - **Grade B**: 14-27 points (Good)
+            - **Grade C**: 28+ points (Poor)
 
-            Created with ❤️ for NYC's food scene
+            ### Timing Matters
+            - Inspections happen throughout the year
+            - Scores can vary by season and inspection type
+            - Regular inspections help maintain high safety standards
+
+            ### Data Insights
+            - Violations are weighted based on health risk
+            - Critical violations carry more points
+            - Repeat violations face stricter penalties
+
+            ### About This Tool
+            This application visualizes health inspection data from NYC's Department of Health, 
+            helping you make informed dining decisions. Data is sourced from the 
+            [NYC Open Data API](https://data.cityofnewyork.us/Health/DOHMH-New-York-City-Restaurant-Inspection-Results/43nn-pn8j) 
+            and updated regularly.
+
+            Created with ❤️ for NYC's diverse food scene
             """
         )
 
