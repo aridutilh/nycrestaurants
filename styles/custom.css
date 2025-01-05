@@ -77,7 +77,7 @@ header[data-testid="stHeader"] {
 .stTextInput > div {
     position: relative;
     z-index: 1000;
-    background: var(--bg-white);
+    background: transparent;
 }
 
 .stTextInput input {
@@ -588,8 +588,8 @@ p, span, div {
 div[data-testid="block-container"] > div:first-child {
     position: relative;
     z-index: 100;
-    margin-top: 4rem !important; /* Increased margin to lower the section */
-    background: var(--bg-white);
+    margin-top: 4rem !important;
+    background: transparent;
 }
 
 /* Ensure content below search stays behind */
@@ -601,7 +601,7 @@ div[data-testid="block-container"] > div:first-child {
 
 /* Add spacing between search and stats section */
 div[data-testid="block-container"] > div:first-child {
-    margin-top: 6rem !important; /* Increased margin to lower the section */
+    margin-top: 6rem !important;
     position: relative;
     z-index: 1;
 }
@@ -616,9 +616,9 @@ div[data-testid="block-container"] > div:first-child {
 
 /* Add extra spacing and background for statistics section */
 h2[id^="restaurant-safety-at-a-glance"] {
-    margin-top: 4rem !important; /* Increased margin */
+    margin-top: 4rem !important;
     position: relative;
     z-index: 1;
-    background: var(--bg-white);
+    background: transparent;
     padding-top: 1.5rem !important;
 }
