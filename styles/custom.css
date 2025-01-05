@@ -1,12 +1,12 @@
-/* Minimalist Theme */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+/* Minimalist Editorial Theme */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&display=swap');
 
 :root {
-    --accent-yellow: #FFBE76;
-    --accent-red: #FF4757;
+    --accent-yellow: #FFD43B;
+    --accent-red: #E74C3C;
     --bg-white: #FFFFFF;
-    --text-primary: #1A1A1A;
-    --text-secondary: #666666;
+    --text-primary: #000000;
+    --text-secondary: #6B7280;
     --border-light: #E5E5E5;
 }
 
@@ -18,34 +18,38 @@
 /* Header Styling */
 .simple-header {
     text-align: center;
-    padding: 2rem 0;
-    margin-bottom: 2rem;
+    padding: 3rem 0;
+    margin-bottom: 3rem;
+    border-bottom: 1px solid var(--border-light);
 }
 
 .simple-header h1 {
-    font-family: 'Inter', sans-serif !important;
-    font-size: 3.5rem !important;
+    font-family: 'Fraunces', serif !important;
+    font-size: 3.75rem !important;
     color: var(--text-primary);
-    font-weight: 800 !important;
-    letter-spacing: -0.03em;
+    font-weight: 600 !important;
+    letter-spacing: -0.02em;
     line-height: 1.1;
     margin: 0 !important;
 }
 
 .subheader {
     font-family: 'Inter', sans-serif;
-    font-size: 1.1rem;
+    font-size: 1.125rem;
     color: var(--text-secondary);
-    margin-top: 1rem;
+    margin-top: 1.5rem;
     font-weight: 400;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* Clean Card Styling */
 .stExpander {
     background: var(--bg-white) !important;
     border: 1px solid var(--border-light) !important;
-    border-radius: 8px !important;
-    padding: 1.25rem !important;
+    border-radius: 4px !important;
+    padding: 1.5rem !important;
     margin: 1rem 0 !important;
 }
 
@@ -53,7 +57,7 @@
 .stTextInput input {
     background: var(--bg-white) !important;
     border: 1px solid var(--border-light) !important;
-    border-radius: 6px !important;
+    border-radius: 4px !important;
     padding: 0.75rem !important;
     font-family: 'Inter', sans-serif !important;
     color: var(--text-primary) !important;
@@ -61,30 +65,31 @@
 }
 
 .stTextInput input:focus {
-    border-color: var(--accent-yellow) !important;
+    border-color: var(--text-primary) !important;
     box-shadow: none !important;
 }
 
 /* Metrics Styling */
 .stMetric {
     background: var(--bg-white) !important;
-    padding: 1.25rem !important;
-    border-radius: 8px !important;
+    padding: 1.5rem !important;
+    border-radius: 4px !important;
     border: 1px solid var(--border-light) !important;
 }
 
 .stMetric label {
     color: var(--text-secondary) !important;
     font-family: 'Inter', sans-serif !important;
-    font-size: 0.9rem !important;
+    font-size: 0.875rem !important;
     font-weight: 500 !important;
+    letter-spacing: 0.025em;
 }
 
 .stMetric .metric-value {
     color: var(--text-primary) !important;
-    font-family: 'Inter', sans-serif !important;
-    font-size: 1.75rem !important;
-    font-weight: 700 !important;
+    font-family: 'Fraunces', serif !important;
+    font-size: 2rem !important;
+    font-weight: 600 !important;
 }
 
 /* Tabs Styling */
@@ -100,20 +105,21 @@
     font-weight: 500 !important;
     color: var(--text-secondary) !important;
     padding: 0.5rem 1rem !important;
-    border-radius: 6px;
+    border-radius: 0;
 }
 
 .stTabs [aria-selected="true"] {
-    background: var(--accent-yellow) !important;
+    background: transparent !important;
     color: var(--text-primary) !important;
+    border-bottom: 2px solid var(--text-primary) !important;
 }
 
 /* Simple Loading Animation */
 .loading-spinner {
-    width: 40px;
-    height: 40px;
-    border: 3px solid #f3f3f3;
-    border-top: 3px solid var(--accent-yellow);
+    width: 32px;
+    height: 32px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid var(--text-primary);
     border-radius: 50%;
     animation: spin 1s linear infinite;
     margin: 2rem auto;
@@ -128,43 +134,47 @@
 .restaurant-info-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-    margin: 1rem 0;
+    gap: 1.5rem;
+    margin: 1.5rem 0;
 }
 
 .restaurant-info-item {
-    padding: 1rem;
-    border-radius: 6px;
-    background: #f8f8f8;
+    padding: 1.5rem;
+    border-radius: 4px;
+    background: #fafafa;
 }
 
 .restaurant-info-item strong {
     color: var(--text-primary);
     display: block;
     margin-bottom: 0.5rem;
-    font-size: 0.9rem;
+    font-size: 0.875rem;
     font-weight: 600;
+    letter-spacing: 0.025em;
+    text-transform: uppercase;
 }
 
 /* Rating Styles */
 .rating-container {
-    padding: 1.5rem;
+    padding: 2rem;
     text-align: center;
-    margin: 1rem 0;
-    background: #f8f8f8;
-    border-radius: 6px;
+    margin: 1.5rem 0;
+    background: #fafafa;
+    border-radius: 4px;
 }
 
 .rating-text {
-    font-size: 1.1rem;
+    font-family: 'Fraunces', serif;
+    font-size: 1.25rem;
     font-weight: 600;
-    margin: 0.5rem 0;
+    margin: 0.75rem 0;
     padding: 0.5rem 1rem;
     display: inline-block;
+    letter-spacing: 0.025em;
 }
 
 .rating-excellent .rating-text {
-    color: #2ECC71;
+    color: #2F855A;
 }
 
 .rating-poor .rating-text {
@@ -173,8 +183,8 @@
 
 /* Map Container */
 .map-container {
-    margin-top: 1rem;
-    border-radius: 8px;
+    margin-top: 1.5rem;
+    border-radius: 4px;
     overflow: hidden;
     border: 1px solid var(--border-light);
 }
