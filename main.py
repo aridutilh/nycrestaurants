@@ -17,6 +17,22 @@ st.set_page_config(
     }
 )
 
+# Add meta tags for better social sharing and iMessage preview
+st.markdown("""
+    <head>
+        <title>🍕 NYC Food Safety - Restaurant Inspection Explorer</title>
+        <meta property="og:title" content="NYC Food Safety Explorer" />
+        <meta property="og:description" content="Discover restaurant inspection results across New York City. Find the safest places to eat!" />
+        <meta property="og:image" content="https://raw.githubusercontent.com/aridutilh/nycrestaurants/main/generated-icon.png" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="NYC Food Safety Explorer" />
+        <meta name="twitter:description" content="Discover restaurant inspection results across New York City. Find the safest places to eat!" />
+        <meta name="twitter:image" content="https://raw.githubusercontent.com/aridutilh/nycrestaurants/main/generated-icon.png" />
+        <link rel="icon" type="image/png" href="./generated-icon.png">
+    </head>
+""", unsafe_allow_html=True)
+
 # Load custom CSS
 with open('styles/custom.css') as f:
     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
