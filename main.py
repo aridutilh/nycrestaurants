@@ -224,7 +224,7 @@ if st.session_state.data_loaded and st.session_state.data is not None:
                     <span>© 2025 Small Spoon Software by <a href="https://aridutilh.com" target="_blank" rel="noopener noreferrer">Ari</a></span>
                 </div>
                 <div style="font-size: 0.8rem; color: #666;">
-                    All data on this website is from <a href="https://data.cityofnewyork.us/Health/DOHMH-New-York-City-Restaurant-Inspection-Results/43nn-pn8j/data_preview" target="_blank" rel="noopener noreferrer">Open Data NYC</a> | <a href="https://github.com/aridutilh/nycrestaurants" target="_blank" rel="noopener noreferrer">Find this website's code here</a>
+                    All data on this website is from <a href="https://data.cityofnewyork.us/Health/DOHMH-New-York-City-Restaurant-Inspection-Results/43nn-pn8j/data_preview" target="_blank" rel="noopener noreferrer">Open Data NYC</a> | Find this website's code <a href="https://github.com/aridutilh/nycrestaurants" target="_blank" rel="noopener noreferrer">here</a>
                 </div>
             </div>
         </div>
