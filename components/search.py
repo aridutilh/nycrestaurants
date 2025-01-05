@@ -51,13 +51,17 @@ def render_search_section(df):
 
                 # Display each result
                 for idx, row in results.iterrows():
-                    with st.container():
+                    # Create expander label with key info
+                    expander_label = (
+                        f"🏪 {row['dba']} - "
+                        f"{row['grade'] if pd.notna(row['grade']) else 'Grade N/A'} "
+                        f"(Score: {int(row['score']) if pd.notna(row['score']) else 'N/A'})"
+                    )
+
+                    with st.expander(expander_label, expanded=False):
                         st.markdown(f"""
                         <div class='restaurant-result'>
-                            <h4>🏪 {row['dba']}</h4>
                             <p>📍 {row['building']} {row['street']}, {row['boro']}</p>
-                            <p>⭐ Grade: {row['grade'] if pd.notna(row['grade']) else 'N/A'} | 
-                               Score: {int(row['score']) if pd.notna(row['score']) else 'N/A'}</p>
                             <p>📅 Inspected: {row['inspection_date'].strftime('%B %d, %Y')}</p>
                             {f"<p class='violation'>❗ {row['violation_description']}</p>" if pd.notna(row['violation_description']) else ""}
                             <div class='restaurant-details'>
@@ -75,20 +79,24 @@ def render_search_section(df):
 
             st.markdown("<div class='search-results'>", unsafe_allow_html=True)
             for _, row in recent.iterrows():
-                st.markdown(f"""
-                <div class='restaurant-result'>
-                    <h4>🏪 {row['dba']}</h4>
-                    <p>📍 {row['building']} {row['street']}, {row['boro']}</p>
-                    <p>⭐ Grade: {row['grade'] if pd.notna(row['grade']) else 'N/A'} | 
-                       Score: {int(row['score']) if pd.notna(row['score']) else 'N/A'}</p>
-                    <p>📅 Inspected: {row['inspection_date'].strftime('%B %d, %Y')}</p>
-                    {f"<p class='violation'>❗ {row['violation_description']}</p>" if pd.notna(row['violation_description']) else ""}
-                    <div class='restaurant-details'>
-                        <span>🍽️ {row['cuisine_description'] if pd.notna(row['cuisine_description']) else 'N/A'}</span>
-                        {f"<span class='critical'>⚠️ {row['critical_flag']}</span>" if pd.notna(row['critical_flag']) else ""}
+                expander_label = (
+                    f"🏪 {row['dba']} - "
+                    f"{row['grade'] if pd.notna(row['grade']) else 'Grade N/A'} "
+                    f"(Score: {int(row['score']) if pd.notna(row['score']) else 'N/A'})"
+                )
+
+                with st.expander(expander_label, expanded=False):
+                    st.markdown(f"""
+                    <div class='restaurant-result'>
+                        <p>📍 {row['building']} {row['street']}, {row['boro']}</p>
+                        <p>📅 Inspected: {row['inspection_date'].strftime('%B %d, %Y')}</p>
+                        {f"<p class='violation'>❗ {row['violation_description']}</p>" if pd.notna(row['violation_description']) else ""}
+                        <div class='restaurant-details'>
+                            <span>🍽️ {row['cuisine_description'] if pd.notna(row['cuisine_description']) else 'N/A'}</span>
+                            {f"<span class='critical'>⚠️ {row['critical_flag']}</span>" if pd.notna(row['critical_flag']) else ""}
+                        </div>
                     </div>
-                </div>
-                """, unsafe_allow_html=True)
+                    """, unsafe_allow_html=True)
             st.markdown("</div>", unsafe_allow_html=True)
 
     except Exception as e:
