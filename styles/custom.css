@@ -59,7 +59,7 @@ header[data-testid="stHeader"] {
     max-width: 800px !important;
     padding: 0 1rem;
     position: relative;
-    z-index: 9999 !important;
+    z-index: 1000 !important;
     background: var(--bg-white);
     pointer-events: auto !important;
 }
@@ -125,6 +125,10 @@ div[data-testid="stFormSubmitButton"] button:focus,
 .search-results {
     margin-top: 2rem !important;
     padding-top: 1rem !important;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
 }
 
 .header-links {
@@ -516,13 +520,6 @@ p, span, div {
 }
 
 /* Adding new styles for search results */
-.search-results {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin-top: 1rem;
-}
-
 .restaurant-result {
     background: white;
     border: 1px solid #E5E5E5;
@@ -591,7 +588,7 @@ p, span, div {
 
 /* Ensure content below search stays behind */
 .block-container {
-    padding-top: 1rem;
+    padding-top: 3rem !important;
     z-index: 1;
     position: relative;
 }
@@ -599,4 +596,17 @@ p, span, div {
 /* Fix streamlit elements positioning */
 .stApp > div:first-child {
     z-index: auto !important;
+}
+
+/* Add spacing between search and stats section */
+div[data-testid="block-container"] > div:first-child {
+    margin-top: 2rem !important;
+}
+
+/* Ensure statistics section doesn't overlap */
+.element-container:has(h2) {
+    position: relative;
+    z-index: 1;
+    margin-top: 3rem !important;
+    padding-top: 1rem !important;
 }
