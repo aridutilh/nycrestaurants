@@ -15,21 +15,12 @@ header[data-testid="stHeader"] {
     display: none !important;
 }
 
-/* Main container and global containment */
-body {
-    overflow-x: hidden !important;
-    width: 100% !important;
-    position: relative !important;
-}
-
 /* Main container */
 .stApp {
     background: var(--background-color);
     padding: 0 !important;
     width: 100% !important;
     overflow-x: hidden !important;
-    position: relative !important;
-    max-width: 100vw !important;
 }
 
 /* Block container adjustments */
@@ -38,7 +29,6 @@ body {
     max-width: var(--max-content-width) !important;
     margin: 0 auto !important;
     width: 100% !important;
-    overflow-x: hidden !important;
 }
 
 /* Override Streamlit's default padding */
@@ -47,7 +37,6 @@ body {
     padding-left: 0 !important;
     padding-right: 0 !important;
     max-width: none !important;
-    overflow-x: hidden !important;
 }
 
 /* Search input styling */
@@ -62,16 +51,6 @@ body {
     background: white !important;
     border-radius: 4px !important;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
-}
-
-/* Content wrapper adjustments */
-.content-wrapper {
-    text-align: center;
-    padding: var(--content-padding);
-    max-width: min(700px, 95vw);
-    margin: 0 auto;
-    overflow-x: hidden !important;
-    width: 100% !important;
 }
 
 /* Ensure other elements stay below */
@@ -91,6 +70,22 @@ body {
 .results-container, .content-wrapper {
     position: relative !important;
     z-index: 999 !important;
+}
+
+/* Content wrapper adjustments */
+.content-wrapper {
+    text-align: center;
+    padding: var(--content-padding);
+    max-width: min(700px, 95vw);
+    margin: 0 auto;
+}
+
+.subtitle {
+    font-size: 1.25rem;
+    color: var(--secondary-color);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.5;
 }
 
 /* Results styling */
@@ -527,9 +522,9 @@ h2[id^="restaurant-safety-at-a-glance"] {
     position: relative !important;
     z-index: 1001 !important;
     background: var(--bg-white) !important;
-    padding: 0 1.5rem;
+    padding: 0 1.5rem; 
     margin: 0 auto 2rem;
-    max-width: 700px;
+    max-width: 700px; 
     width: 100%;
 }
 
