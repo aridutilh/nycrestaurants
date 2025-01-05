@@ -111,6 +111,79 @@ if st.session_state.data_loaded and st.session_state.data is not None:
 
     st.plotly_chart(fig_grades, use_container_width=True)
 
+    # Pest Violations Section
+    st.markdown("<h3 style='text-align: center; margin: 2rem 0;'>🪳 Top Icks Report</h3>", unsafe_allow_html=True)
+
+    # Filter for pest-related violations in the past year
+    one_year_ago = pd.Timestamp.now() - pd.Timedelta(days=365)
+    pest_df = filtered_df[
+        (filtered_df['inspection_date'] >= one_year_ago) &
+        (filtered_df['violation_description'].notna())
+    ]
+
+    # Define pest-related keywords
+    pest_keywords = {
+        'rats/mice': ['rat', 'mouse', 'mice', 'rodent'],
+        'cockroaches': ['roach', 'cockroach'],
+        'flies': ['flies', 'flying insects'],
+        'vermin': ['vermin', 'pest']
+    }
+
+    # Calculate statistics for each pest type
+    pest_stats = {}
+    for pest_type, keywords in pest_keywords.items():
+        mask = pest_df['violation_description'].str.lower().str.contains('|'.join(keywords), na=False)
+        pest_stats[pest_type] = len(pest_df[mask])
+
+    # Display pest statistics
+    st.markdown(
+        """
+        <div style='background-color: #f8f9fa; padding: 2rem; border-radius: 8px; margin: 1rem 0;'>
+            <p style='text-align: center; font-size: 1.1rem; margin-bottom: 1.5rem;'>
+                Reported pest-related violations in the past year:
+            </p>
+        """,
+        unsafe_allow_html=True
+    )
+
+    # Create two columns for the stats
+    col1, col2 = st.columns(2)
+
+    with col1:
+        st.metric(
+            "🐀 Rats/Mice Reports",
+            pest_stats['rats/mice'],
+            help="Number of rat or mice related violations"
+        )
+        st.metric(
+            "🪰 Fly Infestations",
+            pest_stats['flies'],
+            help="Number of fly-related violations"
+        )
+
+    with col2:
+        st.metric(
+            "🪳 Cockroach Reports",
+            pest_stats['cockroaches'],
+            help="Number of cockroach-related violations"
+        )
+        st.metric(
+            "🐜 Other Vermin",
+            pest_stats['vermin'],
+            help="Number of other pest-related violations"
+        )
+
+    # Add explanation text
+    st.markdown(
+        """
+        <div style='text-align: center; font-size: 0.9rem; color: #666; margin-top: 1rem;'>
+            These statistics show reported violations involving pests during health inspections.
+            Multiple violations may be reported for the same establishment.
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
     # Top Picks Section
     st.markdown("<h3 style='text-align: center; margin: 2rem 0;'>🌟 Top Rated Restaurants</h3>", unsafe_allow_html=True)
 
