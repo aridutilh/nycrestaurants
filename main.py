@@ -40,7 +40,6 @@ if 'data' not in st.session_state:
 # Load data if not already loaded
 if not st.session_state.data_loaded:
     try:
-        render_loading()
         data = load_nyc_restaurant_data()
         if not data.empty:
             st.session_state.data = data
