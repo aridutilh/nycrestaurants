@@ -10,7 +10,7 @@ def render_header():
                 <h1>NYC Food Safety</h1>
                 <span class="floating-emoji right">🗽</span>
             </div>
-            <p class="garfield-quote">"I've never met a lasagna I didn't like"</p>
+            <p class="garfield-quote">"I've never met a lasagna I didn't like" - Garfield</p>
         </div>
         """,
         unsafe_allow_html=True
