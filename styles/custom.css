@@ -373,3 +373,46 @@ p, span, div {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+/* Enhanced Neighborhood Selector Styling */
+.neighborhood-toggle {
+    background-color: #f8f9fa;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin: 2rem 0;
+}
+
+/* Style the selectbox container */
+.neighborhood-toggle .stSelectbox {
+    margin-bottom: 0;
+}
+
+/* Style the selectbox */
+.neighborhood-toggle .stSelectbox > div > div {
+    background-color: #4A90E2 !important;
+    border: none !important;
+    color: white !important;
+    font-weight: 600 !important;
+    font-size: 1.1rem !important;
+    border-radius: 8px !important;
+    padding: 0.5rem 1rem !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+}
+
+/* Style the dropdown arrow */
+.neighborhood-toggle .stSelectbox > div > div > div:last-child > div {
+    color: white !important;
+}
+
+/* Hover state */
+.neighborhood-toggle .stSelectbox > div > div:hover {
+    background-color: #357ABD !important;
+    transform: translateY(-1px) !important;
+}
+
+/* Selected text color */
+.neighborhood-toggle .stSelectbox [data-baseweb="select"] {
+    color: white !important;
+}
