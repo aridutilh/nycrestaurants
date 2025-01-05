@@ -34,7 +34,7 @@ header[data-testid="stHeader"] {
 
 /* Search input styling */
 [data-testid="stTextInput"] {
-    margin: 3rem auto 4rem !important;
+    margin: 3rem auto 5rem !important;
     padding: 0 2rem !important;
 }
 
