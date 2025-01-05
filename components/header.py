@@ -2,10 +2,6 @@ import streamlit as st
 
 def render_header():
     """Render the app header with minimalist styling"""
-    # Initialize search query in session state if not present
-    if 'search_query' not in st.session_state:
-        st.session_state.search_query = ''
-
     st.markdown(
         """
         <div class="simple-header">
@@ -17,34 +13,23 @@ def render_header():
             <p class="subheader">
                 Explore food safety ratings and inspection results across New York City
             </p>
-            <div class="search-container">
-                <div class="search-icon">🔍</div>
-                <input type="text" 
-                    class="search-input" 
-                    placeholder="Search any restaurant in NYC..."
-                    value=""
-                    onchange="handleSearchChange(this.value)"
-                    oninput="this.dispatchEvent(new Event('change'))"
-                    aria-label="Search restaurants"
-                />
-            </div>
         </div>
-
-        <script>
-        function handleSearchChange(value) {
-            // Send the value to Streamlit using the correct event format
-            const data = {
-                search_query: value
-            };
-
-            if (window.parent.streamlit) {
-                window.parent.streamlit.setComponentValue(data);
-            }
-        }
-        </script>
         """,
         unsafe_allow_html=True
     )
+
+    # Use Streamlit's native text input for search
+    search_query = st.text_input(
+        label="",
+        value=st.session_state.get('search_query', ''),
+        placeholder="Search any restaurant in NYC...",
+        key="search_input"
+    )
+
+    # Update session state when search input changes
+    if search_query != st.session_state.get('search_query', ''):
+        st.session_state.search_query = search_query
+        st.session_state.search_triggered = True
 
 def render_loading():
     """Display minimal loading animation"""
