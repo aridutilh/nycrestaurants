@@ -124,8 +124,7 @@ if st.session_state.data_loaded and st.session_state.data is not None:
     # Filter data based on selection
     filtered_df = df if selected_boro == "All NYC" else df[df['boro'] == selected_boro]
 
-    # Grade Distribution Section
-    st.markdown("<h3 style='text-align: center; margin: 2rem 0;'>Grade Distribution</h3>", unsafe_allow_html=True)
+    # Grade Distribution Chart
     grade_dist = filtered_df[filtered_df['grade'].isin(['A', 'B', 'C'])]['grade'].value_counts()
     fig_grades = px.pie(
         values=grade_dist.values,
