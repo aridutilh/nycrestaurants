@@ -6,6 +6,8 @@
     --background-color: #FFFFFF;
     --accent-color: #3B82F6;
     --danger-color: #EF4444;
+    --max-content-width: min(1200px, 95vw);
+    --content-padding: clamp(1rem, 5vw, 2rem);
 }
 
 /* Hide default Streamlit header */
@@ -17,16 +19,16 @@ header[data-testid="stHeader"] {
 .stApp {
     background: var(--background-color);
     padding: 0 !important;
+    width: 100% !important;
+    overflow-x: hidden !important;
 }
 
 /* Block container adjustments */
 .block-container {
-    padding: 0 !important;
-    max-width: 1200px !important;
+    padding: var(--content-padding) !important;
+    max-width: var(--max-content-width) !important;
     margin: 0 auto !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
+    width: 100% !important;
 }
 
 /* Override Streamlit's default padding */
@@ -39,18 +41,13 @@ header[data-testid="stHeader"] {
 
 /* Search input styling */
 [data-testid="stTextInput"] {
-    margin: 2rem auto !important;
-    position: relative !important;
-    z-index: 1000 !important;
-    width: calc(100% - 4rem) !important;
-    max-width: 700px !important;
+    margin: 1rem auto !important;
+    width: min(700px, 90vw) !important;
 }
 
 .stTextInput > div {
     margin: 0 auto !important;
-    position: relative !important;
-    z-index: 1000 !important;
-    max-width: 700px !important;
+    width: 100% !important;
     background: white !important;
     border-radius: 4px !important;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
@@ -78,8 +75,8 @@ header[data-testid="stHeader"] {
 /* Content wrapper adjustments */
 .content-wrapper {
     text-align: center;
-    padding: 2rem 1.5rem; /* Increased horizontal padding */
-    max-width: 700px; /* Reduced from 800px */
+    padding: var(--content-padding);
+    max-width: min(700px, 95vw);
     margin: 0 auto;
 }
 
@@ -349,10 +346,10 @@ header[data-testid="stHeader"] {
 }
 
 .map-container {
-    margin-top: 1.5rem;
-    border-radius: 4px;
-    overflow: hidden;
-    border: 1px solid var(--border-light);
+    width: 100%;
+    max-width: min(800px, 95vw);
+    margin: 1.5rem auto;
+    height: clamp(300px, 50vh, 600px);
 }
 
 p, span, div {
@@ -485,33 +482,32 @@ h2[id^="restaurant-safety-at-a-glance"] {
     background-color: var(--bg-white);
 }
 
+/* Header styling */
 .simple-header {
     text-align: center;
-    padding: 2rem 0 1rem;
-    max-width: 800px;
+    padding: clamp(1rem, 4vw, 2rem) var(--content-padding);
+    max-width: min(800px, 95vw);
     margin: 0 auto;
-    background: var(--bg-white);
-    position: relative;
-    z-index: 1000;
 }
 
 .simple-header h1 {
     font-family: 'Fraunces', serif !important;
-    font-size: 3.75rem !important;
+    font-size: clamp(2rem, 6vw, 3.75rem) !important;
     color: var(--text-primary);
     font-weight: 600 !important;
     letter-spacing: -0.02em;
-    line-height: 1.1;
-    margin: 0 0 1rem 0 !important;
+    line-height: 1.2;
+    margin: 0 0 clamp(0.5rem, 2vw, 1rem) 0 !important;
 }
 
 .subheader {
     font-family: 'Inter', sans-serif;
-    font-size: 1.125rem;
+    font-size: clamp(1rem, 3vw, 1.125rem);
     color: var(--text-secondary);
-    margin: 0 auto 1.5rem !important;
+    margin: 0 auto clamp(0.5rem, 2vw, 1.5rem) !important;
     font-weight: 400;
     max-width: 600px;
+    padding: 0 var(--content-padding);
 }
 
 /* Search container adjustments */
@@ -519,9 +515,9 @@ h2[id^="restaurant-safety-at-a-glance"] {
     position: relative !important;
     z-index: 1001 !important;
     background: var(--bg-white) !important;
-    padding: 0 1.5rem; /* Increased from 1rem */
+    padding: 0 1.5rem; 
     margin: 0 auto 2rem;
-    max-width: 700px; /* Reduced from 800px */
+    max-width: 700px; 
     width: 100%;
 }
 
@@ -539,6 +535,10 @@ h2[id^="restaurant-safety-at-a-glance"] {
     z-index: 999;
     margin-top: 2rem;
     padding-top: 1rem;
+    width: 100%;
+    max-width: var(--max-content-width);
+    margin: 0 auto;
+    padding: var(--content-padding);
 }
 
 div[data-testid="stText"] input:focus,
@@ -613,4 +613,65 @@ div[data-testid="stVerticalBlock"] > div:first-child {
     max-width: 600px;
     margin: 0 auto;
     line-height: 1.5;
+}
+
+/* Restaurant cards and results */
+.restaurant-card {
+    padding: var(--content-padding);
+    width: 100%;
+    max-width: min(700px, 95vw);
+    margin: 0 auto 1rem;
+}
+
+.restaurant-meta {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+
+/* Map container */
+.map-container {
+    width: 100%;
+    max-width: min(800px, 95vw);
+    margin: 1.5rem auto;
+    height: clamp(300px, 50vh, 600px);
+}
+
+/* Loading container */
+.loading-container {
+    width: min(600px, 90vw);
+    margin: 1rem auto;
+    padding: var(--content-padding);
+}
+
+/* Metrics and stats */
+.stMetric {
+    width: min(400px, 95vw) !important;
+    margin: 1rem auto !important;
+    padding: var(--content-padding) !important;
+}
+
+/* Responsive font sizes */
+@media screen and (max-width: 768px) {
+    .restaurant-meta span {
+        font-size: 0.8rem;
+    }
+
+    .stMetric label {
+        font-size: 0.8rem !important;
+    }
+
+    .stMetric .metric-value {
+        font-size: 1.5rem !important;
+    }
+}
+
+.restaurant-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    width: 100%;
+    max-width: min(800px, 95vw);
+    margin: 1rem auto;
+    padding: var(--content-padding);
 }
