@@ -37,7 +37,7 @@ def render_search_section(df):
     if search_query != st.session_state.search_query:
         st.session_state.search_query = search_query
 
-    # Display results section
+    # Display results section only if there's a search query
     try:
         if search_query.strip():
             # Perform search
@@ -72,32 +72,6 @@ def render_search_section(df):
                         """, unsafe_allow_html=True)
 
                 st.markdown("</div>", unsafe_allow_html=True)
-        else:
-            # Show recently inspected restaurants
-            st.markdown("#### 🕒 Recently Inspected Restaurants")
-            recent = df.sort_values('inspection_date', ascending=False).head(10)
-
-            st.markdown("<div class='search-results'>", unsafe_allow_html=True)
-            for _, row in recent.iterrows():
-                expander_label = (
-                    f"🏪 {row['dba']} - "
-                    f"{row['grade'] if pd.notna(row['grade']) else 'Grade N/A'} "
-                    f"(Score: {int(row['score']) if pd.notna(row['score']) else 'N/A'})"
-                )
-
-                with st.expander(expander_label, expanded=False):
-                    st.markdown(f"""
-                    <div class='restaurant-result'>
-                        <p>📍 {row['building']} {row['street']}, {row['boro']}</p>
-                        <p>📅 Inspected: {row['inspection_date'].strftime('%B %d, %Y')}</p>
-                        {f"<p class='violation'>❗ {row['violation_description']}</p>" if pd.notna(row['violation_description']) else ""}
-                        <div class='restaurant-details'>
-                            <span>🍽️ {row['cuisine_description'] if pd.notna(row['cuisine_description']) else 'N/A'}</span>
-                            {f"<span class='critical'>⚠️ {row['critical_flag']}</span>" if pd.notna(row['critical_flag']) else ""}
-                        </div>
-                    </div>
-                    """, unsafe_allow_html=True)
-            st.markdown("</div>", unsafe_allow_html=True)
 
     except Exception as e:
         st.error(f"Error displaying search results: {str(e)}")
