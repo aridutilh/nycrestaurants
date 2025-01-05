@@ -42,11 +42,14 @@ def render_loading():
     """Display minimal loading animation"""
     st.markdown(
         """
-        <div style='text-align: center;'>
-            <div class='loading-spinner'></div>
-            <p style='color: var(--text-secondary); font-size: 0.9rem; margin-top: 1rem;'>
-                Loading data...
-            </p>
+        <div class="loading-container">
+            <div class="loading-spinner"></div>
+            <p class="loading-text">Loading restaurants...</p>
+            <div class="loading-emoji-container">
+                <span class="loading-emoji">🍜</span>
+                <span class="loading-emoji">🍕</span>
+                <span class="loading-emoji">🍱</span>
+            </div>
         </div>
         """,
         unsafe_allow_html=True
