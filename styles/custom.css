@@ -23,10 +23,10 @@ header[data-testid="stHeader"] {
 /* Header Styling */
 .simple-header {
     text-align: center;
-    padding: 1.5rem 0 2rem;
+    padding: 1.5rem 0 1rem;
     border-bottom: 1px solid var(--border-light);
     max-width: 800px;
-    margin: 0 auto 3rem;
+    margin: 0 auto 2rem;
     width: 100%;
 }
 
@@ -166,7 +166,7 @@ div[data-testid="stFormSubmitButton"] button:focus,
     text-align: center;
     color: var(--text-secondary);
     font-size: 1rem;
-    margin: 0.75rem 0 5rem !important;
+    margin: 0.75rem 0 2rem !important;
     font-family: 'Inter', sans-serif;
     font-weight: 500;
 }
