@@ -46,35 +46,46 @@ header[data-testid="stHeader"] {
     position: relative !important;
     z-index: 1000 !important;
     max-width: 900px !important;
+    background: white !important;
+    border-radius: 16px !important;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08) !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.stTextInput > div:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12) !important;
 }
 
 .stTextInput input {
     width: 100% !important;
-    background: var(--background-color) !important;
-    border: 2px solid var(--border-color) !important;
-    border-radius: 12px !important;
-    padding: 1.5rem 2rem !important;
+    background: transparent !important;
+    border: 2px solid rgba(0, 0, 0, 0.08) !important;
+    border-radius: 16px !important;
+    padding: 1.75rem 2rem !important;
     font-size: 1.25rem !important;
     color: var(--primary-color) !important;
     height: auto !important;
     min-height: 70px !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
     transition: all 0.2s ease-in-out !important;
     position: relative !important;
     z-index: 1000 !important;
+    backdrop-filter: blur(8px) !important;
 }
 
 .stTextInput input:focus {
     outline: none !important;
-    border-color: var(--border-light) !important;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1) !important;
-    transform: translateY(-2px);
+    border-color: var(--accent-color) !important;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1) !important;
+    transform: none !important;
 }
 
 .stTextInput input::placeholder {
-    color: var(--text-secondary) !important;
-    opacity: 0.8 !important;
+    color: var(--secondary-color) !important;
+    opacity: 0.7 !important;
     font-size: 1.2rem !important;
+    font-weight: 400 !important;
+    letter-spacing: -0.01em !important;
 }
 
 /* Ensure other elements stay below */
