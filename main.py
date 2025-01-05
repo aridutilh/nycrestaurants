@@ -228,6 +228,9 @@ if st.session_state.data_loaded and st.session_state.data is not None:
                         </svg>
                     </a>
                 </div>
+                <div style="font-size: 0.8rem; color: #666;">
+                    All data on this website is from <a href="https://data.cityofnewyork.us/Health/DOHMH-New-York-City-Restaurant-Inspection-Results/43nn-pn8j/data_preview" target="_blank" rel="noopener noreferrer">Open Data NYC</a>
+                </div>
             </div>
         </div>
     """, unsafe_allow_html=True)
