@@ -1,3 +1,4 @@
+
 [server]
 headless = true
 address = "0.0.0.0"
@@ -9,7 +10,7 @@ gatherUsageStats = false
 
 [theme]
 primaryColor = "#FA911D"  # Warm accent orange
-backgroundColor = "#FFBE76"  # Warm background
+backgroundColor = "#F5F5F5"  # Light gray background
 secondaryBackgroundColor = "#FFFFFF"  # White for cards
 textColor = "#1A1A1A"  # Dark text for contrast
 font = "sans serif"
