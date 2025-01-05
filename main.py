@@ -206,7 +206,7 @@ if st.session_state.data_loaded and st.session_state.data is not None:
 
     # Simple Safety Guide
     st.markdown("""
-        <div style='text-align: center; margin: 3rem 0; padding: 2rem; background-color: #f8f9fa; border-radius: 8px;'>
+        <div style='text-align: center; margin: 3rem 0;'>
             <h3>🎯 Understanding Safety Grades</h3>
             <p style='margin: 1rem 0;'>
                 <strong>A (0-13 points)</strong> - Excellent food safety standards<br>
