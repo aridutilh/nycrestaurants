@@ -56,11 +56,11 @@ header[data-testid="stHeader"] {
     background: transparent !important;
     border: 1px solid rgba(0, 0, 0, 0.15) !important;
     border-radius: 4px !important;
-    padding: 1rem 1.5rem !important;
+    padding: 0 1.5rem !important;
     font-size: 1.25rem !important;
     color: var(--primary-color) !important;
-    height: auto !important;
-    min-height: 60px !important;
+    height: 60px !important;
+    line-height: 60px !important;
     transition: border-color 0.2s ease-in-out !important;
 }
 
@@ -75,6 +75,7 @@ header[data-testid="stHeader"] {
     opacity: 0.7 !important;
     font-size: 1.1rem !important;
     font-weight: 400 !important;
+    line-height: 60px !important;
 }
 
 /* Ensure other elements stay below */
@@ -174,7 +175,6 @@ header[data-testid="stHeader"] {
     border-radius: 8px !important;
     padding: 1rem !important;
 }
-
 
 .results-header {
     font-size: 1.125rem;
@@ -373,7 +373,6 @@ p, span, div {
     color: var(--text-primary);
     font-family: 'Inter', sans-serif;
 }
-
 
 .restaurant-result {
     background: white;
