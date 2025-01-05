@@ -24,33 +24,29 @@ def render_header():
         <div class="search-container">
             <div class="search-icon">🔍</div>
             <input type="text" 
+                id="restaurant-search"
                 class="search-input" 
                 placeholder="Search any restaurant in NYC..."
                 value="{current_search}"
-                onchange="handleSearchChange(this.value)"
-                oninput="handleSearchInput(this.value)"
+                onchange="handleSearchChange(event)"
+                oninput="handleSearchInput(event)"
                 aria-label="Search restaurants"
             />
         </div>
     </div>
 
     <script>
-    function handleSearchInput(value) {{
-        handleSearchChange(value);
+    function handleSearchInput(event) {{
+        handleSearchChange(event);
     }}
 
-    function handleSearchChange(value) {{
-        const data = {{
-            'args': {{
-                'search_query': value,
-                'search_triggered': true
-            }},
-            'target': 'search'
-        }};
-
-        if (window.parent.streamlit) {{
-            window.parent.streamlit.setComponentValue(data);
-        }}
+    function handleSearchChange(event) {{
+        const value = event.target.value;
+        window.parent.streamlit.setComponentValue({{
+            value: value,
+            dataType: "json",
+            args: {{ search_query: value, search_triggered: true }},
+        }});
     }}
     </script>
     """
