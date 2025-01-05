@@ -18,7 +18,7 @@
 /* Header Styling */
 .simple-header {
     text-align: center;
-    padding: 3rem 0;
+    padding: 1.5rem 0;  /* Reduced from 3rem to 1.5rem */
     margin-bottom: 3rem;
     border-bottom: 1px solid var(--border-light);
     max-width: 800px;
@@ -41,7 +41,7 @@
     font-family: 'Inter', sans-serif;
     font-size: 1.125rem;
     color: var(--text-secondary);
-    margin: 1.5rem auto 0;
+    margin: 1rem auto 2rem;  /* Adjusted margins */
     font-weight: 400;
     max-width: 800px;
     width: 100%;
@@ -301,12 +301,12 @@ p, span, div {
 }
 
 .float-left {
-    left: 15%;
+    left: 5%;  /* Moved more to the left from 15% */
     animation-name: floatLeft;
 }
 
 .float-right {
-    right: 15%;
+    right: 5%;  /* Moved more to the right from 15% */
     animation-name: floatRight;
 }
 
