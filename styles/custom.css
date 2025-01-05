@@ -53,33 +53,31 @@ header[data-testid="stHeader"] {
     text-align: center;
 }
 
-/* Search Input Container Styling */
-.stTextInput > div {
-    margin: 0 auto !important;
-    max-width: 800px !important;
-    padding: 0 1rem;
+/* Search Section Styles */
+.search-overlay {
     position: relative;
-    z-index: 9999 !important;
+    z-index: 1000;
     background: var(--bg-white);
-    pointer-events: auto !important;
+    padding-bottom: 2rem;
+    margin-bottom: 2rem;
+    width: 100%;
 }
 
-.stApp > header {
-    z-index: 1 !important;
-}
-
-div[data-testid="stToolbar"] {
-    z-index: 1 !important;
-}
-
-/* Container for the entire search section */
 .search-container {
     position: relative;
-    z-index: 9999;
+    z-index: 1000;
     background: var(--bg-white);
-    padding: 0 0 2rem !important;
-    margin: 0 !important;
+    padding: 0 1rem;
+    margin: 0 auto;
+    max-width: 800px;
     width: 100%;
+}
+
+/* Search Input Styling */
+.stTextInput > div {
+    position: relative;
+    z-index: 1000;
+    background: var(--bg-white);
 }
 
 .stTextInput input {
@@ -99,6 +97,15 @@ div[data-testid="stToolbar"] {
     min-height: 65px !important;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
 }
+
+/* Search Results Container */
+.search-results-container {
+    position: relative;
+    z-index: 900;
+    margin-top: 2rem;
+    padding-top: 1rem;
+}
+
 
 /* Remove default focus outline and add custom styling */
 .stTextInput input:focus {
@@ -577,14 +584,14 @@ p, span, div {
     padding: 0.5rem !important;
 }
 
-.search-container {
-    margin: 0 !important;
-    padding: 1rem 0 3rem !important;
+/* Statistics Section */
+div[data-testid="block-container"] > div:first-child {
     position: relative;
     z-index: 100;
+    margin-top: 3rem;
     background: var(--bg-white);
-    width: 100%;
 }
+
 
 /* Ensure content below search stays behind */
 .block-container {
