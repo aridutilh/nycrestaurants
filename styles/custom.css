@@ -23,10 +23,9 @@ header[data-testid="stHeader"] {
 /* Header Styling */
 .simple-header {
     text-align: center;
-    padding: 1.5rem 0 1rem;
-    border-bottom: 1px solid var(--border-light);
+    padding: 1.5rem 0 0;
     max-width: 800px;
-    margin: 0 auto 2rem;
+    margin: 0 auto;
     width: 100%;
 }
 
@@ -46,7 +45,7 @@ header[data-testid="stHeader"] {
     font-family: 'Inter', sans-serif;
     font-size: 1.125rem;
     color: var(--text-secondary);
-    margin: 0 auto 2rem !important;
+    margin: 0 auto 1rem !important;
     font-weight: 400;
     max-width: 600px;
     width: 100%;
