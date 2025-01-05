@@ -97,7 +97,7 @@ if st.session_state.data_loaded and st.session_state.data is not None:
 
     # Grade Distribution Section
     st.markdown("<h3 style='text-align: center; margin: 2rem 0;'>📊 Grade Distribution</h3>", unsafe_allow_html=True)
-    grade_dist = df[df['grade'].isin(['A', 'B', 'C'])]['grade'].value_counts()
+    grade_dist = filtered_df[filtered_df['grade'].isin(['A', 'B', 'C'])]['grade'].value_counts()
     fig_grades = px.pie(
         values=grade_dist.values,
         names=grade_dist.index,
@@ -109,13 +109,13 @@ if st.session_state.data_loaded and st.session_state.data is not None:
     # Most Common Issues Section
     st.markdown("<h3 style='text-align: center; margin: 2rem 0;'>⚠️ Most Common Issues</h3>", unsafe_allow_html=True)
 
-    # Group and count violation descriptions
-    violation_counts = df['violation_description'].value_counts().head(5)
+    # Group and count violation descriptions for the selected borough
+    violation_counts = filtered_df['violation_description'].value_counts().head(5)
     fig_violations = px.bar(
         x=violation_counts.values,
         y=violation_counts.index,
         orientation='h',
-        title='Top 5 Most Common Violations',
+        title=f'Top 5 Most Common Violations in {selected_boro}',
         labels={'x': 'Number of Violations', 'y': 'Violation Type'}
     )
     fig_violations.update_layout(yaxis={'categoryorder': 'total ascending'})
