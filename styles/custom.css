@@ -21,6 +21,10 @@
     padding: 3rem 0;
     margin-bottom: 3rem;
     border-bottom: 1px solid var(--border-light);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
 }
 
 .simple-header h1 {
