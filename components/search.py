@@ -13,6 +13,9 @@ def render_search_section(df):
                 <span class="float-right">👨‍🍳</span>
             </div>
             <h1>NYC Restaurant Safety</h1>
+            <p class="subheader">
+                Explore food safety ratings and inspection results across New York City
+            </p>
         </div>
         """,
         unsafe_allow_html=True
@@ -26,11 +29,11 @@ def render_search_section(df):
         key="search_input_field"
     )
 
-    # Subheader after search
+    # Center the search label
     st.markdown(
         """
-        <p class="subheader">
-            Explore food safety ratings and inspection results across New York City
+        <p class="search-label">
+            Search restaurants
         </p>
         """,
         unsafe_allow_html=True
