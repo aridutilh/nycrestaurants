@@ -19,15 +19,11 @@ st.set_page_config(
     }
 )
 
-# Disable session state metrics
-if 'metrics' not in st.session_state:
-    st.session_state['metrics'] = False
-
 # Load custom CSS
 with open('styles/custom.css') as f:
     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
-# Render header (now includes search)
+# Render header
 render_header()
 
 # Initialize session state
@@ -58,79 +54,64 @@ if not st.session_state.data_loaded:
 if st.session_state.data_loaded and st.session_state.data is not None:
     df = st.session_state.data
 
-    # Data Visualization Section
-    st.markdown("## 📊 Restaurant Safety Overview")
+    # Clean Data Overview Section
+    st.markdown("<h2 style='text-align: center; margin-bottom: 2rem;'>🍽️ Restaurant Safety at a Glance</h2>", unsafe_allow_html=True)
 
-    # Key Statistics Dashboard
-    col1, col2, col3, col4 = st.columns(4)
-
-    with col1:
-        total_restaurants = len(df['camis'].unique())
-        st.metric("Total Restaurants", f"{total_restaurants:,}", 
-                 help="Number of unique restaurants in NYC")
-
-    with col2:
-        grade_a_percent = (len(df[df['grade'] == 'A']) / len(df) * 100)
-        st.metric("Grade A Restaurants", f"{grade_a_percent:.1f}%",
-                 help="Percentage of restaurants with Grade A")
-
-    with col3:
-        avg_score = df['score'].mean()
-        st.metric("Average Safety Score", f"{avg_score:.1f}",
-                 help="Lower score is better")
-
-    with col4:
-        recent_inspections = len(df[df['inspection_date'] >= (pd.Timestamp.now() - pd.Timedelta(days=30))])
-        st.metric("Recent Inspections", f"{recent_inspections:,}",
-                 help="Inspections in the last 30 days")
-
-    # Map View
-    render_map_view(st.session_state.data)
-
-    # About Section
-    st.markdown(
-        """
-        ## About NYC Restaurant Safety
-
-        Our platform helps you make informed dining decisions by providing transparent 
-        access to NYC's restaurant inspection data. Here's what you need to know:
-
-        ### 🎯 Safety Grades Explained
-        - **Grade A (0-13 points)**: Excellent food safety practices
-        - **Grade B (14-27 points)**: Good, with some areas for improvement
-        - **Grade C (28+ points)**: Significant violations present
-
-        ### 🔍 What We Check
-        - Food temperature control
-        - Kitchen cleanliness
-        - Employee hygiene
-        - Pest control
-        - Food handling procedures
-
-        ### 📊 Recent Trends
-        """
-    )
-
-    # Add recent trends visualization
+    # Simplified metrics in two rows
     col1, col2 = st.columns(2)
 
     with col1:
-        st.markdown("#### Most Common Violations")
-        violations = df.groupby('violation_description')['camis'].count().nlargest(5)
-        st.bar_chart(violations)
+        st.metric(
+            "Active Restaurants",
+            f"{len(df['camis'].unique()):,}",
+            help="Total number of restaurants currently operating in NYC"
+        )
+
+        recent_inspections = len(df[df['inspection_date'] >= (pd.Timestamp.now() - pd.Timedelta(days=30))])
+        st.metric(
+            "Recent Inspections",
+            f"{recent_inspections:,}",
+            help="Inspections conducted in the last 30 days"
+        )
 
     with col2:
-        st.markdown("#### Inspection Results by Borough")
-        borough_stats = df.groupby('boro')['grade'].value_counts().unstack()
-        st.bar_chart(borough_stats)
+        grade_a_percent = (len(df[df['grade'] == 'A']) / len(df) * 100)
+        st.metric(
+            "Grade A Restaurants",
+            f"{grade_a_percent:.1f}%",
+            help="Percentage of restaurants with Grade A rating"
+        )
+
+        avg_score = df['score'].mean()
+        st.metric(
+            "Average Safety Score",
+            f"{avg_score:.1f}",
+            help="Lower score indicates better safety standards"
+        )
+
+    # Interactive Map
+    st.markdown("<h3 style='text-align: center; margin: 2rem 0;'>📍 Restaurant Locations</h3>", unsafe_allow_html=True)
+    render_map_view(df)
+
+    # Simple Safety Guide
+    st.markdown("""
+        <div style='text-align: center; margin: 3rem 0; padding: 2rem; background-color: #f8f9fa; border-radius: 8px;'>
+            <h3>🎯 Understanding Safety Grades</h3>
+            <p style='margin: 1rem 0;'>
+                <strong>A (0-13 points)</strong> - Excellent food safety standards<br>
+                <strong>B (14-27 points)</strong> - Good, with some areas for improvement<br>
+                <strong>C (28+ points)</strong> - Significant violations present
+            </p>
+        </div>
+    """, unsafe_allow_html=True)
 
     # Footer
     st.markdown(
-        """
-        <div style='text-align: center; padding: 20px;'>
-            <p>Data provided by NYC Open Data | Last updated: {}</p>
+        f"""
+        <div style='text-align: center; padding: 20px; color: #6B7280; font-size: 0.9rem;'>
+            <p>Data provided by NYC Open Data | Last updated: {pd.Timestamp.now().strftime("%B %d, %Y")}</p>
         </div>
-        """.format(pd.Timestamp.now().strftime("%B %d, %Y")),
+        """,
         unsafe_allow_html=True
     )
 else:
