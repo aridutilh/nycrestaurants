@@ -7,55 +7,55 @@ def render_header():
         st.session_state.search_query = ''
         st.session_state.search_triggered = False
 
-    st.markdown(
-        """
-        <div class="simple-header">
-            <div class="floating-emojis">
-                <span class="float-left">🍕</span>
-                <span class="float-right">👨‍🍳</span>
-            </div>
-            <h1>NYC Restaurant Safety</h1>
-            <p class="subheader">
-                Explore food safety ratings and inspection results across New York City
-            </p>
-            <div class="search-container">
-                <div class="search-icon">🔍</div>
-                <input type="text" 
-                    class="search-input" 
-                    placeholder="Search any restaurant in NYC..."
-                    value="{}"
-                    onchange="handleSearchChange(this.value)"
-                    oninput="handleSearchInput(this.value)"
-                    aria-label="Search restaurants"
-                />
-            </div>
+    # Get current search query value
+    current_search = st.session_state.get('search_query', '')
+
+    # Create the header HTML with proper string formatting
+    header_html = f"""
+    <div class="simple-header">
+        <div class="floating-emojis">
+            <span class="float-left">🍕</span>
+            <span class="float-right">👨‍🍳</span>
         </div>
+        <h1>NYC Restaurant Safety</h1>
+        <p class="subheader">
+            Explore food safety ratings and inspection results across New York City
+        </p>
+        <div class="search-container">
+            <div class="search-icon">🔍</div>
+            <input type="text" 
+                class="search-input" 
+                placeholder="Search any restaurant in NYC..."
+                value="{current_search}"
+                onchange="handleSearchChange(this.value)"
+                oninput="handleSearchInput(this.value)"
+                aria-label="Search restaurants"
+            />
+        </div>
+    </div>
 
-        <script>
-        function handleSearchInput(value) {
-            // Update on every input change
-            handleSearchChange(value);
-        }
+    <script>
+    function handleSearchInput(value) {{
+        handleSearchChange(value);
+    }}
 
-        function handleSearchChange(value) {
-            // Send the value to Streamlit
-            const data = {
-                'args': {
-                    'search_query': value,
-                    'search_triggered': true
-                },
-                'target': 'search'
-            };
+    function handleSearchChange(value) {{
+        const data = {{
+            'args': {{
+                'search_query': value,
+                'search_triggered': true
+            }},
+            'target': 'search'
+        }};
 
-            // Use Streamlit's setComponentValue
-            if (window.parent.streamlit) {
-                window.parent.streamlit.setComponentValue(data);
-            }
-        }
-        </script>
-        """.format(st.session_state.get('search_query', '')),
-        unsafe_allow_html=True
-    )
+        if (window.parent.streamlit) {{
+            window.parent.streamlit.setComponentValue(data);
+        }}
+    }}
+    </script>
+    """
+
+    st.markdown(header_html, unsafe_allow_html=True)
 
 def render_loading():
     """Display minimal loading animation"""
