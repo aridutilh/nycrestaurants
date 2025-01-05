@@ -137,8 +137,11 @@ if st.session_state.data_loaded and st.session_state.data is not None:
     fig_grades.update_layout(
         plot_bgcolor='rgba(0,0,0,0)',
         paper_bgcolor='rgba(0,0,0,0)',
-        margin=dict(t=40, b=20, l=20, r=20),
-        title_x=0.5
+        margin=dict(t=80, b=20, l=20, r=20),
+        title=dict(
+            y=0.95,
+            yanchor='top'
+        )
     )
 
     st.plotly_chart(fig_grades, use_container_width=True)
