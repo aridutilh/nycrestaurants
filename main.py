@@ -80,6 +80,9 @@ if st.session_state.data_loaded and st.session_state.data is not None:
     # Restaurant Safety at a Glance Section
     st.markdown("<h2 style='text-align: center; margin-bottom: 2rem;'>🍽️ Restaurant Safety at a Glance</h2>", unsafe_allow_html=True)
 
+    # Add container with max-width for better centering
+    st.markdown("<div style='max-width: 800px; margin: 0 auto; padding: 0 1rem;'>", unsafe_allow_html=True)
+
     # Metrics in two rows
     col1, col2 = st.columns(2)
     with col1:
@@ -108,6 +111,8 @@ if st.session_state.data_loaded and st.session_state.data is not None:
             f"{avg_score:.1f}",
             help="Lower score indicates better safety standards"
         )
+    
+    st.markdown("</div>", unsafe_allow_html=True)
 
     # Neighborhood Toggle Section
     st.markdown("<h3 style='text-align: center; margin: 2rem 0;'>🏘️ Neighborhood View</h3>", unsafe_allow_html=True)
