@@ -39,7 +39,7 @@ header[data-testid="stHeader"] {
 }
 
 .stTextInput > div {
-    max-width: 800px !important;
+    max-width: 900px !important;
     margin: 0 auto !important;
 }
 
@@ -76,18 +76,6 @@ header[data-testid="stHeader"] {
     max-width: 800px;
     margin: 0 auto;
 }
-
-.content-wrapper h1 {
-    font-family: 'Inter', -apple-system, system-ui, sans-serif;
-    font-size: 3rem;
-    font-weight: 800;
-    color: var(--primary-color);
-    margin-bottom: 1rem;
-    line-height: 1.2;
-}
-
-/* Font imports */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 .subtitle {
     font-size: 1.25rem;
