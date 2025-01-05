@@ -152,7 +152,13 @@ if st.session_state.data_loaded and st.session_state.data is not None:
     st.plotly_chart(fig_grades, use_container_width=True)
 
     # Pest Violations Section
-    st.markdown("<h3 style='text-align: center; margin: 2rem 0;'>🪳 Top Icks Report</h3>", unsafe_allow_html=True)
+    st.markdown("""
+        <h3 style='text-align: center; margin: 2rem 0;'>🪳 Top Icks Report</h3>
+        <p style='text-align: center; font-size: 0.9rem; color: #666; margin-bottom: 2rem;'>
+            These statistics show reported violations involving pests during health inspections. 
+            Multiple violations may be reported for the same establishment.
+        </p>
+    """, unsafe_allow_html=True)
 
     # Filter for pest-related violations in the past year
     one_year_ago = pd.Timestamp.now() - pd.Timedelta(days=365)
@@ -202,16 +208,7 @@ if st.session_state.data_loaded and st.session_state.data is not None:
             help="Number of other pest-related violations"
         )
 
-    # Add explanation text
-    st.markdown(
-        """
-        <div style='text-align: center; font-size: 0.9rem; color: #666; margin-top: 1rem;'>
-            These statistics show reported violations involving pests during health inspections.
-            Multiple violations may be reported for the same establishment.
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+    
 
     # Add extra spacing
     st.markdown("<div style='margin: 5rem 0;'></div>", unsafe_allow_html=True)
