@@ -588,10 +588,9 @@ p, span, div {
 div[data-testid="block-container"] > div:first-child {
     position: relative;
     z-index: 100;
-    margin-top: 2rem !important; /* Updated margin-top value */
+    margin-top: 4rem !important; /* Increased margin to lower the section */
     background: var(--bg-white);
 }
-
 
 /* Ensure content below search stays behind */
 .block-container {
@@ -600,14 +599,9 @@ div[data-testid="block-container"] > div:first-child {
     position: relative;
 }
 
-/* Fix streamlit elements positioning */
-.stApp > div:first-child {
-    z-index: auto !important;
-}
-
 /* Add spacing between search and stats section */
 div[data-testid="block-container"] > div:first-child {
-    margin-top: 2rem !important;
+    margin-top: 6rem !important; /* Increased margin to lower the section */
     position: relative;
     z-index: 1;
 }
@@ -616,15 +610,15 @@ div[data-testid="block-container"] > div:first-child {
 .element-container:has(h2) {
     position: relative;
     z-index: 1;
-    margin-top: 1rem !important; /* Updated margin-top value */
-    padding-top: 0.5rem !important; /* Updated padding-top value */
+    margin-top: 2rem !important;
+    padding-top: 1rem !important;
 }
 
 /* Add extra spacing and background for statistics section */
 h2[id^="restaurant-safety-at-a-glance"] {
-    margin-top: 2rem !important; /* Updated margin-top value */
+    margin-top: 4rem !important; /* Increased margin */
     position: relative;
     z-index: 1;
     background: var(--bg-white);
-    padding-top: 1rem !important; /* Updated padding-top value */
+    padding-top: 1.5rem !important;
 }
