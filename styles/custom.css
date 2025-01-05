@@ -8,26 +8,25 @@
     --danger-color: #EF4444;
 }
 
-/* Hide Streamlit Header */
+/* Hide default Streamlit header */
 header[data-testid="stHeader"] {
     display: none !important;
 }
 
-/* Main App Container */
+/* Main container */
 .stApp {
     background: var(--background-color);
 }
 
-/* App Header */
-.app-header {
+/* Search wrapper and header */
+.search-wrapper {
     text-align: center;
     padding: 2rem 1rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     background: var(--background-color);
 }
 
-.app-header h1 {
-    font-family: 'Inter', -apple-system, system-ui, sans-serif;
+.search-wrapper h1 {
     font-size: 2.5rem;
     font-weight: 800;
     color: var(--primary-color);
@@ -35,25 +34,28 @@ header[data-testid="stHeader"] {
     line-height: 1.2;
 }
 
-.app-header .subtitle {
+.subtitle {
     font-size: 1.125rem;
     color: var(--secondary-color);
     max-width: 600px;
-    margin: 0 auto;
-    line-height: 1.5;
+    margin: 0 auto 1.5rem;
 }
 
-/* Search Input Styling */
+/* Search input container */
 [data-testid="stTextInput"] {
-    max-width: 800px !important;
     margin: 0 auto !important;
+    width: 100% !important;
+    max-width: 800px !important;
 }
 
+/* Search input field */
 .stTextInput > div {
-    background: var(--background-color) !important;
+    width: 100% !important;
 }
 
 .stTextInput input {
+    width: 100% !important;
+    max-width: none !important;
     background: var(--background-color) !important;
     border: 2px solid var(--border-color) !important;
     border-radius: 12px !important;
@@ -64,6 +66,7 @@ header[data-testid="stHeader"] {
     min-height: 60px !important;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05) !important;
     transition: all 0.2s ease-in-out !important;
+    margin: 0 !important;
 }
 
 .stTextInput input:focus {
@@ -77,12 +80,13 @@ header[data-testid="stHeader"] {
     opacity: 0.8 !important;
 }
 
-/* Results Styling */
-.results-header {
+/* Results styling */
+.results-count {
     font-size: 1.125rem;
     color: var(--secondary-color);
     margin: 2rem 0 1rem;
     padding: 0 1rem;
+    text-align: center;
 }
 
 .restaurant-card {
@@ -116,7 +120,7 @@ header[data-testid="stHeader"] {
     font-weight: 500;
 }
 
-/* Streamlit Specific Overrides */
+/* Streamlit specific overrides */
 .stExpander {
     border: 1px solid var(--border-color) !important;
     border-radius: 8px !important;
@@ -132,7 +136,7 @@ header[data-testid="stHeader"] {
     padding: 0 1rem 1rem !important;
 }
 
-/* Warning and Error Messages */
+/* Warning messages */
 .stAlert {
     background: var(--background-color) !important;
     border: 1px solid var(--border-color) !important;
@@ -140,155 +144,96 @@ header[data-testid="stHeader"] {
     padding: 1rem !important;
 }
 
-/* Restaurant Info Styling */
-.restaurant-info-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-    margin: 1.5rem 0;
+/* Block container spacing */
+div[data-testid="stVerticalBlock"] > div:first-child {
+    padding-top: 0 !important;
 }
 
-.restaurant-info-item {
-    padding: 1.5rem;
-    border-radius: 4px;
-    background: #fafafa;
+/* Fix for Streamlit container padding */
+.block-container {
+    padding-top: 1rem !important;
+    max-width: 1200px !important;
 }
 
-.restaurant-info-item strong {
-    color: var(--text-primary);
-    display: block;
+.restaurant-result {
+    background: white;
+    border: 1px solid #E5E5E5;
+    border-radius: 8px;
+    padding: 1rem;
     margin-bottom: 0.5rem;
-    font-size: 0.875rem;
+}
+
+.restaurant-result h4 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
     font-weight: 600;
+}
+
+.restaurant-result p {
+    margin: 0.25rem 0;
+    font-size: 0.95rem;
+}
+
+.restaurant-details {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+
+.stMetric {
+    background: var(--bg-white) !important;
+    padding: 1.5rem !important;
+    border-radius: 4px !important;
+    border: 1px solid var(--border-light) !important;
+}
+
+.stMetric label {
+    color: var(--text-secondary) !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 0.875rem !important;
+    font-weight: 500 !important;
     letter-spacing: 0.025em;
-    text-transform: uppercase;
 }
 
-/* Rating Styles */
-.rating-container {
-    padding: 2rem;
-    text-align: center;
-    margin: 1.5rem 0;
-    background: #fafafa;
-    border-radius: 4px;
+.stMetric .metric-value {
+    color: var(--text-primary) !important;
+    font-family: 'Fraunces', serif !important;
+    font-size: 2rem !important;
+    font-weight: 600 !important;
 }
 
-.rating-text {
-    font-family: 'Fraunces', serif;
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin: 0.75rem 0;
-    padding: 0.5rem 1rem;
-    display: inline-block;
-    letter-spacing: 0.025em;
+.stTabs [data-baseweb="tab-list"] {
+    gap: 0.5rem;
+    background-color: var(--bg-white);
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--border-light);
 }
 
-.rating-excellent .rating-text {
-    color: #2F855A;
+.stTabs [data-baseweb="tab"] {
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 500 !important;
+    color: var(--text-secondary) !important;
+    padding: 0.5rem 1rem !important;
+    border-radius: 0;
 }
 
-.rating-poor .rating-text {
-    color: var(--accent-red);
-}
-
-/* Map Container */
-.map-container {
-    margin-top: 1.5rem;
-    border-radius: 4px;
-    overflow: hidden;
-    border: 1px solid var(--border-light);
-}
-
-/* Typography */
-p, span, div {
-    color: var(--text-primary);
-    font-family: 'Inter', sans-serif;
-}
-
-/* Floating Emojis */
-.floating-emojis {
-    position: relative;
-    width: 100%;
-    height: 60px;
-    margin-bottom: 1rem;
-}
-
-.floating-emojis span {
-    position: absolute;
-    font-size: 3rem;
-    opacity: 0.8;
-    animation-duration: 3s;
-    animation-iteration-count: infinite;
-    animation-timing-function: ease-in-out;
-}
-
-.float-left {
-    left: 5%;
-    animation-name: floatLeft;
-}
-
-.float-right {
-    right: 5%;
-    animation-name: floatRight;
-}
-
-@keyframes floatLeft {
-    0%, 100% { transform: translateY(0) rotate(-10deg); }
-    50% { transform: translateY(-10px) rotate(10deg); }
-}
-
-@keyframes floatRight {
-    0%, 100% { transform: translateY(-10px) rotate(10deg); }
-    50% { transform: translateY(0) rotate(-10deg); }
-}
-
-/* Loading Animation Styles */
-.loading-container {
-    text-align: center;
-    padding: 2rem;
-    margin: 1rem auto;
-    max-width: 600px;
-    background: var(--bg-white);
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+.stTabs [aria-selected="true"] {
+    background: transparent !important;
+    color: var(--text-primary) !important;
+    border-bottom: 2px solid var(--text-primary) !important;
 }
 
 .loading-spinner {
-    width: 40px;
-    height: 40px;
-    border: 3px solid #f3f3f3;
-    border-top: 3px solid var(--text-primary);
+    width: 32px;
+    height: 32px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid var(--text-primary);
     border-radius: 50%;
     animation: spin 1s linear infinite;
-    margin: 0 auto 1rem;
-}
-
-.loading-text {
-    color: var(--text-secondary);
-    font-family: 'Inter', sans-serif;
-    font-size: 1rem;
-    margin: 0.5rem 0;
-}
-
-.loading-emoji-container {
-    margin-top: 1rem;
-}
-
-.loading-emoji {
-    font-size: 1.5rem;
-    margin: 0 0.5rem;
-    display: inline-block;
-    animation: bounce 1s infinite;
-    animation-delay: calc(var(--emoji-index) * 0.2s);
-}
-
-.loading-emoji:nth-child(1) { --emoji-index: 0; }
-.loading-emoji:nth-child(2) { --emoji-index: 1; }
-.loading-emoji:nth-child(3) { --emoji-index: 2; }
-
-@keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+    margin: 2rem auto;
 }
 
 @keyframes spin {
@@ -296,81 +241,172 @@ p, span, div {
     100% { transform: rotate(360deg); }
 }
 
-/* Enhanced Neighborhood Selector Styling */
-.neighborhood-toggle {
-    background-color: #f8f9fa;
-    padding: 1.5rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    margin: 2rem 0;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
+.element-container:has(h2) {
+    position: relative;
+    z-index: 1;
+    margin-top: 2rem !important;
+    padding-top: 1rem !important;
 }
 
-/* Style the selectbox container */
-.neighborhood-toggle .stSelectbox {
-    margin-bottom: 0;
+h2[id^="restaurant-safety-at-a-glance"] {
+    margin-top: 4rem !important;
+    position: relative;
+    z-index: 1;
+    background: transparent;
+    padding-top: 1.5rem !important;
 }
 
-/* Style the selectbox */
-.neighborhood-toggle .stSelectbox > div > div {
-    background-color: #2c3e50 !important;
-    border: none !important;
-    color: white !important;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&display=swap');
+
+.stApp {
+    background-color: var(--bg-white);
+}
+
+.simple-header {
+    text-align: center;
+    padding: 2rem 0 1rem;
+    max-width: 800px;
+    margin: 0 auto;
+    background: var(--bg-white);
+    position: relative;
+    z-index: 1000;
+}
+
+.simple-header h1 {
+    font-family: 'Fraunces', serif !important;
+    font-size: 3.75rem !important;
+    color: var(--text-primary);
     font-weight: 600 !important;
-    font-size: 1.1rem !important;
-    border-radius: 8px !important;
-    padding: 0.75rem 1rem !important;
-    cursor: pointer !important;
-    transition: all 0.2s ease !important;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
-    pointer-events: none !important;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin: 0 0 1rem 0 !important;
 }
 
-/* Make only the dropdown arrow clickable */
-.neighborhood-toggle .stSelectbox > div > div > div:last-child {
-    pointer-events: auto !important;
+.subheader {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.125rem;
+    color: var(--text-secondary);
+    margin: 0 auto 1.5rem !important;
+    font-weight: 400;
+    max-width: 600px;
 }
 
-/* Style the dropdown arrow */
-.neighborhood-toggle .stSelectbox > div > div > div:last-child > div {
-    color: white !important;
+.search-container {
+    position: relative;
+    z-index: 1001;
+    background: var(--bg-white);
+    padding: 0 1rem;
+    margin: 0 auto 2rem;
+    max-width: 800px;
+    width: 100%;
 }
 
-/* Hover state */
-.neighborhood-toggle .stSelectbox > div > div:hover {
-    background-color: #34495e !important;
-    transform: translateY(-1px) !important;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15) !important;
+.search-label {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 1rem;
+    margin: 0.75rem 0 0 !important;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
 }
 
-/* Selected text color */
-.neighborhood-toggle .stSelectbox [data-baseweb="select"] {
-    color: white !important;
+.search-results-container {
+    position: relative;
+    z-index: 999;
+    margin-top: 2rem;
+    padding-top: 1rem;
 }
 
-/* Dropdown menu styling */
-.neighborhood-toggle .stSelectbox [role="listbox"] {
-    background-color: white !important;
-    border-radius: 8px !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
-    border: none !important;
+.stTextInput input:focus {
+    outline: none !important;
+    border-color: var(--border-light) !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1) !important;
+    transform: translateY(-2px);
 }
 
-/* Dropdown options */
-.neighborhood-toggle .stSelectbox [role="option"] {
-    color: #2c3e50 !important;
-    padding: 0.75rem 1rem !important;
-    transition: background-color 0.2s ease !important;
+.stTextInput input::placeholder {
+    color: var(--text-secondary) !important;
+    opacity: 0.8 !important;
+    font-size: 1.2rem !important;
 }
 
-/* Hover state for dropdown options */
-.neighborhood-toggle .stSelectbox [role="option"]:hover {
-    background-color: #f8f9fa !important;
+div[data-testid="stText"] input:focus,
+div[data-testid="stFormSubmitButton"] button:focus,
+.stTextInput div[data-baseweb="input"] > div:focus {
+    outline: none !important;
+    box-shadow: none !important;
 }
 
-/* Footer Styling */
+.search-results {
+    margin-top: 2rem !important;
+    padding-top: 1rem !important;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.header-links {
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.header-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.header-links a:hover {
+    color: var(--text-primary);
+}
+
+.github-link {
+    display: inline-flex;
+    align-items: center;
+}
+
+.github-link svg {
+    width: 20px;
+    height: 20px;
+}
+
+.app-header {
+    text-align: center;
+    padding: 2rem 1rem;
+    margin-bottom: 2rem;
+    background: var(--background-color);
+}
+
+.app-header h1 {
+    font-family: 'Inter', -apple-system, system-ui, sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.app-header .subtitle {
+    font-size: 1.125rem;
+    color: var(--secondary-color);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.5;
+}
+
+.results-header {
+    font-size: 1.125rem;
+    color: var(--secondary-color);
+    margin: 2rem 0 1rem;
+    padding: 0 1rem;
+}
+
 .footer {
     margin-top: 4rem;
     padding: 2rem;
@@ -412,65 +448,156 @@ p, span, div {
     margin: 0;
 }
 
-/* Adding new styles for search results */
-.restaurant-result {
-    background: white;
-    border: 1px solid #E5E5E5;
-    border-radius: 8px;
-    padding: 1rem;
-    margin-bottom: 0.5rem;
+.neighborhood-toggle {
+    background-color: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin: 2rem 0;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.restaurant-result h4 {
-    margin: 0 0 0.5rem 0;
-    font-size: 1.1rem;
-    font-weight: 600;
+.neighborhood-toggle .stSelectbox {
+    margin-bottom: 0;
 }
 
-.restaurant-result p {
-    margin: 0.25rem 0;
-    font-size: 0.95rem;
-}
-
-.restaurant-details {
-    display: flex;
-    gap: 1rem;
-    margin-top: 0.5rem;
-    font-size: 0.9rem;
-    color: #666;
-}
-
-.violation {
-    color: #E74C3C;
-    font-style: italic;
-    font-size: 0.9rem;
-}
-
-.critical {
-    color: #E74C3C;
-}
-
-/* Style streamlit containers to be more compact */
-.stExpander {
+.neighborhood-toggle .stSelectbox > div > div {
+    background-color: #2c3e50 !important;
     border: none !important;
-    box-shadow: none !important;
-    background: transparent !important;
-}
-
-.streamlit-expanderHeader {
-    padding: 0.5rem !important;
-    background: white !important;
-    border: 1px solid #E5E5E5 !important;
+    color: white !important;
+    font-weight: 600 !important;
+    font-size: 1.1rem !important;
     border-radius: 8px !important;
-    margin-bottom: 0.5rem !important;
+    padding: 0.75rem 1rem !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+    pointer-events: none !important;
 }
 
-.streamlit-expanderContent {
+.neighborhood-toggle .stSelectbox > div > div > div:last-child {
+    pointer-events: auto !important;
+}
+
+.neighborhood-toggle .stSelectbox > div > div > div:last-child > div {
+    color: white !important;
+}
+
+.neighborhood-toggle .stSelectbox > div > div:hover {
+    background-color: #34495e !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15) !important;
+}
+
+.neighborhood-toggle .stSelectbox [data-baseweb="select"] {
+    color: white !important;
+}
+
+.neighborhood-toggle .stSelectbox [role="listbox"] {
+    background-color: white !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
     border: none !important;
-    padding: 0.5rem !important;
 }
 
-/* Statistics Section */
+.neighborhood-toggle .stSelectbox [role="option"] {
+    color: #2c3e50 !important;
+    padding: 0.75rem 1rem !important;
+    transition: background-color 0.2s ease !important;
+}
+
+.neighborhood-toggle .stSelectbox [role="option"]:hover {
+    background-color: #f8f9fa !important;
+}
+
+.floating-emojis {
+    position: relative;
+    width: 100%;
+    height: 60px;
+    margin-bottom: 1rem;
+}
+
+.floating-emojis span {
+    position: absolute;
+    font-size: 3rem;
+    opacity: 0.8;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+
+.float-left {
+    left: 5%;
+    animation-name: floatLeft;
+}
+
+.float-right {
+    right: 5%;
+    animation-name: floatRight;
+}
+
+@keyframes floatLeft {
+    0%, 100% { transform: translateY(0) rotate(-10deg); }
+    50% { transform: translateY(-10px) rotate(10deg); }
+}
+
+@keyframes floatRight {
+    0%, 100% { transform: translateY(-10px) rotate(10deg); }
+    50% { transform: translateY(0) rotate(-10deg); }
+}
+
+.loading-container {
+    text-align: center;
+    padding: 2rem;
+    margin: 1rem auto;
+    max-width: 600px;
+    background: var(--bg-white);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.loading-text {
+    color: var(--text-secondary);
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    margin: 0.5rem 0;
+}
+
+.loading-emoji-container {
+    margin-top: 1rem;
+}
+
+.loading-emoji {
+    font-size: 1.5rem;
+    margin: 0 0.5rem;
+    display: inline-block;
+    animation: bounce 1s infinite;
+    animation-delay: calc(var(--emoji-index) * 0.2s);
+}
+
+.loading-emoji:nth-child(1) { --emoji-index: 0; }
+.loading-emoji:nth-child(2) { --emoji-index: 1; }
+.loading-emoji:nth-child(3) { --emoji-index: 2; }
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.map-container {
+    margin-top: 1.5rem;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid var(--border-light);
+}
+
+p, span, div {
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+}
+
 div[data-testid="block-container"] > div:first-child {
     position: relative;
     z-index: 100;
@@ -478,247 +605,8 @@ div[data-testid="block-container"] > div:first-child {
     background: transparent;
 }
 
-/* Ensure content below search stays behind */
 .block-container {
     padding-top: 3rem !important;
     z-index: 1;
     position: relative;
-}
-
-/* Add spacing between search and stats section */
-div[data-testid="block-container"] > div:first-child {
-    margin-top: 2rem !important;
-    position: relative;
-    z-index: 1;
-}
-
-/* Ensure statistics section doesn't overlap */
-.element-container:has(h2) {
-    position: relative;
-    z-index: 1;
-    margin-top: 2rem !important;
-    padding-top: 1rem !important;
-}
-
-/* Add extra spacing and background for statistics section */
-h2[id^="restaurant-safety-at-a-glance"] {
-    margin-top: 4rem !important;
-    position: relative;
-    z-index: 1;
-    background: transparent;
-    padding-top: 1.5rem !important;
-}
-
-/* Minimalist Editorial Theme */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&display=swap');
-
-/* Clean background */
-.stApp {
-    background-color: var(--bg-white);
-}
-
-/* Header Styling */
-.simple-header {
-    text-align: center;
-    padding: 2rem 0 1rem;
-    max-width: 800px;
-    margin: 0 auto;
-    background: var(--bg-white);
-    position: relative;
-    z-index: 1000;
-}
-
-.simple-header h1 {
-    font-family: 'Fraunces', serif !important;
-    font-size: 3.75rem !important;
-    color: var(--text-primary);
-    font-weight: 600 !important;
-    letter-spacing: -0.02em;
-    line-height: 1.1;
-    margin: 0 0 1rem 0 !important;
-}
-
-.subheader {
-    font-family: 'Inter', sans-serif;
-    font-size: 1.125rem;
-    color: var(--text-secondary);
-    margin: 0 auto 1.5rem !important;
-    font-weight: 400;
-    max-width: 600px;
-}
-
-/* Search Container Styles */
-.search-container {
-    position: relative;
-    z-index: 1001;
-    background: var(--bg-white);
-    padding: 0 1rem;
-    margin: 0 auto 2rem;
-    max-width: 800px;
-    width: 100%;
-}
-
-
-/* Search label styling */
-.search-label {
-    text-align: center;
-    color: var(--text-secondary);
-    font-size: 1rem;
-    margin: 0.75rem 0 0 !important;
-    font-family: 'Inter', sans-serif;
-    font-weight: 500;
-}
-
-/* Search Results Container */
-.search-results-container {
-    position: relative;
-    z-index: 999;
-    margin-top: 2rem;
-    padding-top: 1rem;
-}
-
-/* Remove default focus outline and add custom styling */
-.stTextInput input:focus {
-    outline: none !important;
-    border-color: var(--border-light) !important;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1) !important;
-    transform: translateY(-2px);
-}
-
-.stTextInput input::placeholder {
-    color: var(--text-secondary) !important;
-    opacity: 0.8 !important;
-    font-size: 1.2rem !important;
-}
-
-/* Additional styles to remove any Streamlit-specific focus outlines */
-div[data-testid="stText"] input:focus,
-div[data-testid="stFormSubmitButton"] button:focus,
-.stTextInput div[data-baseweb="input"] > div:focus {
-    outline: none !important;
-    box-shadow: none !important;
-}
-
-/* Add extra spacing between search and content */
-.search-results {
-    margin-top: 2rem !important;
-    padding-top: 1rem !important;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin-top: 1rem;
-}
-
-.header-links {
-    margin-bottom: 0.5rem;
-    font-size: 0.875rem;
-    color: var(--text-secondary);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-}
-
-.header-links a {
-    color: var(--text-secondary);
-    text-decoration: none;
-    transition: color 0.2s ease;
-}
-
-.header-links a:hover {
-    color: var(--text-primary);
-}
-
-.github-link {
-    display: inline-flex;
-    align-items: center;
-}
-
-.github-link svg {
-    width: 20px;
-    height: 20px;
-}
-
-/* Clean Card Styling */
-
-/* Input Styling */
-/* Enhanced Search Styling */
-
-
-/* Metrics Styling */
-.stMetric {
-    background: var(--bg-white) !important;
-    padding: 1.5rem !important;
-    border-radius: 4px !important;
-    border: 1px solid var(--border-light) !important;
-}
-
-.stMetric label {
-    color: var(--text-secondary) !important;
-    font-family: 'Inter', sans-serif !important;
-    font-size: 0.875rem !important;
-    font-weight: 500 !important;
-    letter-spacing: 0.025em;
-}
-
-.stMetric .metric-value {
-    color: var(--text-primary) !important;
-    font-family: 'Fraunces', serif !important;
-    font-size: 2rem !important;
-    font-weight: 600 !important;
-}
-
-/* Tabs Styling */
-.stTabs [data-baseweb="tab-list"] {
-    gap: 0.5rem;
-    background-color: var(--bg-white);
-    padding: 0.5rem;
-    border-bottom: 1px solid var(--border-light);
-}
-
-.stTabs [data-baseweb="tab"] {
-    font-family: 'Inter', sans-serif !important;
-    font-weight: 500 !important;
-    color: var(--text-secondary) !important;
-    padding: 0.5rem 1rem !important;
-    border-radius: 0;
-}
-
-.stTabs [aria-selected="true"] {
-    background: transparent !important;
-    color: var(--text-primary) !important;
-    border-bottom: 2px solid var(--text-primary) !important;
-}
-
-/* Simple Loading Animation */
-.loading-spinner {
-    width: 32px;
-    height: 32px;
-    border: 2px solid #f3f3f3;
-    border-top: 2px solid var(--text-primary);
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    margin: 2rem auto;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-/* Ensure statistics section doesn't overlap */
-.element-container:has(h2) {
-    position: relative;
-    z-index: 1;
-    margin-top: 2rem !important;
-    padding-top: 1rem !important;
-}
-
-/* Add extra spacing and background for statistics section */
-h2[id^="restaurant-safety-at-a-glance"] {
-    margin-top: 4rem !important;
-    position: relative;
-    z-index: 1;
-    background: transparent;
-    padding-top: 1.5rem !important;
 }
