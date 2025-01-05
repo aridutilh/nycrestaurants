@@ -17,80 +17,9 @@ st.set_page_config(
     }
 )
 
-# Load custom CSS and add viewport meta tag
+# Load custom CSS
 with open('styles/custom.css') as f:
     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
-
-# Add viewport meta tag for mobile responsiveness
-st.markdown("""
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-""", unsafe_allow_html=True)
-
-# Adjust container width for mobile responsiveness and fix header
-st.markdown("""
-    <style>
-        .element-container, .stApp {
-            width: 100% !important;
-            padding: 0 !important;
-            max-width: 100vw !important;
-            overflow-x: hidden !important;
-        }
-        [data-testid="stSidebarContent"] {
-            width: 100% !important;
-            max-width: 100vw !important;
-        }
-        /* Fix header at top */
-        .stApp > header {
-            position: fixed !important;
-            top: 0 !important;
-            z-index: 999 !important;
-            background: white !important;
-            width: 100% !important;
-            padding: 1rem !important;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
-            overflow: hidden !important;
-            height: auto !important;
-            min-height: fit-content !important;
-        }
-        /* Make header elements stay in place */
-        .stApp > header > div {
-            position: relative !important;
-            overflow: hidden !important;
-        }
-        /* Add padding to main content to prevent overlap with fixed header and footer */
-        .main .block-container {
-            padding-top: 5rem !important;
-            padding-bottom: 8rem !important;  /* Added padding for footer */
-            min-height: calc(100vh - 13rem) !important;  /* Account for header and footer */
-        }
-        /* Prevent any scrolling within header elements */
-        .stApp > header *, .stApp > header div {
-            overflow: hidden !important;
-            max-height: none !important;
-        }
-        /* Fix footer styling */
-        .footer {
-            position: fixed !important;
-            bottom: 0 !important;
-            left: 0 !important;
-            width: 100% !important;
-            background: white !important;
-            z-index: 999 !important;
-            padding: 1rem !important;
-            box-shadow: 0 -2px 4px rgba(0,0,0,0.1) !important;
-            overflow: hidden !important;
-        }
-        .footer-content {
-            max-width: 800px !important;
-            margin: 0 auto !important;
-            text-align: center !important;
-            overflow: hidden !important;
-        }
-        .footer-content * {
-            overflow: hidden !important;
-        }
-    </style>
-""", unsafe_allow_html=True)
 
 # Initialize session state for data loading
 if 'data_loaded' not in st.session_state:
