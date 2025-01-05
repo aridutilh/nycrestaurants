@@ -9,11 +9,30 @@ def render_header():
                 <span>By <a href="https://aridutilh.com" target="_blank">Ari</a></span>
             </div>
             <h1>NYC Restaurant Safety</h1>
+            <div class="search-container">
+                <div class="search-icon">🔍</div>
+                <input type="text" 
+                    class="search-input" 
+                    placeholder="Search any restaurant in NYC..."
+                    onchange="handleSearchChange(this.value)"
+                    aria-label="Search restaurants"
+                />
+            </div>
             <p class="subheader">
                 Explore food safety ratings and inspection results across New York City
             </p>
-            </div>
         </div>
+
+        <script>
+        function handleSearchChange(value) {
+            if (window.parent.stStreamlitPyObject) {
+                window.parent.stStreamlitPyObject.sendBackMsg({
+                    type: "streamlit:setComponentValue",
+                    value: value
+                });
+            }
+        }
+        </script>
         """,
         unsafe_allow_html=True
     )

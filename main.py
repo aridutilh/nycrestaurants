@@ -27,8 +27,12 @@ if 'metrics' not in st.session_state:
 with open('styles/custom.css') as f:
     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
-# Render header
+# Render header (now includes search)
 render_header()
+
+# Initialize session state
+if 'search_query' not in st.session_state:
+    st.session_state.search_query = ''
 
 # Initialize session state for data
 if 'data_loaded' not in st.session_state:
@@ -53,13 +57,6 @@ if not st.session_state.data_loaded:
 # Only show content if data is loaded
 if st.session_state.data_loaded and st.session_state.data is not None:
     df = st.session_state.data
-
-    # Search Section (moved directly under header)
-    search_query = st.text_input(
-        "",  # Remove label
-        placeholder="Enter restaurant name or address...",
-        help="Find restaurants and view their latest inspection results"
-    )
 
     # Data Visualization Section
     st.markdown("## 📊 Restaurant Safety Overview")
