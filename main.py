@@ -93,14 +93,19 @@ if st.session_state.data_loaded and st.session_state.data is not None:
     # Neighborhood Toggle Section
     st.markdown("<h3 style='text-align: center; margin: 2rem 0;'>🏘️ Neighborhood View</h3>", unsafe_allow_html=True)
     st.markdown('<div class="neighborhood-toggle">', unsafe_allow_html=True)
+
+    # Add "All NYC" as the first option
+    borough_options = ["All NYC"] + sorted(df['boro'].unique().tolist())
     selected_boro = st.selectbox(
         "Select a neighborhood to explore",
-        sorted(df['boro'].unique()),
+        borough_options,
         key="neighborhood_selector",
         help="Choose a borough to see detailed statistics"
     )
     st.markdown('</div>', unsafe_allow_html=True)
-    filtered_df = df[df['boro'] == selected_boro]
+
+    # Filter data based on selection
+    filtered_df = df if selected_boro == "All NYC" else df[df['boro'] == selected_boro]
 
     # Grade Distribution Section
     st.markdown("<h3 style='text-align: center; margin: 2rem 0;'>📊 Grade Distribution</h3>", unsafe_allow_html=True)
@@ -135,7 +140,7 @@ if st.session_state.data_loaded and st.session_state.data is not None:
         orientation='h',
         title=f'Pest Violations in {selected_boro}',
         labels={'x': 'Number of Incidents', 'y': ''},
-        color_discrete_sequence=['#FFA07A']  # Light salmon color
+        color_discrete_sequence=['#E74C3C']  # Changed to red
     )
 
     # Update layout for better readability
