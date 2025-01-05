@@ -31,20 +31,30 @@ def render_search(df):
                 # Display results in a clean layout
                 for idx, row in results.iterrows():
                     try:
-                        with st.expander(f"🏪 {row['dba']} - {row['building']} {row['street']}", expanded=True):
-                            # Create two columns for layout
+                        # Create a clickable expander for each restaurant
+                        with st.expander(f"🏪 {row['dba']}", expanded=False):
+                            # Basic info visible in the collapsed view
+                            st.markdown(
+                                f"""
+                                📍 {row['building']} {row['street']}, {row['boro']}  
+                                📅 Latest Inspection: {row['inspection_date'].strftime('%B %d, %Y')}  
+                                ⭐ Score: {int(row['score']) if pd.notna(row['score']) else 'N/A'}  
+                                {f"📋 Grade: {row['grade']}" if pd.notna(row['grade']) else ""}
+                                """
+                            )
+
+                            # Create two columns for detailed view
                             col1, col2 = st.columns([3, 2])
 
                             with col1:
-                                # Basic restaurant info
-                                st.markdown(f"**Address:** {row['building']} {row['street']}, {row['boro']}")
-                                st.markdown(f"**Latest Inspection:** {row['inspection_date'].strftime('%B %d, %Y')}")
-                                st.markdown(f"**Score:** {int(row['score']) if pd.notna(row['score']) else 'N/A'}")
-                                if pd.notna(row['grade']):
-                                    st.markdown(f"**Grade:** {row['grade']}")
                                 if pd.notna(row['violation_description']):
                                     st.markdown("**Latest Violation:**")
                                     st.markdown(f"_{row['violation_description']}_")
+                                st.markdown("**Additional Details:**")
+                                if pd.notna(row['cuisine_description']):
+                                    st.markdown(f"Cuisine: {row['cuisine_description']}")
+                                if pd.notna(row['critical_flag']):
+                                    st.markdown(f"Critical Flag: {row['critical_flag']}")
 
                             with col2:
                                 # Display location map
