@@ -452,3 +452,41 @@ p, span, div {
 .neighborhood-toggle .stSelectbox [role="option"]:hover {
     background-color: #f8f9fa !important;
 }
+
+/* Footer Styling */
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1rem;
+    background: white;
+    border-top: 1px solid var(--border-light);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    z-index: 100;
+}
+
+.footer a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.footer a:hover {
+    color: var(--text-primary);
+}
+
+.github-link {
+    display: inline-flex;
+    align-items: center;
+}
+
+.github-link svg {
+    width: 20px;
+    height: 20px;
+}
