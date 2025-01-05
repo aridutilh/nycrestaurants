@@ -54,13 +54,12 @@ if not st.session_state.data_loaded:
 if st.session_state.data_loaded and st.session_state.data is not None:
     df = st.session_state.data
 
-    # Search Section
-    st.text_input(
-        "Search restaurants by name or address",
+    # Search Section (moved directly under header)
+    search_query = st.text_input(
+        "",  # Remove label
         placeholder="Enter restaurant name or address...",
         help="Find restaurants and view their latest inspection results"
     )
-    render_search(st.session_state.data)
 
     # Data Visualization Section
     st.markdown("## 📊 Restaurant Safety Overview")
