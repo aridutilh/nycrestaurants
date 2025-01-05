@@ -16,13 +16,13 @@ header[data-testid="stHeader"] {
 /* Main container */
 .stApp {
     background: var(--background-color);
-    padding: 0 8rem !important; /* Increased from 5rem */
+    padding: 0 !important;
 }
 
 /* Block container adjustments */
 .block-container {
-    padding: 0 !important;
-    max-width: 900px !important; /* Reduced from 1000px */
+    padding: 0 2rem !important;
+    max-width: 1200px !important;
     margin: 0 auto !important;
 }
 
