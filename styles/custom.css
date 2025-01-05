@@ -10,42 +10,21 @@
     background-attachment: fixed;
 }
 
-/* Main container styling */
-.main-header {
-    font-family: 'Inter', sans-serif;
-    color: #1A1A1A;
+/* Simple header styling */
+.simple-header {
     text-align: center;
-    padding: 3rem 2rem;
-    margin: 2rem auto;
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 24px;
-    box-shadow: 
-        0 8px 32px rgba(250, 145, 29, 0.15),
-        0 2px 8px rgba(250, 145, 29, 0.1);
-    max-width: 1200px;
-    transform: translateY(0);
-    transition: transform 0.3s ease;
+    padding: 2rem 0;
 }
 
-.main-header:hover {
-    transform: translateY(-4px);
-}
-
-.main-header h1 {
-    font-size: 4rem !important;
-    margin-bottom: 1rem !important;
+.simple-header h1 {
+    font-family: 'Inter', sans-serif;
+    font-size: 3.5rem !important;
     color: #1A1A1A;
     font-weight: 800 !important;
     letter-spacing: -0.03em;
     line-height: 1.1;
-}
-
-.main-header p {
-    font-size: 1.3rem !important;
-    color: #333;
-    font-weight: 400;
-    max-width: 800px;
-    margin: 0 auto;
+    margin: 0 !important;
+    text-shadow: 2px 2px 0px rgba(250, 145, 29, 0.2);
 }
 
 /* Search container and results */
