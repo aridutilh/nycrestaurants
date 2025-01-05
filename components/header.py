@@ -5,9 +5,6 @@ def render_header():
     st.markdown(
         """
         <div class="simple-header">
-            <div class="header-links">
-                <span>By <a href="https://aridutilh.com" target="_blank">Ari</a></span>
-            </div>
             <div class="floating-emojis">
                 <span class="float-left">🍕</span>
                 <span class="float-right">👨‍🍳</span>
