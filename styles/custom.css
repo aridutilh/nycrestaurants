@@ -55,9 +55,21 @@ header[data-testid="stHeader"] {
 
 /* Search Input Container Styling */
 .stTextInput > div {
-    margin: 0.5rem auto 2rem !important;
+    margin: 0 auto !important;
     max-width: 800px !important;
     padding: 0 1rem;
+    position: relative;
+    z-index: 1000;
+    background: var(--bg-white);
+}
+
+/* Container for the entire search section */
+.search-container {
+    position: relative;
+    z-index: 1000;
+    background: var(--bg-white);
+    padding: 0 0 2rem !important;
+    margin: 0 !important;
 }
 
 .stTextInput input {
