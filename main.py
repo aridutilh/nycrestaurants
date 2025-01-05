@@ -30,17 +30,21 @@ render_header()
 if 'search_query' not in st.session_state:
     st.session_state.search_query = ''
 
-# Initialize session state for data
 if 'data_loaded' not in st.session_state:
     st.session_state.data_loaded = False
 
 if 'data' not in st.session_state:
     st.session_state.data = None
 
+if 'is_loading' not in st.session_state:
+    st.session_state.is_loading = False
+
 # Load data if not already loaded
 if not st.session_state.data_loaded:
     try:
-        render_loading()  # Show loading animation
+        st.session_state.is_loading = True
+        if st.session_state.is_loading:
+            render_loading()  # Only show loading when actively fetching
         data = load_nyc_restaurant_data()
         if not data.empty:
             st.session_state.data = data
@@ -50,6 +54,8 @@ if not st.session_state.data_loaded:
     except Exception as e:
         st.error(f"Error loading data: {str(e)}")
         st.session_state.data_loaded = False
+    finally:
+        st.session_state.is_loading = False
 
 # Only show content if data is loaded
 if st.session_state.data_loaded and st.session_state.data is not None:

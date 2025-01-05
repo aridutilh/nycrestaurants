@@ -20,82 +20,85 @@ def load_nyc_restaurant_data():
             st.success(f"Loaded {metadata['unique_restaurants']:,} restaurants from cache (Last updated: {metadata['last_updated']})")
             return cached_data
 
-    # If no valid cache, fetch from API
-    url = "https://data.cityofnewyork.us/resource/43nn-pn8j.csv"
-
     # Initialize empty list to store all dataframes
     all_data = []
     offset = 0
     page_size = 1000
     total_fetched = 0
 
-    while True:
-        # Set query parameters for pagination
-        query_params = {
-            '$limit': page_size,
-            '$offset': offset,
-            '$order': 'inspection_date DESC',
-            '$where': 'inspection_date IS NOT NULL'
-        }
+    url = "https://data.cityofnewyork.us/resource/43nn-pn8j.csv"
+    st.session_state.is_loading = True
 
-        # Fetch page of data
-        df_page = fetch_data(url, query_params)
+    try:
+        while True:
+            # Set query parameters for pagination
+            query_params = {
+                '$limit': page_size,
+                '$offset': offset,
+                '$order': 'inspection_date DESC',
+                '$where': 'inspection_date IS NOT NULL'
+            }
 
-        # If page is empty or error occurred, break the loop
-        if df_page.empty:
-            break
+            # Fetch page of data
+            df_page = fetch_data(url, query_params)
 
-        all_data.append(df_page)
-        total_fetched += len(df_page)
+            # If page is empty or error occurred, break the loop
+            if df_page.empty:
+                break
 
-        # Update progress message
-        st.info(f"Loading restaurants from API... Retrieved {total_fetched:,} records so far")
+            all_data.append(df_page)
+            total_fetched += len(df_page)
 
-        # If we got less than page_size records, we've reached the end
-        if len(df_page) < page_size:
-            break
+            # Update progress message
+            st.info(f"Loading restaurants from API... Retrieved {total_fetched:,} records so far")
 
-        # Increment offset for next page
-        offset += page_size
+            # If we got less than page_size records, we've reached the end
+            if len(df_page) < page_size:
+                break
 
-    # If we got no data at all, try loading from cache as fallback
-    if not all_data:
-        cached_data = load_from_cache()
-        if cached_data is not None:
-            st.warning("Failed to fetch fresh data, using cached data instead")
-            return cached_data
-        st.error("No data received from the API and no cache available")
-        return pd.DataFrame()
+            # Increment offset for next page
+            offset += page_size
 
-    # Combine all pages into single DataFrame
-    df = pd.concat(all_data, ignore_index=True)
+        # If we got no data at all, try loading from cache as fallback
+        if not all_data:
+            cached_data = load_from_cache()
+            if cached_data is not None:
+                st.warning("Failed to fetch fresh data, using cached data instead")
+                return cached_data
+            st.error("No data received from the API and no cache available")
+            return pd.DataFrame()
 
-    # Clean and process the combined data
-    df['inspection_date'] = pd.to_datetime(df['inspection_date'], errors='coerce')
-    df = df.dropna(subset=['latitude', 'longitude'])  # Only drop rows missing coordinates
+        # Combine all pages into single DataFrame
+        df = pd.concat(all_data, ignore_index=True)
 
-    # Convert score to numeric, handling missing values
-    df['score'] = pd.to_numeric(df['score'], errors='coerce')
-    median_score = df['score'].median()
-    df['score'] = df['score'].fillna(median_score)
+        # Clean and process the combined data
+        df['inspection_date'] = pd.to_datetime(df['inspection_date'], errors='coerce')
+        df = df.dropna(subset=['latitude', 'longitude'])  # Only drop rows missing coordinates
 
-    # Add year column for time-lapse
-    df['year'] = df['inspection_date'].dt.year
+        # Convert score to numeric, handling missing values
+        df['score'] = pd.to_numeric(df['score'], errors='coerce')
+        median_score = df['score'].median()
+        df['score'] = df['score'].fillna(median_score)
 
-    # Fill NA values in string columns with empty strings
-    string_columns = ['dba', 'building', 'street', 'grade']
-    df[string_columns] = df[string_columns].fillna('')
+        # Add year column for time-lapse
+        df['year'] = df['inspection_date'].dt.year
 
-    # Remove duplicate records keeping the latest inspection for each restaurant
-    df = df.sort_values('inspection_date', ascending=False).drop_duplicates(subset='camis')
+        # Fill NA values in string columns with empty strings
+        string_columns = ['dba', 'building', 'street', 'grade']
+        df[string_columns] = df[string_columns].fillna('')
 
-    # Save the processed data to cache
-    save_to_cache(df)
+        # Remove duplicate records keeping the latest inspection for each restaurant
+        df = df.sort_values('inspection_date', ascending=False).drop_duplicates(subset='camis')
 
-    # Log the final number of unique restaurants
-    st.success(f"Successfully loaded {len(df):,} unique restaurants from API and updated cache")
+        # Save the processed data to cache
+        save_to_cache(df)
 
-    return df
+        # Log the final number of unique restaurants
+        st.success(f"Successfully loaded {len(df):,} unique restaurants from API and updated cache")
+
+        return df
+    finally:
+        st.session_state.is_loading = False
 
 def fetch_data(url, query_params=None):
     """Fetch data from NYC Open Data API with optional query parameters"""

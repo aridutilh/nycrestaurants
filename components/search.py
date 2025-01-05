@@ -23,7 +23,10 @@ def render_search(df):
                 render_restaurant_details(row)
 
     if search_query:
-        with st.spinner("🍕 Searching restaurants..."):
+        st.session_state.is_loading = True
+        if st.session_state.is_loading:
+            render_loading()
+        try:
             results = search_restaurants(df, search_query)
 
             if len(results) > 0:
@@ -34,3 +37,5 @@ def render_search(df):
                         render_restaurant_details(row)
             else:
                 st.warning("No restaurants found matching your search.")
+        finally:
+            st.session_state.is_loading = False
