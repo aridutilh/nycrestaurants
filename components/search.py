@@ -6,11 +6,8 @@ from components.restaurant_details import render_restaurant_details
 
 def render_search(df):
     """Render the restaurant search component"""
-    # Search input
-    search_query = st.text_input(
-        "Search restaurants by name or address",
-        placeholder="Enter restaurant name or address..."
-    )
+    # Get search query from main search input
+    search_query = st.session_state.get('search_query', '')
 
     if not search_query:
         # Show recently inspected restaurants
