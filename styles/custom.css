@@ -23,12 +23,10 @@ header[data-testid="stHeader"] {
 /* Header Styling */
 .simple-header {
     text-align: center;
-    padding: 1.5rem 0 4rem;  /* Increased bottom padding */
-    margin-bottom: 3rem;     /* Increased bottom margin */
+    padding: 1.5rem 0 2rem;
     border-bottom: 1px solid var(--border-light);
     max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto 3rem;
     width: 100%;
 }
 

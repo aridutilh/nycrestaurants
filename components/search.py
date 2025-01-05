@@ -16,13 +16,11 @@ def render_search_section(df):
             <p class="subheader">
                 Explore food safety ratings and inspection results across New York City
             </p>
-        </div>
+            <div class="search-container">
         """,
         unsafe_allow_html=True
     )
 
-    # Search input with better spacing and prominence
-    st.markdown('<div class="search-container">', unsafe_allow_html=True)
     search_query = st.text_input(
         label="",
         value=st.session_state.get('search_query', ''),
