@@ -558,3 +558,11 @@ p, span, div {
     border: none !important;
     padding: 0.5rem !important;
 }
+
+.search-container {
+    margin: 1rem 0 !important;
+    padding: 1rem 0 !important;
+    position: relative;
+    z-index: 50;
+    background: var(--bg-white);
+}
