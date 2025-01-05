@@ -4,13 +4,15 @@
 .stApp {
     background-color: #FFBE76;
     background-image: 
-        linear-gradient(rgba(255, 190, 118, 0.97), rgba(255, 190, 118, 0.97)),
-        repeating-linear-gradient(0deg, transparent 0px, transparent 49px, rgba(250, 145, 29, 0.15) 50px),
-        repeating-linear-gradient(90deg, transparent 0px, transparent 49px, rgba(250, 145, 29, 0.15) 50px);
+        linear-gradient(45deg, #FA911D 25%, transparent 25%),
+        linear-gradient(-45deg, #FA911D 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #FA911D 75%),
+        linear-gradient(-45deg, transparent 75%, #FA911D 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
     background-attachment: fixed;
 }
 
-/* Simple header styling */
 .simple-header {
     text-align: center;
     padding: 2rem 0;
@@ -63,15 +65,23 @@
     line-height: 1.1;
     margin: 0 !important;
     text-shadow: 2px 2px 0px rgba(250, 145, 29, 0.2);
+    background: white;
+    padding: 1rem 2rem;
+    border-radius: 15px;
+    display: inline-block;
 }
 
 .garfield-quote {
     font-family: 'Inter', sans-serif;
     font-size: 1.2rem;
-    color: #666;
+    color: #1A1A1A;
     margin-top: 0.5rem;
     font-style: italic;
     text-shadow: 1px 1px 0px rgba(250, 145, 29, 0.1);
+    background: white;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    display: inline-block;
 }
 
 /* Search container and results */
