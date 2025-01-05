@@ -24,7 +24,7 @@ header[data-testid="stHeader"] {
 .simple-header {
     text-align: center;
     padding: 1.5rem 0;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;  /* Increased margin to prevent clipping */
     border-bottom: 1px solid var(--border-light);
     max-width: 800px;
     margin-left: auto;
@@ -48,7 +48,7 @@ header[data-testid="stHeader"] {
     font-family: 'Inter', sans-serif;
     font-size: 1.125rem;
     color: var(--text-secondary);
-    margin: 0 auto 2rem !important;
+    margin: 0 auto 2.5rem !important;  /* Increased bottom margin */
     font-weight: 400;
     max-width: 600px;
     width: 100%;
@@ -107,8 +107,8 @@ header[data-testid="stHeader"] {
 
 /* Search Input Container Styling */
 .stTextInput > div {
-    margin: 2rem auto 1rem !important;
-    max-width: 800px !important;  /* Increased width for prominence */
+    margin: 0 auto 1rem !important;  /* Adjusted margins */
+    max-width: 800px !important;
     padding: 0 1rem;
 }
 
@@ -142,6 +142,7 @@ header[data-testid="stHeader"] {
     font-size: 1.2rem !important;
 }
 
+/* Search label styling - removed duplicate rule */
 .search-label {
     text-align: center;
     color: var(--text-secondary);
@@ -149,15 +150,6 @@ header[data-testid="stHeader"] {
     margin: 0.75rem 0 2.5rem !important;
     font-family: 'Inter', sans-serif;
     font-weight: 500;  /* Made label slightly bolder */
-}
-
-
-.search-label {
-    text-align: center;
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-    margin: 0.5rem 0 2rem !important;
-    font-family: 'Inter', sans-serif;
 }
 
 /* Metrics Styling */
