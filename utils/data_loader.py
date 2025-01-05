@@ -7,7 +7,15 @@ import streamlit as st
 def load_nyc_restaurant_data():
     """Load NYC restaurant inspection data from the Open Data API"""
     url = "https://data.cityofnewyork.us/resource/43nn-pn8j.csv"
-    return fetch_data(url)
+
+    # Set a large limit to get more restaurants
+    query_params = {
+        '$limit': 50000,  # Get up to 50,000 records
+        '$order': 'inspection_date DESC',
+        '$where': 'inspection_date IS NOT NULL'  # Ensure we get records with valid inspection dates
+    }
+
+    return fetch_data(url, query_params)
 
 def fetch_data(url, query_params=None):
     """Fetch data from NYC Open Data API with optional query parameters"""
@@ -20,11 +28,12 @@ def fetch_data(url, query_params=None):
         df = pd.read_csv(io.StringIO(response.text))
 
         if df.empty:
+            st.error("No data received from the API")
             return pd.DataFrame()
 
         # Clean and process the data
         df['inspection_date'] = pd.to_datetime(df['inspection_date'], errors='coerce')
-        df = df.dropna(subset=['latitude', 'longitude', 'score'])
+        df = df.dropna(subset=['latitude', 'longitude'])  # Only drop rows missing coordinates
 
         # Convert score to numeric, handling missing values
         df['score'] = pd.to_numeric(df['score'], errors='coerce')
@@ -37,6 +46,9 @@ def fetch_data(url, query_params=None):
         # Fill NA values in string columns with empty strings
         string_columns = ['dba', 'building', 'street', 'grade']
         df[string_columns] = df[string_columns].fillna('')
+
+        # Log the number of restaurants for debugging
+        st.info(f"Loaded {len(df['camis'].unique())} unique restaurants from the API")
 
         return df
 
@@ -60,7 +72,7 @@ def search_restaurants(df, query):
     query_params = {
         '$where': f"lower(dba) like '%{query}%' OR lower(building) like '%{query}%' OR lower(street) like '%{query}%'",
         '$order': 'inspection_date DESC',
-        '$limit': 50
+        '$limit': 1000  # Increased from 50 to 1000 for more comprehensive search results
     }
 
     # Fetch fresh data from API with search parameters
