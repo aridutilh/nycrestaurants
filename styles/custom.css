@@ -59,7 +59,7 @@ header[data-testid="stHeader"] {
     max-width: 800px !important;
     padding: 0 1rem;
     position: relative;
-    z-index: 1000 !important;
+    z-index: 9999 !important;
     background: var(--bg-white);
     pointer-events: auto !important;
 }
@@ -75,10 +75,11 @@ div[data-testid="stToolbar"] {
 /* Container for the entire search section */
 .search-container {
     position: relative;
-    z-index: 1000;
+    z-index: 9999;
     background: var(--bg-white);
     padding: 0 0 2rem !important;
     margin: 0 !important;
+    width: 100%;
 }
 
 .stTextInput input {
@@ -183,7 +184,6 @@ div[data-testid="stFormSubmitButton"] button:focus,
     font-family: 'Inter', sans-serif;
     font-weight: 500;
 }
-
 
 
 /* Metrics Styling */
@@ -600,7 +600,9 @@ p, span, div {
 
 /* Add spacing between search and stats section */
 div[data-testid="block-container"] > div:first-child {
-    margin-top: 2rem !important;
+    margin-top: 4rem !important;
+    position: relative;
+    z-index: 1;
 }
 
 /* Ensure statistics section doesn't overlap */
@@ -609,4 +611,13 @@ div[data-testid="block-container"] > div:first-child {
     z-index: 1;
     margin-top: 3rem !important;
     padding-top: 1rem !important;
+}
+
+/* Add extra spacing and background for statistics section */
+h2[id^="restaurant-safety-at-a-glance"] {
+    margin-top: 5rem !important;
+    position: relative;
+    z-index: 1;
+    background: var(--bg-white);
+    padding-top: 2rem !important;
 }
