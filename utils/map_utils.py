@@ -32,15 +32,12 @@ def create_heatmap(df):
                 radius=20,
                 colorscale="Reds",
                 showscale=False,  # Hide individual scales
-                hoverongaps=False,
                 name=neighborhood,
-                hovertemplate=(
-                    "<b>%{text}</b><br>" +
-                    "Score: %{customdata}<br>" +
-                    "<extra></extra>"
-                ),
-                text=neighborhood_data['dba'],
-                customdata=neighborhood_data['score'],
+                hoverinfo="text",  # Show only custom text on hover
+                hovertext=[
+                    f"{name}<br>Score: {score}" 
+                    for name, score in zip(neighborhood_data['dba'], neighborhood_data['score'])
+                ],
             )
         )
 
@@ -54,8 +51,7 @@ def create_heatmap(df):
         showlegend=True,
         legend_title_text="Neighborhoods",
         margin={"r":0,"t":0,"l":0,"b":0},
-        height=600,
-        mapbox_style="carto-positron"
+        height=600
     )
 
     return fig
