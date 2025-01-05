@@ -57,14 +57,37 @@ st.markdown("""
             position: relative !important;
             overflow: hidden !important;
         }
-        /* Add padding to main content to prevent overlap with fixed header */
+        /* Add padding to main content to prevent overlap with fixed header and footer */
         .main .block-container {
             padding-top: 5rem !important;
+            padding-bottom: 8rem !important;  /* Added padding for footer */
+            min-height: calc(100vh - 13rem) !important;  /* Account for header and footer */
         }
         /* Prevent any scrolling within header elements */
         .stApp > header *, .stApp > header div {
             overflow: hidden !important;
             max-height: none !important;
+        }
+        /* Fix footer styling */
+        .footer {
+            position: fixed !important;
+            bottom: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            background: white !important;
+            z-index: 999 !important;
+            padding: 1rem !important;
+            box-shadow: 0 -2px 4px rgba(0,0,0,0.1) !important;
+            overflow: hidden !important;
+        }
+        .footer-content {
+            max-width: 800px !important;
+            margin: 0 auto !important;
+            text-align: center !important;
+            overflow: hidden !important;
+        }
+        .footer-content * {
+            overflow: hidden !important;
         }
     </style>
 """, unsafe_allow_html=True)
