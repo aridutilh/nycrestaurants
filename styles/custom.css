@@ -1,242 +1,143 @@
-/* Hide Streamlit Header Menu */
+/* Reset and Base Styles */
+:root {
+    --primary-color: #1E1E1E;
+    --secondary-color: #6B7280;
+    --border-color: #E5E7EB;
+    --background-color: #FFFFFF;
+    --accent-color: #3B82F6;
+    --danger-color: #EF4444;
+}
+
+/* Hide Streamlit Header */
 header[data-testid="stHeader"] {
     display: none !important;
 }
 
-/* Minimalist Editorial Theme */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&display=swap');
-
-:root {
-    --accent-yellow: #FFD43B;
-    --accent-red: #E74C3C;
-    --bg-white: #FFFFFF;
-    --text-primary: #000000;
-    --text-secondary: #6B7280;
-    --border-light: #E5E5E5;
-}
-
-/* Clean background */
+/* Main App Container */
 .stApp {
-    background-color: var(--bg-white);
+    background: var(--background-color);
 }
 
-/* Header Styling */
-.simple-header {
+/* App Header */
+.app-header {
     text-align: center;
-    padding: 2rem 0 1rem;
-    max-width: 800px;
-    margin: 0 auto;
-    background: var(--bg-white);
-    position: relative;
-    z-index: 1000;
+    padding: 2rem 1rem;
+    margin-bottom: 2rem;
+    background: var(--background-color);
 }
 
-.simple-header h1 {
-    font-family: 'Fraunces', serif !important;
-    font-size: 3.75rem !important;
-    color: var(--text-primary);
-    font-weight: 600 !important;
-    letter-spacing: -0.02em;
-    line-height: 1.1;
-    margin: 0 0 1rem 0 !important;
+.app-header h1 {
+    font-family: 'Inter', -apple-system, system-ui, sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    line-height: 1.2;
 }
 
-.subheader {
-    font-family: 'Inter', sans-serif;
+.app-header .subtitle {
     font-size: 1.125rem;
-    color: var(--text-secondary);
-    margin: 0 auto 1.5rem !important;
-    font-weight: 400;
+    color: var(--secondary-color);
     max-width: 600px;
-}
-
-/* Search Container Styles */
-.search-container {
-    position: relative;
-    z-index: 1001;
-    background: var(--bg-white);
-    padding: 0 1rem;
-    margin: 0 auto 2rem;
-    max-width: 800px;
-    width: 100%;
+    margin: 0 auto;
+    line-height: 1.5;
 }
 
 /* Search Input Styling */
+[data-testid="stTextInput"] {
+    max-width: 800px !important;
+    margin: 0 auto !important;
+}
+
 .stTextInput > div {
-    position: relative;
-    z-index: 1002;
+    background: var(--background-color) !important;
 }
 
 .stTextInput input {
-    background: var(--bg-white) !important;
-    border: 2px solid var(--border-light) !important;
-    border-radius: 16px !important;
-    padding: 1.25rem 2rem !important;
-    font-family: 'Inter', sans-serif !important;
-    font-size: 1.2rem !important;
-    color: var(--text-primary) !important;
-    transition: all 0.2s ease;
-    width: 100% !important;
-    max-width: none !important;
-    margin: 0 !important;
-    display: block !important;
+    background: var(--background-color) !important;
+    border: 2px solid var(--border-color) !important;
+    border-radius: 12px !important;
+    padding: 1rem 1.5rem !important;
+    font-size: 1.125rem !important;
+    color: var(--primary-color) !important;
     height: auto !important;
-    min-height: 65px !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
+    min-height: 60px !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05) !important;
+    transition: all 0.2s ease-in-out !important;
 }
 
-/* Search label styling */
-.search-label {
-    text-align: center;
-    color: var(--text-secondary);
-    font-size: 1rem;
-    margin: 0.75rem 0 0 !important;
-    font-family: 'Inter', sans-serif;
-    font-weight: 500;
-}
-
-/* Search Results Container */
-.search-results-container {
-    position: relative;
-    z-index: 999;
-    margin-top: 2rem;
-    padding-top: 1rem;
-}
-
-/* Remove default focus outline and add custom styling */
 .stTextInput input:focus {
+    border-color: var(--accent-color) !important;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1) !important;
     outline: none !important;
-    border-color: var(--border-light) !important;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1) !important;
-    transform: translateY(-2px);
 }
 
 .stTextInput input::placeholder {
-    color: var(--text-secondary) !important;
+    color: var(--secondary-color) !important;
     opacity: 0.8 !important;
-    font-size: 1.2rem !important;
 }
 
-/* Additional styles to remove any Streamlit-specific focus outlines */
-div[data-testid="stText"] input:focus,
-div[data-testid="stFormSubmitButton"] button:focus,
-.stTextInput div[data-baseweb="input"] > div:focus {
-    outline: none !important;
-    box-shadow: none !important;
+/* Results Styling */
+.results-header {
+    font-size: 1.125rem;
+    color: var(--secondary-color);
+    margin: 2rem 0 1rem;
+    padding: 0 1rem;
 }
 
-/* Add extra spacing between search and content */
-.search-results {
-    margin-top: 2rem !important;
-    padding-top: 1rem !important;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin-top: 1rem;
-}
-
-.header-links {
+.restaurant-card {
+    padding: 1rem;
+    background: var(--background-color);
+    border-radius: 8px;
     margin-bottom: 0.5rem;
-    font-size: 0.875rem;
-    color: var(--text-secondary);
+}
+
+.restaurant-card p {
+    margin: 0.5rem 0;
+    color: var(--primary-color);
+}
+
+.violation {
+    color: var(--danger-color);
+    font-style: italic;
+    margin: 0.5rem 0;
+}
+
+.restaurant-meta {
     display: flex;
-    align-items: center;
-    justify-content: center;
     gap: 1rem;
+    margin-top: 0.75rem;
+    color: var(--secondary-color);
+    font-size: 0.875rem;
 }
 
-.header-links a {
-    color: var(--text-secondary);
-    text-decoration: none;
-    transition: color 0.2s ease;
+.critical {
+    color: var(--danger-color);
+    font-weight: 500;
 }
 
-.header-links a:hover {
-    color: var(--text-primary);
+/* Streamlit Specific Overrides */
+.stExpander {
+    border: 1px solid var(--border-color) !important;
+    border-radius: 8px !important;
+    margin-bottom: 0.75rem !important;
 }
 
-.github-link {
-    display: inline-flex;
-    align-items: center;
+.streamlit-expanderHeader {
+    padding: 1rem !important;
+    background: var(--background-color) !important;
 }
 
-.github-link svg {
-    width: 20px;
-    height: 20px;
+.streamlit-expanderContent {
+    padding: 0 1rem 1rem !important;
 }
 
-/* Clean Card Styling */
-/*.stExpander {
-    background: var(--bg-white) !important;
-    border: 1px solid var(--border-light) !important;
-    border-radius: 4px !important;
-    padding: 1.5rem !important;
-    margin: 1rem 0 !important;
-}*/
-
-/* Input Styling */
-/* Enhanced Search Styling */
-
-
-/* Metrics Styling */
-.stMetric {
-    background: var(--bg-white) !important;
-    padding: 1.5rem !important;
-    border-radius: 4px !important;
-    border: 1px solid var(--border-light) !important;
-}
-
-.stMetric label {
-    color: var(--text-secondary) !important;
-    font-family: 'Inter', sans-serif !important;
-    font-size: 0.875rem !important;
-    font-weight: 500 !important;
-    letter-spacing: 0.025em;
-}
-
-.stMetric .metric-value {
-    color: var(--text-primary) !important;
-    font-family: 'Fraunces', serif !important;
-    font-size: 2rem !important;
-    font-weight: 600 !important;
-}
-
-/* Tabs Styling */
-.stTabs [data-baseweb="tab-list"] {
-    gap: 0.5rem;
-    background-color: var(--bg-white);
-    padding: 0.5rem;
-    border-bottom: 1px solid var(--border-light);
-}
-
-.stTabs [data-baseweb="tab"] {
-    font-family: 'Inter', sans-serif !important;
-    font-weight: 500 !important;
-    color: var(--text-secondary) !important;
-    padding: 0.5rem 1rem !important;
-    border-radius: 0;
-}
-
-.stTabs [aria-selected="true"] {
-    background: transparent !important;
-    color: var(--text-primary) !important;
-    border-bottom: 2px solid var(--text-primary) !important;
-}
-
-/* Simple Loading Animation */
-.loading-spinner {
-    width: 32px;
-    height: 32px;
-    border: 2px solid #f3f3f3;
-    border-top: 2px solid var(--text-primary);
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    margin: 2rem auto;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+/* Warning and Error Messages */
+.stAlert {
+    background: var(--background-color) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 8px !important;
+    padding: 1rem !important;
 }
 
 /* Restaurant Info Styling */
@@ -589,6 +490,220 @@ div[data-testid="block-container"] > div:first-child {
     margin-top: 2rem !important;
     position: relative;
     z-index: 1;
+}
+
+/* Ensure statistics section doesn't overlap */
+.element-container:has(h2) {
+    position: relative;
+    z-index: 1;
+    margin-top: 2rem !important;
+    padding-top: 1rem !important;
+}
+
+/* Add extra spacing and background for statistics section */
+h2[id^="restaurant-safety-at-a-glance"] {
+    margin-top: 4rem !important;
+    position: relative;
+    z-index: 1;
+    background: transparent;
+    padding-top: 1.5rem !important;
+}
+
+/* Minimalist Editorial Theme */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&display=swap');
+
+/* Clean background */
+.stApp {
+    background-color: var(--bg-white);
+}
+
+/* Header Styling */
+.simple-header {
+    text-align: center;
+    padding: 2rem 0 1rem;
+    max-width: 800px;
+    margin: 0 auto;
+    background: var(--bg-white);
+    position: relative;
+    z-index: 1000;
+}
+
+.simple-header h1 {
+    font-family: 'Fraunces', serif !important;
+    font-size: 3.75rem !important;
+    color: var(--text-primary);
+    font-weight: 600 !important;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin: 0 0 1rem 0 !important;
+}
+
+.subheader {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.125rem;
+    color: var(--text-secondary);
+    margin: 0 auto 1.5rem !important;
+    font-weight: 400;
+    max-width: 600px;
+}
+
+/* Search Container Styles */
+.search-container {
+    position: relative;
+    z-index: 1001;
+    background: var(--bg-white);
+    padding: 0 1rem;
+    margin: 0 auto 2rem;
+    max-width: 800px;
+    width: 100%;
+}
+
+
+/* Search label styling */
+.search-label {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 1rem;
+    margin: 0.75rem 0 0 !important;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+}
+
+/* Search Results Container */
+.search-results-container {
+    position: relative;
+    z-index: 999;
+    margin-top: 2rem;
+    padding-top: 1rem;
+}
+
+/* Remove default focus outline and add custom styling */
+.stTextInput input:focus {
+    outline: none !important;
+    border-color: var(--border-light) !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1) !important;
+    transform: translateY(-2px);
+}
+
+.stTextInput input::placeholder {
+    color: var(--text-secondary) !important;
+    opacity: 0.8 !important;
+    font-size: 1.2rem !important;
+}
+
+/* Additional styles to remove any Streamlit-specific focus outlines */
+div[data-testid="stText"] input:focus,
+div[data-testid="stFormSubmitButton"] button:focus,
+.stTextInput div[data-baseweb="input"] > div:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Add extra spacing between search and content */
+.search-results {
+    margin-top: 2rem !important;
+    padding-top: 1rem !important;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.header-links {
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.header-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.header-links a:hover {
+    color: var(--text-primary);
+}
+
+.github-link {
+    display: inline-flex;
+    align-items: center;
+}
+
+.github-link svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Clean Card Styling */
+
+/* Input Styling */
+/* Enhanced Search Styling */
+
+
+/* Metrics Styling */
+.stMetric {
+    background: var(--bg-white) !important;
+    padding: 1.5rem !important;
+    border-radius: 4px !important;
+    border: 1px solid var(--border-light) !important;
+}
+
+.stMetric label {
+    color: var(--text-secondary) !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 0.875rem !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.025em;
+}
+
+.stMetric .metric-value {
+    color: var(--text-primary) !important;
+    font-family: 'Fraunces', serif !important;
+    font-size: 2rem !important;
+    font-weight: 600 !important;
+}
+
+/* Tabs Styling */
+.stTabs [data-baseweb="tab-list"] {
+    gap: 0.5rem;
+    background-color: var(--bg-white);
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.stTabs [data-baseweb="tab"] {
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 500 !important;
+    color: var(--text-secondary) !important;
+    padding: 0.5rem 1rem !important;
+    border-radius: 0;
+}
+
+.stTabs [aria-selected="true"] {
+    background: transparent !important;
+    color: var(--text-primary) !important;
+    border-bottom: 2px solid var(--text-primary) !important;
+}
+
+/* Simple Loading Animation */
+.loading-spinner {
+    width: 32px;
+    height: 32px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid var(--text-primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 2rem auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 /* Ensure statistics section doesn't overlap */
