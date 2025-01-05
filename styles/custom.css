@@ -68,10 +68,10 @@ header[data-testid="stHeader"] {
     position: relative;
     z-index: 1001;
     background: var(--bg-white);
-    padding: 0 1rem;
+    padding: 0;
     margin: 0 auto;
-    max-width: 800px;
     width: 100%;
+    max-width: 800px;
 }
 
 /* Search Input Styling */
@@ -79,6 +79,9 @@ header[data-testid="stHeader"] {
     position: relative;
     z-index: 1002;
     background: transparent;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .stTextInput input {
@@ -91,7 +94,7 @@ header[data-testid="stHeader"] {
     color: var(--text-primary) !important;
     transition: all 0.2s ease;
     width: 100% !important;
-    max-width: 800px !important;
+    max-width: none !important;
     margin: 0 auto !important;
     display: block !important;
     height: auto !important;
