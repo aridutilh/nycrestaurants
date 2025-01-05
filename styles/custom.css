@@ -123,9 +123,16 @@ header[data-testid="stHeader"] {
     font-size: 0.875rem;
 }
 
-.critical {
-    color: var(--danger-color);
+.critical-flag {
     font-weight: 500;
+}
+
+.critical-flag.is-critical {
+    color: var(--danger-color);
+}
+
+.critical-flag.not-critical {
+    color: var(--secondary-color);
 }
 
 /* Streamlit specific overrides */

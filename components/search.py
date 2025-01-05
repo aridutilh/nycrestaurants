@@ -57,7 +57,7 @@ def render_search_section(df):
                                 {f"<p class='violation'>❗ {row['violation_description']}</p>" if pd.notna(row['violation_description']) else ""}
                                 <div class='restaurant-meta'>
                                     <span>🍽️ {row['cuisine_description'] if pd.notna(row['cuisine_description']) else 'N/A'}</span>
-                                    {f"<span class='critical'>⚠️ {row['critical_flag']}</span>" if pd.notna(row['critical_flag']) else ""}
+                                    {f"<span class='critical-flag {row['critical_flag'].lower().replace(' ','-')}'>{row['critical_flag']}</span>" if pd.notna(row['critical_flag']) else ""}
                                 </div>
                             </div>
                             """,
