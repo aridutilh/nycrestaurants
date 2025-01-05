@@ -111,6 +111,32 @@ if st.session_state.data_loaded and st.session_state.data is not None:
 
     st.plotly_chart(fig_grades, use_container_width=True)
 
+    # Top Picks Section
+    st.markdown("<h3 style='text-align: center; margin: 2rem 0;'>🌟 Top Rated Restaurants</h3>", unsafe_allow_html=True)
+
+    # Filter for top rated restaurants in selected borough
+    top_picks = filtered_df.sort_values('score').head(5)
+
+    # Display top picks in expandable cards
+    for _, row in top_picks.iterrows():
+        expander_label = (
+            f"🏪 {row['dba']} - "
+            f"{row['grade'] if pd.notna(row['grade']) else 'Grade N/A'} "
+            f"(Score: {int(row['score']) if pd.notna(row['score']) else 'N/A'})"
+        )
+
+        with st.expander(expander_label, expanded=False):
+            st.markdown(f"""
+            <div class='restaurant-result'>
+                <p>📍 {row['building']} {row['street']}, {row['boro']}</p>
+                <p>📅 Inspected: {row['inspection_date'].strftime('%B %d, %Y')}</p>
+                <div class='restaurant-details'>
+                    <span>🍽️ {row['cuisine_description'] if pd.notna(row['cuisine_description']) else 'N/A'}</span>
+                    {f"<span class='critical'>⚠️ {row['critical_flag']}</span>" if pd.notna(row['critical_flag']) else ""}
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+
     # Simple Safety Guide
     st.markdown("""
         <div style='text-align: center; margin: 3rem 0; padding: 2rem; background-color: #f8f9fa; border-radius: 8px;'>
