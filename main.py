@@ -167,17 +167,6 @@ if st.session_state.data_loaded and st.session_state.data is not None:
         mask = pest_df['violation_description'].str.lower().str.contains('|'.join(keywords), na=False)
         pest_stats[pest_type] = len(pest_df[mask])
 
-    # Display pest statistics
-    st.markdown(
-        """
-        <div style='background-color: #f8f9fa; padding: 2rem; border-radius: 8px; margin: 1rem 0;'>
-            <p style='text-align: center; font-size: 1.1rem; margin-bottom: 1.5rem;'>
-                Reported pest-related violations in the past year:
-            </p>
-        """,
-        unsafe_allow_html=True
-    )
-
     # Create two columns for the stats
     col1, col2 = st.columns(2)
 
