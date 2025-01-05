@@ -6,7 +6,7 @@ header[data-testid="stHeader"] {
 /* Minimalist Editorial Theme */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&display=swap');
 
-:root {
+::root {
     --accent-yellow: #FFD43B;
     --accent-red: #E74C3C;
     --bg-white: #FFFFFF;
@@ -107,7 +107,7 @@ header[data-testid="stHeader"] {
 
 /* Search Input Container Styling */
 .stTextInput > div {
-    margin: 0 auto 1rem !important;  /* Adjusted margins */
+    margin: 0 auto 1.5rem !important;
     max-width: 800px !important;
     padding: 0 1rem;
 }
@@ -115,10 +115,10 @@ header[data-testid="stHeader"] {
 .stTextInput input {
     background: var(--bg-white) !important;
     border: 2px solid var(--border-light) !important;
-    border-radius: 16px !important;  /* Increased border radius */
-    padding: 1.25rem 2rem !important;  /* Increased padding */
+    border-radius: 16px !important;
+    padding: 1.25rem 2rem !important;
     font-family: 'Inter', sans-serif !important;
-    font-size: 1.2rem !important;  /* Larger font size */
+    font-size: 1.2rem !important;
     color: var(--text-primary) !important;
     transition: all 0.2s ease;
     width: 100% !important;
@@ -126,30 +126,38 @@ header[data-testid="stHeader"] {
     margin: 0 auto !important;
     display: block !important;
     height: auto !important;
-    min-height: 65px !important;  /* Increased height */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;  /* Added subtle shadow by default */
+    min-height: 65px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
 }
 
+/* Remove default focus outline and add custom styling */
 .stTextInput input:focus {
+    outline: none !important;
     border-color: var(--text-primary) !important;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1) !important;  /* Enhanced shadow on focus */
-    transform: translateY(-2px);  /* Subtle lift effect on focus */
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1) !important;
+    transform: translateY(-2px);
 }
 
 .stTextInput input::placeholder {
     color: var(--text-secondary) !important;
-    opacity: 0.8 !important;  /* Made placeholder more visible */
+    opacity: 0.8 !important;
     font-size: 1.2rem !important;
 }
 
-/* Search label styling - removed duplicate rule */
+/* Search label styling */
 .search-label {
     text-align: center;
     color: var(--text-secondary);
-    font-size: 1rem;  /* Slightly larger label */
-    margin: 0.75rem 0 2.5rem !important;
+    font-size: 1rem;
+    margin: 0.75rem 0 3rem !important;
     font-family: 'Inter', sans-serif;
-    font-weight: 500;  /* Made label slightly bolder */
+    font-weight: 500;
+}
+
+/* Add extra spacing between search and content */
+.search-results {
+    margin-top: 4rem !important;
+    padding-top: 2rem !important;
 }
 
 /* Metrics Styling */
