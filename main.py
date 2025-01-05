@@ -153,7 +153,7 @@ if st.session_state.data_loaded and st.session_state.data is not None:
 
     # Pest Violations Section
     st.markdown("""
-        <h3 style='text-align: center; margin: 2rem 0;'>🪳 Top Icks Report</h3>
+        <h3 style='text-align: center; margin: 2rem 0 0.5rem;'>🪳 Top Icks Report</h3>
         <p style='text-align: center; font-size: 0.9rem; color: #666; margin-bottom: 2rem;'>
             These statistics show reported violations involving pests during health inspections. 
             Multiple violations may be reported for the same establishment.
