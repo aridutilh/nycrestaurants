@@ -156,7 +156,7 @@ div[data-testid="stFormSubmitButton"] button:focus,
     text-align: center;
     color: var(--text-secondary);
     font-size: 1rem;
-    margin: 0.75rem 0 3rem !important;
+    margin: 0.75rem 0 5rem !important;
     font-family: 'Inter', sans-serif;
     font-weight: 500;
 }
