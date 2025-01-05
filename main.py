@@ -53,6 +53,31 @@ if not st.session_state.data_loaded:
 
 # Only show content if data is loaded
 if st.session_state.data_loaded and st.session_state.data is not None:
+    df = st.session_state.data
+
+    # Key Statistics Dashboard
+    col1, col2, col3, col4 = st.columns(4)
+
+    with col1:
+        total_restaurants = len(df['camis'].unique())
+        st.metric("Total Restaurants", f"{total_restaurants:,}", 
+                 help="Number of unique restaurants in NYC")
+
+    with col2:
+        grade_a_percent = (len(df[df['grade'] == 'A']) / len(df) * 100)
+        st.metric("Grade A Restaurants", f"{grade_a_percent:.1f}%",
+                 help="Percentage of restaurants with Grade A")
+
+    with col3:
+        avg_score = df['score'].mean()
+        st.metric("Average Safety Score", f"{avg_score:.1f}",
+                 help="Lower score is better")
+
+    with col4:
+        recent_inspections = len(df[df['inspection_date'] >= (pd.Timestamp.now() - pd.Timedelta(days=30))])
+        st.metric("Recent Inspections", f"{recent_inspections:,}",
+                 help="Inspections in the last 30 days")
+
     # Main navigation
     tabs = st.tabs(["🗺️ Map View", "🔍 Search", "ℹ️ About"])
 
@@ -63,76 +88,41 @@ if st.session_state.data_loaded and st.session_state.data is not None:
         render_search(st.session_state.data)
 
     with tabs[2]:
-        # Calculate interesting statistics
-        df = st.session_state.data
-        total_inspections = len(df)
-        grade_a_count = len(df[df['grade'] == 'A'])
-        grade_a_percentage = (grade_a_count / total_inspections) * 100
-        avg_score = df['score'].mean()
-        worst_score = df['score'].max()
-        best_neighborhood = df.groupby('boro')['score'].mean().idxmin()
-
         st.markdown(
-            f"""
+            """
             ## About NYC Restaurant Safety
 
-            When analyzing restaurant safety across New York City neighborhoods, we've discovered some 
-            fascinating patterns in our data. For instance, {best_neighborhood} leads with the best 
-            average safety scores, showing a strong commitment to food safety standards.
+            Our platform helps you make informed dining decisions by providing transparent 
+            access to NYC's restaurant inspection data. Here's what you need to know:
 
-            ### By the Numbers
-            - **{total_inspections:,}** total inspections conducted
-            - **{grade_a_percentage:.1f}%** of restaurants maintain an A grade
-            - Average safety score: **{avg_score:.1f}** (lower is better)
-            - {worst_score:.0f} points was the highest (worst) score recorded
+            ### 🎯 Safety Grades Explained
+            - **Grade A (0-13 points)**: Excellent food safety practices
+            - **Grade B (14-27 points)**: Good, with some areas for improvement
+            - **Grade C (28+ points)**: Significant violations present
 
-            ### Understanding Restaurant Grades
-            Our grading system helps you make informed dining decisions:
+            ### 🔍 What We Check
+            - Food temperature control
+            - Kitchen cleanliness
+            - Employee hygiene
+            - Pest control
+            - Food handling procedures
 
-            #### 🏆 Grade A (0-13 points) - Excellent
-            - Exceptional food safety practices
-            - Minor or no violations found
-            - Regular cleaning and maintenance
-            - Well-trained staff
-            - Recommended for dining
-
-            #### ⭐ Grade B (14-27 points) - Good
-            - Generally safe food handling
-            - Some violations present
-            - Issues being addressed
-            - More frequent inspections
-            - Exercise normal caution
-
-            #### ⚠️ Grade C (28+ points) - Poor
-            - Significant violations found
-            - Major food safety concerns
-            - Requires immediate attention
-            - Under close monitoring
-            - Consider alternative options
-
-            ### How Scores Are Calculated
-            - Each violation carries points based on health risk level
-            - Critical violations (food temperature, contamination): 5-7 points
-            - Major violations (facility maintenance, procedures): 3-5 points
-            - Minor violations (labeling, non-food surfaces): 1-2 points
-            - Repeat violations receive additional points
-
-            ### Making Informed Choices
-            - Always check the current grade and inspection date
-            - Lower scores indicate better performance
-            - Consider recent inspection history
-            - Look for trends in violation types
-            - Grade changes can indicate improving or declining standards
-
-            ### About This Tool
-            This application visualizes health inspection data from NYC's Department of Health, 
-            helping you make informed dining decisions. Data is sourced from the 
-            [NYC Open Data API](https://data.cityofnewyork.us/Health/DOHMH-New-York-City-Restaurant-Inspection-Results/43nn-pn8j) 
-            and updated regularly.
-
-            Created with ❤️ for NYC's diverse food scene
+            ### 📊 Recent Trends
             """
         )
+
+        # Add recent trends visualization
+        col1, col2 = st.columns(2)
+
+        with col1:
+            st.markdown("#### Most Common Violations")
+            violations = df.groupby('violation_description')['camis'].count().nlargest(5)
+            st.bar_chart(violations)
+
+        with col2:
+            st.markdown("#### Inspection Results by Borough")
+            borough_stats = df.groupby('boro')['grade'].value_counts().unstack()
+            st.bar_chart(borough_stats)
 
     # Footer
     st.markdown(
