@@ -8,7 +8,14 @@ def render_header():
             <div class="header-links">
                 <span>By <a href="https://aridutilh.com" target="_blank">Ari</a></span>
             </div>
+            <div class="floating-emojis">
+                <span class="float-left">🍕</span>
+                <span class="float-right">👨‍🍳</span>
+            </div>
             <h1>NYC Restaurant Safety</h1>
+            <p class="subheader">
+                Explore food safety ratings and inspection results across New York City
+            </p>
             <div class="search-container">
                 <div class="search-icon">🔍</div>
                 <input type="text" 
@@ -18,9 +25,6 @@ def render_header():
                     aria-label="Search restaurants"
                 />
             </div>
-            <p class="subheader">
-                Explore food safety ratings and inspection results across New York City
-            </p>
         </div>
 
         <script>
