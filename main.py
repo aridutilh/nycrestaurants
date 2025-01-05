@@ -1,9 +1,8 @@
 import streamlit as st
 import pandas as pd
-from components.header import render_header, render_loading
+import plotly.express as px
+from components.header import render_header
 from components.search import render_search
-from components.maps import render_map_view
-from components.restaurant_details import render_restaurant_details
 from utils.data_loader import load_nyc_restaurant_data
 
 # Page configuration
@@ -59,27 +58,17 @@ if not st.session_state.data_loaded:
 if st.session_state.data_loaded and st.session_state.data is not None:
     df = st.session_state.data
 
-    # Clean Data Overview Section
+    # Restaurant Safety at a Glance Section
     st.markdown("<h2 style='text-align: center; margin-bottom: 2rem;'>🍽️ Restaurant Safety at a Glance</h2>", unsafe_allow_html=True)
 
-    # Simplified metrics in two rows
+    # Metrics in two rows
     col1, col2 = st.columns(2)
-
     with col1:
         st.metric(
             "Active Restaurants",
             f"{len(df['camis'].unique()):,}",
             help="Total number of restaurants currently operating in NYC"
         )
-
-        recent_inspections = len(df[df['inspection_date'] >= (pd.Timestamp.now() - pd.Timedelta(days=30))])
-        st.metric(
-            "Recent Inspections",
-            f"{recent_inspections:,}",
-            help="Inspections conducted in the last 30 days"
-        )
-
-    with col2:
         grade_a_percent = (len(df[df['grade'] == 'A']) / len(df) * 100)
         st.metric(
             "Grade A Restaurants",
@@ -87,6 +76,13 @@ if st.session_state.data_loaded and st.session_state.data is not None:
             help="Percentage of restaurants with Grade A rating"
         )
 
+    with col2:
+        recent_inspections = len(df[df['inspection_date'] >= (pd.Timestamp.now() - pd.Timedelta(days=30))])
+        st.metric(
+            "Recent Inspections",
+            f"{recent_inspections:,}",
+            help="Inspections conducted in the last 30 days"
+        )
         avg_score = df['score'].mean()
         st.metric(
             "Average Safety Score",
@@ -94,9 +90,36 @@ if st.session_state.data_loaded and st.session_state.data is not None:
             help="Lower score indicates better safety standards"
         )
 
-    # Interactive Map
-    st.markdown("<h3 style='text-align: center; margin: 2rem 0;'>📍 Restaurant Locations</h3>", unsafe_allow_html=True)
-    render_map_view(df)
+    # Neighborhood Toggle Section
+    st.markdown("<h3 style='text-align: center; margin: 2rem 0;'>🏘️ Neighborhood View</h3>", unsafe_allow_html=True)
+    selected_boro = st.selectbox("Select Borough", sorted(df['boro'].unique()))
+    filtered_df = df[df['boro'] == selected_boro]
+
+    # Grade Distribution Section
+    st.markdown("<h3 style='text-align: center; margin: 2rem 0;'>📊 Grade Distribution</h3>", unsafe_allow_html=True)
+    grade_dist = df[df['grade'].isin(['A', 'B', 'C'])]['grade'].value_counts()
+    fig_grades = px.pie(
+        values=grade_dist.values,
+        names=grade_dist.index,
+        title=f'Restaurant Grades Distribution in {selected_boro}',
+        color_discrete_sequence=['#2ECC71', '#F1C40F', '#E74C3C']
+    )
+    st.plotly_chart(fig_grades, use_container_width=True)
+
+    # Most Common Issues Section
+    st.markdown("<h3 style='text-align: center; margin: 2rem 0;'>⚠️ Most Common Issues</h3>", unsafe_allow_html=True)
+
+    # Group and count violation descriptions
+    violation_counts = df['violation_description'].value_counts().head(5)
+    fig_violations = px.bar(
+        x=violation_counts.values,
+        y=violation_counts.index,
+        orientation='h',
+        title='Top 5 Most Common Violations',
+        labels={'x': 'Number of Violations', 'y': 'Violation Type'}
+    )
+    fig_violations.update_layout(yaxis={'categoryorder': 'total ascending'})
+    st.plotly_chart(fig_violations, use_container_width=True)
 
     # Simple Safety Guide
     st.markdown("""
@@ -110,14 +133,5 @@ if st.session_state.data_loaded and st.session_state.data is not None:
         </div>
     """, unsafe_allow_html=True)
 
-    # Footer
-    st.markdown(
-        f"""
-        <div style='text-align: center; padding: 20px; color: #6B7280; font-size: 0.9rem;'>
-            <p>Data provided by NYC Open Data | Last updated: {pd.Timestamp.now().strftime("%B %d, %Y")}</p>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
 else:
     st.warning("Please wait while we load the data...")
