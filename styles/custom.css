@@ -21,9 +21,12 @@ header[data-testid="stHeader"] {
 
 /* Block container adjustments */
 .block-container {
-    padding: 0 2rem !important;
+    padding: 0 !important;
     max-width: 1200px !important;
     margin: 0 auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
 }
 
 /* Override Streamlit's default padding */
@@ -389,6 +392,24 @@ p, span, div {
     padding: 1.5rem !important;
     border-radius: 4px !important;
     border: 1px solid var(--border-light) !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+}
+
+/* Center column containers */
+[data-testid="column"] {
+    display: flex !important;
+    justify-content: center !important;
+    width: 100% !important;
+    max-width: 1000px !important;
+    margin: 0 auto !important;
+}
+
+/* Ensure metric containers take full width */
+[data-testid="metric-container"] {
+    width: 100% !important;
+    max-width: 400px !important;
+    margin: 0 auto !important;
 }
 
 .stMetric label {
