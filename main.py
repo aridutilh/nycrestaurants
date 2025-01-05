@@ -55,6 +55,13 @@ if not st.session_state.data_loaded:
 if st.session_state.data_loaded and st.session_state.data is not None:
     df = st.session_state.data
 
+    # Search Section (Prioritized at the top)
+    st.markdown("## 🔍 Find Your Restaurant")
+    render_search(st.session_state.data)
+
+    # Data Visualization Section
+    st.markdown("## 📊 Restaurant Safety Overview")
+
     # Key Statistics Dashboard
     col1, col2, col3, col4 = st.columns(4)
 
@@ -78,51 +85,45 @@ if st.session_state.data_loaded and st.session_state.data is not None:
         st.metric("Recent Inspections", f"{recent_inspections:,}",
                  help="Inspections in the last 30 days")
 
-    # Main navigation
-    tabs = st.tabs(["🗺️ Map View", "🔍 Search", "ℹ️ About"])
+    # Map View
+    render_map_view(st.session_state.data)
 
-    with tabs[0]:
-        render_map_view(st.session_state.data)
+    # About Section
+    st.markdown(
+        """
+        ## About NYC Restaurant Safety
 
-    with tabs[1]:
-        render_search(st.session_state.data)
+        Our platform helps you make informed dining decisions by providing transparent 
+        access to NYC's restaurant inspection data. Here's what you need to know:
 
-    with tabs[2]:
-        st.markdown(
-            """
-            ## About NYC Restaurant Safety
+        ### 🎯 Safety Grades Explained
+        - **Grade A (0-13 points)**: Excellent food safety practices
+        - **Grade B (14-27 points)**: Good, with some areas for improvement
+        - **Grade C (28+ points)**: Significant violations present
 
-            Our platform helps you make informed dining decisions by providing transparent 
-            access to NYC's restaurant inspection data. Here's what you need to know:
+        ### 🔍 What We Check
+        - Food temperature control
+        - Kitchen cleanliness
+        - Employee hygiene
+        - Pest control
+        - Food handling procedures
 
-            ### 🎯 Safety Grades Explained
-            - **Grade A (0-13 points)**: Excellent food safety practices
-            - **Grade B (14-27 points)**: Good, with some areas for improvement
-            - **Grade C (28+ points)**: Significant violations present
+        ### 📊 Recent Trends
+        """
+    )
 
-            ### 🔍 What We Check
-            - Food temperature control
-            - Kitchen cleanliness
-            - Employee hygiene
-            - Pest control
-            - Food handling procedures
+    # Add recent trends visualization
+    col1, col2 = st.columns(2)
 
-            ### 📊 Recent Trends
-            """
-        )
+    with col1:
+        st.markdown("#### Most Common Violations")
+        violations = df.groupby('violation_description')['camis'].count().nlargest(5)
+        st.bar_chart(violations)
 
-        # Add recent trends visualization
-        col1, col2 = st.columns(2)
-
-        with col1:
-            st.markdown("#### Most Common Violations")
-            violations = df.groupby('violation_description')['camis'].count().nlargest(5)
-            st.bar_chart(violations)
-
-        with col2:
-            st.markdown("#### Inspection Results by Borough")
-            borough_stats = df.groupby('boro')['grade'].value_counts().unstack()
-            st.bar_chart(borough_stats)
+    with col2:
+        st.markdown("#### Inspection Results by Borough")
+        borough_stats = df.groupby('boro')['grade'].value_counts().unstack()
+        st.bar_chart(borough_stats)
 
     # Footer
     st.markdown(
