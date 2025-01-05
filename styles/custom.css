@@ -84,6 +84,36 @@
     display: inline-block;
 }
 
+/* Add gradient overlays for top and bottom blending */
+.stApp::before,
+.stApp::after {
+    content: '';
+    position: fixed;
+    left: 0;
+    right: 0;
+    height: 150px;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.stApp::before {
+    top: 0;
+    background: linear-gradient(to bottom, 
+        rgba(255, 190, 118, 0.95) 0%,
+        rgba(255, 190, 118, 0.8) 25%,
+        rgba(255, 190, 118, 0) 100%
+    );
+}
+
+.stApp::after {
+    bottom: 0;
+    background: linear-gradient(to top, 
+        rgba(255, 190, 118, 0.95) 0%,
+        rgba(255, 190, 118, 0.8) 25%,
+        rgba(255, 190, 118, 0) 100%
+    );
+}
+
 /* Search container and results */
 .search-container {
     background: rgba(255, 255, 255, 0.95);
