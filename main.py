@@ -84,7 +84,7 @@ if st.session_state.data_loaded and st.session_state.data is not None:
     st.markdown("<div style='max-width: 800px; margin: 0 auto; padding: 0 1rem;'>", unsafe_allow_html=True)
 
     # Metrics in two rows with padding columns
-    cols = st.columns([0.1, 1, 1, 0.1])  # Add padding columns
+    cols = st.columns([0.2, 1, 1, 0.1])  # Increased left padding
     with cols[1]:
         st.metric(
             "Active Restaurants",
@@ -183,7 +183,7 @@ if st.session_state.data_loaded and st.session_state.data is not None:
 
     # Create centered container and columns for stats
     st.markdown("<div style='max-width: 800px; margin: 0 auto; padding: 0 1rem;'>", unsafe_allow_html=True)
-    cols = st.columns([0.1, 1, 1, 0.1])  # Add padding columns
+    cols = st.columns([0.2, 1, 1, 0.1])  # Increased left padding
     
     with cols[1]:
         st.metric(

@@ -399,10 +399,11 @@ p, span, div {
 /* Center column containers */
 [data-testid="column"] {
     display: flex !important;
-    justify-content: center !important;
+    justify-content: flex-end !important;
     width: 100% !important;
-    max-width: 1000px !important;
+    max-width: 1200px !important;
     margin: 0 auto !important;
+    padding-right: 2rem !important;
 }
 
 /* Ensure metric containers take full width */
