@@ -8,18 +8,13 @@ def render_search_section(df):
     with st.container():
         st.markdown(
             """
-            <div class="search-overlay">
-                <div class="simple-header">
-                    <div class="floating-emojis">
-                        <span class="float-left">🍕</span>
-                        <span class="float-right">👨‍🍳</span>
-                    </div>
-                    <h1>NYC Restaurant Safety</h1>
-                    <p class="subheader">
-                        Explore food safety ratings and inspection results across New York City
-                    </p>
-                </div>
-                <div class="search-container">
+            <div class="simple-header">
+                <h1>NYC Restaurant Safety</h1>
+                <p class="subheader">
+                    Explore food safety ratings and inspection results across New York City
+                </p>
+            </div>
+            <div class="search-container">
             """,
             unsafe_allow_html=True
         )
@@ -38,7 +33,6 @@ def render_search_section(df):
                 <p class="search-label">
                     Search restaurants
                 </p>
-            </div>
             </div>
             """,
             unsafe_allow_html=True

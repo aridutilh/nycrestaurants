@@ -23,10 +23,12 @@ header[data-testid="stHeader"] {
 /* Header Styling */
 .simple-header {
     text-align: center;
-    padding: 1.5rem 0 0;
+    padding: 2rem 0 1rem;
     max-width: 800px;
     margin: 0 auto;
-    width: 100%;
+    background: var(--bg-white);
+    position: relative;
+    z-index: 1000;
 }
 
 .simple-header h1 {
@@ -37,51 +39,32 @@ header[data-testid="stHeader"] {
     letter-spacing: -0.02em;
     line-height: 1.1;
     margin: 0 0 1rem 0 !important;
-    padding-top: 0.5rem;
 }
 
-/* Updated subheader styling - now directly below title */
 .subheader {
     font-family: 'Inter', sans-serif;
     font-size: 1.125rem;
     color: var(--text-secondary);
-    margin: 0 auto 1rem !important;
+    margin: 0 auto 1.5rem !important;
     font-weight: 400;
     max-width: 600px;
-    width: 100%;
-    text-align: center;
 }
 
-/* Search Section Styles */
-.search-overlay {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    background: var(--bg-white);
-    padding-bottom: 1rem;
-    margin-bottom: 2rem;
-    width: 100%;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-}
-
+/* Search Container Styles */
 .search-container {
     position: relative;
     z-index: 1001;
     background: var(--bg-white);
-    padding: 0;
-    margin: 0 auto;
-    width: 100%;
+    padding: 0 1rem;
+    margin: 0 auto 2rem;
     max-width: 800px;
+    width: 100%;
 }
 
 /* Search Input Styling */
 .stTextInput > div {
     position: relative;
     z-index: 1002;
-    background: transparent;
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
 }
 
 .stTextInput input {
@@ -95,11 +78,21 @@ header[data-testid="stHeader"] {
     transition: all 0.2s ease;
     width: 100% !important;
     max-width: none !important;
-    margin: 0 auto !important;
+    margin: 0 !important;
     display: block !important;
     height: auto !important;
     min-height: 65px !important;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Search label styling */
+.search-label {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 1rem;
+    margin: 0.75rem 0 0 !important;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
 }
 
 /* Search Results Container */
@@ -183,17 +176,6 @@ div[data-testid="stFormSubmitButton"] button:focus,
 
 /* Input Styling */
 /* Enhanced Search Styling */
-
-
-/* Search label styling */
-.search-label {
-    text-align: center;
-    color: var(--text-secondary);
-    font-size: 1rem;
-    margin: 0.75rem 0 2rem !important;
-    font-family: 'Inter', sans-serif;
-    font-weight: 500;
-}
 
 
 /* Metrics Styling */
