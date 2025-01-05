@@ -8,44 +8,54 @@ def render_search(df):
     try:
         # Get current search state
         search_query = st.session_state.get('search_query', '').strip()
-        search_triggered = st.session_state.get('search_triggered', False)
 
-        # Only perform search if triggered and query exists
-        if search_query and search_triggered:
+        # Debug logging
+        st.write("Debug - Current search query:", search_query)
+        st.write("Debug - Search triggered:", st.session_state.get('search_triggered', False))
+
+        # Check if we have a valid search query
+        if search_query:
             try:
                 # Perform search
                 results = search_restaurants(df, search_query)
 
-                if results is None or len(results) == 0:
+                if results is None or results.empty:
                     st.warning("No restaurants found matching your search.")
                 else:
-                    st.write(f"Found {len(results)} matching restaurants:")
-
                     # Display results
+                    st.success(f"Found {len(results)} matching restaurants:")
+
+                    # Display each result in an expander
                     for _, row in results.iterrows():
-                        with st.expander(
-                            f"🏪 {row['dba']} - {row['building']} {row['street']}, {row['boro']}",
-                            expanded=False
-                        ):
+                        # Create expander label with key info
+                        expander_label = (
+                            f"🏪 {row['dba']} - "
+                            f"{row['building']} {row['street']}, {row['boro']}"
+                        )
+
+                        # Display restaurant details in expander
+                        with st.expander(expander_label, expanded=False):
                             render_restaurant_details(row)
 
             except Exception as e:
                 st.error(f"Error performing search: {str(e)}")
-            finally:
-                # Reset search triggered flag
-                st.session_state.search_triggered = False
 
-        elif not search_query:
+        else:
             # Show recently inspected restaurants
-            st.markdown("#### 🕒 Recently Inspected Restaurants")
+            st.subheader("🕒 Recently Inspected Restaurants")
             recent = df.sort_values('inspection_date', ascending=False).head(10)
 
             for _, row in recent.iterrows():
-                with st.expander(
-                    f"🏪 {row['dba']} - {row['building']} {row['street']}, {row['boro']}",
-                    expanded=False
-                ):
+                expander_label = (
+                    f"🏪 {row['dba']} - "
+                    f"{row['building']} {row['street']}, {row['boro']}"
+                )
+                with st.expander(expander_label, expanded=False):
                     render_restaurant_details(row)
 
     except Exception as e:
         st.error(f"An unexpected error occurred: {str(e)}")
+        st.write("Debug - Error details:", str(e))
+
+    # Always reset search triggered flag after rendering
+    st.session_state.search_triggered = False

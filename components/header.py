@@ -1,11 +1,10 @@
 import streamlit as st
 
 def render_header():
-    """Render the app header with minimalist styling"""
+    """Render the app header with search functionality"""
     # Initialize search state if not present
     if 'search_query' not in st.session_state:
         st.session_state.search_query = ''
-        st.session_state.search_triggered = False
 
     st.markdown(
         """
@@ -23,18 +22,20 @@ def render_header():
         unsafe_allow_html=True
     )
 
-    # Use Streamlit's native text input for search
+    # Use Streamlit's native text input with a unique key
     search_query = st.text_input(
         label="",
-        value=st.session_state.get('search_query', ''),
-        placeholder="Search any restaurant in NYC...",
-        key="search_input"
+        value=st.session_state.search_query,
+        placeholder="🔍 Search any restaurant in NYC...",
+        key="search_input",
+        help="Enter restaurant name, address, or borough"
     )
 
     # Update session state when search input changes
-    if search_query != st.session_state.get('search_query', ''):
+    if search_query != st.session_state.search_query:
         st.session_state.search_query = search_query
-        st.session_state.search_triggered = True
+        if search_query.strip():  # Only trigger search if query is not empty
+            st.session_state.search_triggered = True
 
 def render_loading():
     """Display minimal loading animation"""
