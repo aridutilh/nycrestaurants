@@ -7,51 +7,34 @@ def render_header():
         st.session_state.search_query = ''
         st.session_state.search_triggered = False
 
-    # Get current search query value
-    current_search = st.session_state.get('search_query', '')
-
-    # Create the header HTML with proper string formatting
-    header_html = f"""
-    <div class="simple-header">
-        <div class="floating-emojis">
-            <span class="float-left">🍕</span>
-            <span class="float-right">👨‍🍳</span>
+    st.markdown(
+        """
+        <div class="simple-header">
+            <div class="floating-emojis">
+                <span class="float-left">🍕</span>
+                <span class="float-right">👨‍🍳</span>
+            </div>
+            <h1>NYC Restaurant Safety</h1>
+            <p class="subheader">
+                Explore food safety ratings and inspection results across New York City
+            </p>
         </div>
-        <h1>NYC Restaurant Safety</h1>
-        <p class="subheader">
-            Explore food safety ratings and inspection results across New York City
-        </p>
-        <div class="search-container">
-            <div class="search-icon">🔍</div>
-            <input type="text" 
-                id="restaurant-search"
-                class="search-input" 
-                placeholder="Search any restaurant in NYC..."
-                value="{current_search}"
-                onchange="handleSearchChange(event)"
-                oninput="handleSearchInput(event)"
-                aria-label="Search restaurants"
-            />
-        </div>
-    </div>
+        """,
+        unsafe_allow_html=True
+    )
 
-    <script>
-    function handleSearchInput(event) {{
-        handleSearchChange(event);
-    }}
+    # Use Streamlit's native text input for search
+    search_query = st.text_input(
+        label="",
+        value=st.session_state.get('search_query', ''),
+        placeholder="Search any restaurant in NYC...",
+        key="search_input"
+    )
 
-    function handleSearchChange(event) {{
-        const value = event.target.value;
-        window.parent.streamlit.setComponentValue({{
-            value: value,
-            dataType: "json",
-            args: {{ search_query: value, search_triggered: true }},
-        }});
-    }}
-    </script>
-    """
-
-    st.markdown(header_html, unsafe_allow_html=True)
+    # Update session state when search input changes
+    if search_query != st.session_state.get('search_query', ''):
+        st.session_state.search_query = search_query
+        st.session_state.search_triggered = True
 
 def render_loading():
     """Display minimal loading animation"""
