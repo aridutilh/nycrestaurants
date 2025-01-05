@@ -21,20 +21,22 @@ def render_search_section(df):
         unsafe_allow_html=True
     )
 
-    # Search input using native Streamlit component - now directly below title
+    # Search input with better spacing and prominence
+    st.markdown('<div class="search-container">', unsafe_allow_html=True)
     search_query = st.text_input(
-        label="Search restaurants",
+        label="",
         value=st.session_state.get('search_query', ''),
-        placeholder="🔍 Enter restaurant name...",
+        placeholder="🔍 Search any restaurant in NYC...",
         key="search_input_field"
     )
 
-    # Center the search label
+    # Center the search label below the input
     st.markdown(
         """
         <p class="search-label">
             Search restaurants
         </p>
+        </div>
         """,
         unsafe_allow_html=True
     )
@@ -44,8 +46,8 @@ def render_search_section(df):
         st.session_state.search_query = search_query
 
     # Display results section only if there's a search query
-    try:
-        if search_query.strip():
+    if search_query.strip():
+        try:
             # Perform search
             results = search_restaurants(df, search_query)
 
@@ -79,5 +81,5 @@ def render_search_section(df):
 
                 st.markdown("</div>", unsafe_allow_html=True)
 
-    except Exception as e:
-        st.error(f"Error displaying search results: {str(e)}")
+        except Exception as e:
+            st.error(f"Error displaying search results: {str(e)}")
