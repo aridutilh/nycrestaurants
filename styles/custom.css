@@ -26,9 +26,10 @@ header[data-testid="stHeader"] {
 
 /* Search input styling */
 [data-testid="stTextInput"] {
-    margin: 2rem auto !important;
+    margin: 3rem auto !important;
     width: 100% !important;
-    max-width: 800px !important;
+    max-width: 700px !important;
+    padding: 0 2rem !important;
 }
 
 .stTextInput > div {
@@ -41,11 +42,11 @@ header[data-testid="stHeader"] {
     background: var(--background-color) !important;
     border: 2px solid var(--border-color) !important;
     border-radius: 12px !important;
-    padding: 1.25rem 1.5rem !important;
+    padding: 1.5rem 2rem !important;
     font-size: 1.25rem !important;
     color: var(--primary-color) !important;
     height: auto !important;
-    min-height: 65px !important;
+    min-height: 70px !important;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
     transition: all 0.2s ease-in-out !important;
     margin: 0 !important;
@@ -71,6 +72,13 @@ header[data-testid="stHeader"] {
     margin: 0 auto;
 }
 
+/* Content wrapper */
+.content-wrapper {
+    text-align: center;
+    padding: 2rem 1rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
 .content-wrapper h1 {
     font-family: 'Inter', -apple-system, system-ui, sans-serif;
     font-size: 3rem;
