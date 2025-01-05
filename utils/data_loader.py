@@ -3,9 +3,24 @@ from datetime import datetime, timedelta
 import requests
 import io
 import streamlit as st
+from utils.cache_manager import (
+    is_cache_valid,
+    load_from_cache,
+    save_to_cache,
+    get_cache_metadata
+)
 
 def load_nyc_restaurant_data():
-    """Load NYC restaurant inspection data from the Open Data API"""
+    """Load NYC restaurant inspection data from cache or API"""
+    # Check if we have valid cached data
+    if is_cache_valid():
+        cached_data = load_from_cache()
+        if cached_data is not None:
+            metadata = get_cache_metadata()
+            st.success(f"Loaded {metadata['unique_restaurants']:,} restaurants from cache (Last updated: {metadata['last_updated']})")
+            return cached_data
+
+    # If no valid cache, fetch from API
     url = "https://data.cityofnewyork.us/resource/43nn-pn8j.csv"
 
     # Initialize empty list to store all dataframes
@@ -34,7 +49,7 @@ def load_nyc_restaurant_data():
         total_fetched += len(df_page)
 
         # Update progress message
-        st.info(f"Loading restaurants... Retrieved {total_fetched:,} records so far")
+        st.info(f"Loading restaurants from API... Retrieved {total_fetched:,} records so far")
 
         # If we got less than page_size records, we've reached the end
         if len(df_page) < page_size:
@@ -43,9 +58,13 @@ def load_nyc_restaurant_data():
         # Increment offset for next page
         offset += page_size
 
-    # If we got no data at all, return empty DataFrame
+    # If we got no data at all, try loading from cache as fallback
     if not all_data:
-        st.error("No data received from the API")
+        cached_data = load_from_cache()
+        if cached_data is not None:
+            st.warning("Failed to fetch fresh data, using cached data instead")
+            return cached_data
+        st.error("No data received from the API and no cache available")
         return pd.DataFrame()
 
     # Combine all pages into single DataFrame
@@ -70,8 +89,11 @@ def load_nyc_restaurant_data():
     # Remove duplicate records keeping the latest inspection for each restaurant
     df = df.sort_values('inspection_date', ascending=False).drop_duplicates(subset='camis')
 
+    # Save the processed data to cache
+    save_to_cache(df)
+
     # Log the final number of unique restaurants
-    st.success(f"Successfully loaded {len(df):,} unique restaurants from the API")
+    st.success(f"Successfully loaded {len(df):,} unique restaurants from API and updated cache")
 
     return df
 
@@ -93,29 +115,18 @@ def fetch_data(url, query_params=None):
         return pd.DataFrame()
 
 def search_restaurants(df, query):
-    """Search restaurants using direct API query"""
+    """Search restaurants using loaded data"""
     if not query:
         return pd.DataFrame()
 
-    # API endpoint for searching
-    base_url = "https://data.cityofnewyork.us/resource/43nn-pn8j.csv"
-
-    # Construct API query parameters
     query = query.lower().strip()
-    query_params = {
-        '$where': f"lower(dba) like '%{query}%' OR lower(building) like '%{query}%' OR lower(street) like '%{query}%'",
-        '$order': 'inspection_date DESC',
-        '$limit': 1000  # Increased from 50 to 1000 for more comprehensive search results
-    }
+    mask = (
+        df['dba'].str.lower().str.contains(query, na=False) |
+        df['building'].str.lower().str.contains(query, na=False) |
+        df['street'].str.lower().str.contains(query, na=False)
+    )
 
-    # Fetch fresh data from API with search parameters
-    results = fetch_data(base_url, query_params)
-
-    if not results.empty:
-        # Get unique restaurants (latest inspection for each)
-        results = results.drop_duplicates(subset=['camis'])
-
-    return results
+    return df[mask].head(1000)  # Limit to 1000 results for performance
 
 def filter_data_by_year(df, year):
     """Filter dataset by specific year"""
