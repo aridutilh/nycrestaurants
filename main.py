@@ -75,7 +75,7 @@ if st.session_state.data_loaded and st.session_state.data is not None:
             st.markdown("</div>", unsafe_allow_html=True)
 
     # Add spacing between search results and main content
-    st.markdown("<div style='margin-top: 3rem;'></div>", unsafe_allow_html=True)
+    st.markdown("<div style='margin-top: 1.5rem;'></div>", unsafe_allow_html=True)
 
     # Restaurant Safety at a Glance Section
     st.markdown("<h2 style='text-align: center; margin-bottom: 2rem;'>🍽️ Restaurant Safety at a Glance</h2>", unsafe_allow_html=True)
