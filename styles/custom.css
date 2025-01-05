@@ -16,13 +16,13 @@ header[data-testid="stHeader"] {
 /* Main container */
 .stApp {
     background: var(--background-color);
-    padding: 0 5rem !important;
+    padding: 0 8rem !important; /* Increased from 5rem */
 }
 
 /* Block container adjustments */
 .block-container {
     padding: 0 !important;
-    max-width: 1000px !important;
+    max-width: 900px !important; /* Reduced from 1000px */
     margin: 0 auto !important;
 }
 
@@ -72,10 +72,11 @@ header[data-testid="stHeader"] {
     z-index: 999 !important;
 }
 
+/* Content wrapper adjustments */
 .content-wrapper {
     text-align: center;
-    padding: 2rem 1rem;
-    max-width: 800px;
+    padding: 2rem 1.5rem; /* Increased horizontal padding */
+    max-width: 700px; /* Reduced from 800px */
     margin: 0 auto;
 }
 
@@ -484,13 +485,14 @@ h2[id^="restaurant-safety-at-a-glance"] {
     max-width: 600px;
 }
 
+/* Search container adjustments */
 .search-container {
     position: relative !important;
     z-index: 1001 !important;
     background: var(--bg-white) !important;
-    padding: 0 1rem;
+    padding: 0 1.5rem; /* Increased from 1rem */
     margin: 0 auto 2rem;
-    max-width: 800px;
+    max-width: 700px; /* Reduced from 800px */
     width: 100%;
 }
 
