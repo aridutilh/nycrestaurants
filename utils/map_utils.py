@@ -1,28 +1,63 @@
 import plotly.express as px
 import plotly.graph_objects as go
+import pandas as pd
 
 def create_heatmap(df):
-    """Create a heatmap of restaurant safety scores"""
-    fig = px.density_mapbox(
-        df,
-        lat='latitude',
-        lon='longitude',
-        z='score',
-        radius=20,
-        center=dict(lat=40.7128, lon=-74.0060),
-        zoom=10,
-        mapbox_style="carto-positron",
-        color_continuous_scale="Reds",
-        opacity=0.7,
-        title="NYC Restaurant Safety Scores Heatmap"
-    )
-    
+    """Create a heatmap of restaurant safety scores with neighborhood-specific scaling"""
+    if df.empty:
+        return go.Figure()
+
+    # Create base figure
+    fig = go.Figure()
+
+    # Process each neighborhood separately
+    for neighborhood in df['boro'].unique():
+        neighborhood_data = df[df['boro'] == neighborhood]
+
+        # Skip if no data for this neighborhood
+        if neighborhood_data.empty:
+            continue
+
+        # Normalize scores within this neighborhood
+        min_score = neighborhood_data['score'].min()
+        max_score = neighborhood_data['score'].max()
+        normalized_scores = (neighborhood_data['score'] - min_score) / (max_score - min_score)
+
+        # Add trace for this neighborhood
+        fig.add_trace(
+            go.Densitymapbox(
+                lat=neighborhood_data['latitude'],
+                lon=neighborhood_data['longitude'],
+                z=normalized_scores,  # Use normalized scores for coloring
+                radius=20,
+                colorscale="Reds",
+                showscale=False,  # Hide individual scales
+                hoverongaps=False,
+                name=neighborhood,
+                hovertemplate=(
+                    "<b>%{text}</b><br>" +
+                    "Score: %{customdata}<br>" +
+                    "<extra></extra>"
+                ),
+                text=neighborhood_data['dba'],
+                customdata=neighborhood_data['score'],
+            )
+        )
+
+    # Update layout
     fig.update_layout(
-        mapbox_style="carto-positron",
+        mapbox=dict(
+            style="carto-positron",
+            center=dict(lat=40.7128, lon=-74.0060),
+            zoom=10
+        ),
+        showlegend=True,
+        legend_title_text="Neighborhoods",
         margin={"r":0,"t":0,"l":0,"b":0},
-        height=600
+        height=600,
+        mapbox_style="carto-positron"
     )
-    
+
     return fig
 
 def create_restaurant_map(row):
@@ -36,7 +71,7 @@ def create_restaurant_map(row):
             text=[row['dba']],
         )
     )
-    
+
     fig.update_layout(
         mapbox=dict(
             style="carto-positron",
@@ -46,5 +81,5 @@ def create_restaurant_map(row):
         margin={"r":0,"t":0,"l":0,"b":0},
         height=400
     )
-    
+
     return fig
