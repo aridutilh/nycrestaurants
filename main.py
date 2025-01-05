@@ -123,9 +123,35 @@ if st.session_state.data_loaded and st.session_state.data is not None:
         y=violation_counts.index,
         orientation='h',
         title=f'Top 5 Most Common Violations in {selected_boro}',
-        labels={'x': 'Number of Violations', 'y': 'Violation Type'}
+        labels={'x': 'Number of Incidents', 'y': ''},
+        color_discrete_sequence=['#FFA07A']  # Light salmon color
     )
-    fig_violations.update_layout(yaxis={'categoryorder': 'total ascending'})
+
+    # Update layout for better readability
+    fig_violations.update_layout(
+        plot_bgcolor='white',
+        paper_bgcolor='white',
+        title_x=0.5,
+        title_font_size=16,
+        showlegend=False,
+        height=400,
+        margin=dict(l=20, r=20, t=40, b=20),
+        xaxis=dict(
+            gridcolor='#E5E5E5',
+            title_font_size=14,
+            tickfont_size=12
+        ),
+        yaxis=dict(
+            categoryorder='total ascending',
+            tickfont_size=12,
+            tickfont_color='#333333'
+        )
+    )
+
+    # Add gridlines only for x-axis
+    fig_violations.update_xaxes(showgrid=True, gridwidth=1, gridcolor='#E5E5E5')
+    fig_violations.update_yaxes(showgrid=False)
+
     st.plotly_chart(fig_violations, use_container_width=True)
 
     # Simple Safety Guide
