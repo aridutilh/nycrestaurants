@@ -1,21 +1,193 @@
-/* Modern Retro Theme with Grid Pattern */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+/* Retro NYC Diner Theme */
+@import url('https://fonts.googleapis.com/css2?family=Satisfy&family=Fredoka+One&family=Inter:wght@400;500;600;700&display=swap');
 
+:root {
+    --diner-red: #FF4B5C;
+    --diner-turquoise: #40E0D0;
+    --diner-cream: #FFF6E6;
+    --diner-chrome: #E8E8E8;
+    --neon-glow: 0 0 7px #fff,
+                 0 0 10px #fff,
+                 0 0 21px #fff,
+                 0 0 42px var(--diner-turquoise),
+                 0 0 82px var(--diner-turquoise),
+                 0 0 92px var(--diner-turquoise);
+}
+
+/* Background with classic diner checkerboard pattern */
 .stApp {
-    background-color: #FFBE76;
+    background-color: var(--diner-cream);
     background-image: 
-        linear-gradient(45deg, #FA911D 25%, transparent 25%),
-        linear-gradient(-45deg, #FA911D 25%, transparent 25%),
-        linear-gradient(45deg, transparent 75%, #FA911D 75%),
-        linear-gradient(-45deg, transparent 75%, #FA911D 75%);
-    background-size: 20px 20px;
-    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+        linear-gradient(45deg, var(--diner-chrome) 25%, transparent 25%),
+        linear-gradient(-45deg, var(--diner-chrome) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, var(--diner-chrome) 75%),
+        linear-gradient(-45deg, transparent 75%, var(--diner-chrome) 75%);
+    background-size: 40px 40px;
+    background-position: 0 0, 0 20px, 20px -20px, -20px 0px;
     background-attachment: fixed;
 }
 
+/* Neon Header Styling */
 .simple-header {
     text-align: center;
     padding: 2rem 0;
+    margin-bottom: 2rem;
+    background: rgba(0, 0, 0, 0.85);
+    border-radius: 15px;
+    border: 3px solid var(--diner-chrome);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.simple-header h1 {
+    font-family: 'Fredoka One', cursive !important;
+    font-size: 4rem !important;
+    color: var(--diner-turquoise) !important;
+    text-shadow: var(--neon-glow);
+    margin: 0 !important;
+    animation: neonPulse 1.5s infinite alternate;
+}
+
+.garfield-quote {
+    font-family: 'Satisfy', cursive;
+    font-size: 1.5rem;
+    color: var(--diner-red);
+    margin-top: 1rem;
+    text-shadow: 0 0 5px rgba(255, 75, 92, 0.8);
+}
+
+@keyframes neonPulse {
+    from {
+        text-shadow: var(--neon-glow);
+    }
+    to {
+        text-shadow: 0 0 4px #fff,
+                     0 0 7px #fff,
+                     0 0 11px #fff,
+                     0 0 32px var(--diner-turquoise),
+                     0 0 62px var(--diner-turquoise),
+                     0 0 72px var(--diner-turquoise);
+    }
+}
+
+/* Retro-styled Cards and Containers */
+.search-container, .stExpander {
+    background: white !important;
+    border: 3px solid var(--diner-chrome) !important;
+    border-radius: 15px !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+    padding: 1.5rem !important;
+    margin: 1rem 0 !important;
+}
+
+/* Neon Button Styling */
+.stButton button {
+    background: var(--diner-turquoise) !important;
+    color: white !important;
+    font-family: 'Fredoka One', sans-serif !important;
+    border: none !important;
+    padding: 0.8rem 1.6rem !important;
+    border-radius: 10px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 0 10px rgba(64, 224, 208, 0.5) !important;
+}
+
+.stButton button:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 0 15px rgba(64, 224, 208, 0.8) !important;
+}
+
+/* Retro Input Styling */
+.stTextInput input {
+    background: var(--diner-cream) !important;
+    border: 2px solid var(--diner-chrome) !important;
+    border-radius: 10px !important;
+    padding: 1rem !important;
+    font-family: 'Fredoka One', sans-serif !important;
+    color: #333 !important;
+}
+
+/* Metrics Styling */
+.stMetric {
+    background: white !important;
+    border: 3px solid var(--diner-chrome) !important;
+    border-radius: 10px !important;
+    padding: 1rem !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+}
+
+.stMetric label {
+    color: var(--diner-red) !important;
+    font-family: 'Fredoka One', sans-serif !important;
+    font-size: 1rem !important;
+}
+
+.stMetric .metric-value {
+    color: var(--diner-turquoise) !important;
+    font-family: 'Fredoka One', sans-serif !important;
+    font-size: 2rem !important;
+    text-shadow: 0 0 5px rgba(64, 224, 208, 0.3);
+}
+
+/* Tabs Styling */
+.stTabs [data-baseweb="tab-list"] {
+    background: white !important;
+    border-radius: 10px !important;
+    padding: 0.5rem !important;
+    border: 3px solid var(--diner-chrome) !important;
+}
+
+.stTabs [data-baseweb="tab"] {
+    font-family: 'Fredoka One', sans-serif !important;
+    color: #666 !important;
+    background: var(--diner-cream) !important;
+    border-radius: 8px !important;
+    margin: 0 0.3rem !important;
+    transition: all 0.3s ease !important;
+}
+
+.stTabs [aria-selected="true"] {
+    background: var(--diner-turquoise) !important;
+    color: white !important;
+    box-shadow: 0 0 10px rgba(64, 224, 208, 0.5) !important;
+}
+
+/* Loading Animation */
+.loading-spinner {
+    width: 60px;
+    height: 60px;
+    border: 5px solid var(--diner-cream);
+    border-top: 5px solid var(--diner-turquoise);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 2rem auto;
+    box-shadow: 0 0 15px rgba(64, 224, 208, 0.5);
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Restaurant Rating Styles */
+.rating-container {
+    background: white !important;
+    border: 3px solid var(--diner-chrome) !important;
+    border-radius: 10px !important;
+    padding: 1.5rem !important;
+    margin: 1rem 0 !important;
+    text-align: center !important;
+}
+
+.rating-excellent .rating-text {
+    color: var(--diner-turquoise) !important;
+    text-shadow: 0 0 5px rgba(64, 224, 208, 0.5);
+}
+
+.rating-poor .rating-text {
+    color: var(--diner-red) !important;
+    text-shadow: 0 0 5px rgba(255, 75, 92, 0.5);
 }
 
 .emoji-container {
@@ -59,13 +231,13 @@
 .simple-header h1 {
     font-family: 'Inter', sans-serif;
     font-size: 3.5rem !important;
-    color: #1A1A1A;
+    color: var(--diner-turquoise);
     font-weight: 800 !important;
     letter-spacing: -0.03em;
     line-height: 1.1;
     margin: 0 !important;
     text-shadow: 2px 2px 0px rgba(250, 145, 29, 0.2);
-    background: white;
+    background: var(--diner-cream);
     padding: 1rem 2rem;
     border-radius: 15px;
     display: inline-block;
@@ -74,17 +246,16 @@
 .garfield-quote {
     font-family: 'Inter', sans-serif;
     font-size: 1.2rem;
-    color: #1A1A1A;
+    color: var(--diner-red);
     margin-top: 0.5rem;
     font-style: italic;
     text-shadow: 1px 1px 0px rgba(250, 145, 29, 0.1);
-    background: white;
+    background: var(--diner-cream);
     padding: 0.5rem 1rem;
     border-radius: 10px;
     display: inline-block;
 }
 
-/* Add gradient overlays for top and bottom blending */
 .stApp::before,
 .stApp::after {
     content: '';
@@ -114,63 +285,6 @@
     );
 }
 
-/* Search container and results */
-.search-container {
-    background: rgba(255, 255, 255, 0.95);
-    padding: 2.5rem;
-    border-radius: 24px;
-    box-shadow: 
-        0 8px 32px rgba(250, 145, 29, 0.15),
-        0 2px 8px rgba(250, 145, 29, 0.1);
-    margin: 2rem auto;
-    max-width: 1200px;
-    transition: transform 0.3s ease;
-}
-
-.search-container:hover {
-    transform: translateY(-2px);
-}
-
-.search-results {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
-    gap: 2rem;
-    padding: 1rem;
-}
-
-/* Expander styling */
-.stExpander {
-    background: white !important;
-    border-radius: 20px !important;
-    box-shadow: 
-        0 4px 16px rgba(250, 145, 29, 0.15),
-        0 1px 4px rgba(250, 145, 29, 0.1) !important;
-    transition: all 0.3s ease;
-}
-
-.stExpander:hover {
-    transform: translateY(-4px);
-    box-shadow: 
-        0 8px 24px rgba(250, 145, 29, 0.2),
-        0 2px 8px rgba(250, 145, 29, 0.15) !important;
-}
-
-.streamlit-expanderHeader {
-    background-color: white !important;
-    border-radius: 20px !important;
-    border: none !important;
-    padding: 1.2rem !important;
-    color: #1A1A1A !important;
-    font-weight: 600 !important;
-}
-
-.streamlit-expanderContent {
-    background: white !important;
-    padding: 1.8rem !important;
-    border-radius: 0 0 20px 20px !important;
-}
-
-/* Restaurant details */
 .restaurant-info-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -200,7 +314,6 @@
     letter-spacing: 0.02em;
 }
 
-/* Rating styles */
 .rating-container {
     padding: 2rem;
     text-align: center;
@@ -245,7 +358,6 @@
     font-size: 1.1rem;
 }
 
-/* Rating specific styles */
 .rating-excellent .rating-text {
     background: linear-gradient(135deg, #61CBBE 0%, #4DB6A9 100%);
     color: white;
@@ -268,7 +380,6 @@
     color: white;
 }
 
-/* Input styling */
 .stTextInput input {
     background: white !important;
     border: 2px solid rgba(250, 145, 29, 0.2) !important;
@@ -285,7 +396,6 @@
     transform: translateY(-2px);
 }
 
-/* Tabs styling */
 .stTabs [data-baseweb="tab-list"] {
     gap: 1rem;
     background-color: white;
@@ -314,7 +424,6 @@
     box-shadow: 0 4px 12px rgba(250, 145, 29, 0.2);
 }
 
-/* Button styling */
 .stButton button {
     background: linear-gradient(135deg, #FA911D 0%, #F87F0F 100%) !important;
     color: white !important;
@@ -333,7 +442,6 @@
     background: linear-gradient(135deg, #61CBBE 0%, #4DB6A9 100%) !important;
 }
 
-/* Map container */
 .map-container {
     margin-top: 1.5rem;
     border-radius: 20px;
@@ -344,7 +452,6 @@
         0 2px 8px rgba(250, 145, 29, 0.1);
 }
 
-/* Metrics styling */
 .stMetric {
     background: white !important;
     padding: 1.5rem !important;
@@ -372,7 +479,6 @@
     font-size: 1.8rem !important;
 }
 
-/* Text colors */
 p, span, div {
     color: #333;
 }
@@ -408,7 +514,6 @@ p, span, div {
     font-size: 1rem;
 }
 
-/* Loading animation */
 .loading-spinner {
     width: 50px;
     height: 50px;
