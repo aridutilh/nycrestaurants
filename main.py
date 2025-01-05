@@ -205,6 +205,9 @@ if st.session_state.data_loaded and st.session_state.data is not None:
         unsafe_allow_html=True
     )
 
+    # Add extra spacing
+    st.markdown("<div style='margin: 5rem 0;'></div>", unsafe_allow_html=True)
+
     # Simple Safety Guide
     st.markdown("""
         <div style='text-align: center; margin: 3rem 0;'>
