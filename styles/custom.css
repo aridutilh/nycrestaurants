@@ -403,6 +403,12 @@ p, span, div {
     cursor: pointer !important;
     transition: all 0.2s ease !important;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+    pointer-events: none !important;  /* Prevent text selection/editing */
+}
+
+/* Make only the dropdown arrow clickable */
+.neighborhood-toggle .stSelectbox > div > div > div:last-child {
+    pointer-events: auto !important;  /* Allow clicking the dropdown arrow */
 }
 
 /* Style the dropdown arrow */

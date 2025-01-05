@@ -92,17 +92,15 @@ if st.session_state.data_loaded and st.session_state.data is not None:
 
     # Neighborhood Toggle Section
     st.markdown("<h3 style='text-align: center; margin: 2rem 0;'>🏘️ Neighborhood View</h3>", unsafe_allow_html=True)
-    st.markdown('<div class="neighborhood-toggle">', unsafe_allow_html=True)
 
     # Add "All NYC" as the first option
     borough_options = ["All NYC"] + sorted(df['boro'].unique().tolist())
     selected_boro = st.selectbox(
-        "Select a neighborhood to explore",
-        borough_options,
+        label="Select a neighborhood to explore",
+        options=borough_options,
         key="neighborhood_selector",
-        help="Choose a borough to see detailed statistics"
+        label_visibility="collapsed"  # This hides the floating label
     )
-    st.markdown('</div>', unsafe_allow_html=True)
 
     # Filter data based on selection
     filtered_df = df if selected_boro == "All NYC" else df[df['boro'] == selected_boro]
