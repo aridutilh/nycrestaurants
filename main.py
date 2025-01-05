@@ -122,5 +122,25 @@ if st.session_state.data_loaded and st.session_state.data is not None:
             </p>
         </div>
     """, unsafe_allow_html=True)
+
+    # Footer
+    st.markdown("""
+        <div class="footer">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="https://github.com/yourusername/nyc-restaurant-safety" class="footer-link" target="_blank">
+                        <span>GitHub Repository</span>
+                    </a>
+                    <a href="https://data.cityofnewyork.us/Health/DOHMH-New-York-City-Restaurant-Inspection-Results/43nn-pn8j" 
+                       class="footer-link" target="_blank">
+                        <span>Data Source</span>
+                    </a>
+                </div>
+                <p class="footer-text">
+                    Built with ❤️ using Streamlit and NYC Open Data
+                </p>
+            </div>
+        </div>
+    """, unsafe_allow_html=True)
 else:
     st.warning("Please wait while we load the data...")
