@@ -81,7 +81,7 @@ header[data-testid="stHeader"] {
 /* Remove default focus outline and add custom styling */
 .stTextInput input:focus {
     outline: none !important;
-    border-color: var(--text-primary) !important;
+    border-color: var(--border-light) !important;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1) !important;
     transform: translateY(-2px);
 }
