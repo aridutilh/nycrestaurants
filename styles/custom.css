@@ -105,37 +105,52 @@ header[data-testid="stHeader"] {
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
 }
 
+/* Search Input Container Styling */
 .stTextInput > div {
-    margin: 0 auto 0.5rem !important;
-    max-width: 600px;
+    margin: 2rem auto 1rem !important;
+    max-width: 800px !important;  /* Increased width for prominence */
+    padding: 0 1rem;
 }
 
 .stTextInput input {
     background: var(--bg-white) !important;
     border: 2px solid var(--border-light) !important;
-    border-radius: 12px !important;
-    padding: 1rem 1.5rem !important;
+    border-radius: 16px !important;  /* Increased border radius */
+    padding: 1.25rem 2rem !important;  /* Increased padding */
     font-family: 'Inter', sans-serif !important;
-    font-size: 1rem !important;
+    font-size: 1.2rem !important;  /* Larger font size */
     color: var(--text-primary) !important;
     transition: all 0.2s ease;
     width: 100% !important;
-    max-width: 600px !important;
+    max-width: 800px !important;
     margin: 0 auto !important;
     display: block !important;
     height: auto !important;
-    min-height: 50px !important;
+    min-height: 65px !important;  /* Increased height */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;  /* Added subtle shadow by default */
 }
 
 .stTextInput input:focus {
     border-color: var(--text-primary) !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1) !important;  /* Enhanced shadow on focus */
+    transform: translateY(-2px);  /* Subtle lift effect on focus */
 }
 
 .stTextInput input::placeholder {
     color: var(--text-secondary) !important;
-    opacity: 0.7 !important;
+    opacity: 0.8 !important;  /* Made placeholder more visible */
+    font-size: 1.2rem !important;
 }
+
+.search-label {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 1rem;  /* Slightly larger label */
+    margin: 0.75rem 0 2.5rem !important;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;  /* Made label slightly bolder */
+}
+
 
 .search-label {
     text-align: center;
@@ -144,7 +159,6 @@ header[data-testid="stHeader"] {
     margin: 0.5rem 0 2rem !important;
     font-family: 'Inter', sans-serif;
 }
-
 
 /* Metrics Styling */
 .stMetric {
