@@ -18,7 +18,7 @@
 /* Header Styling */
 .simple-header {
     text-align: center;
-    padding: 1.5rem 0;  /* Reduced from 3rem to 1.5rem */
+    padding: 0.5rem 0 1.5rem;  /* Reduced top padding significantly */
     margin-bottom: 3rem;
     border-bottom: 1px solid var(--border-light);
     max-width: 800px;
@@ -35,6 +35,7 @@
     letter-spacing: -0.02em;
     line-height: 1.1;
     margin: 0 !important;
+    padding-top: 0.5rem;  /* Small padding to prevent touching the top */
 }
 
 .subheader {
@@ -287,13 +288,13 @@ p, span, div {
 .floating-emojis {
     position: relative;
     width: 100%;
-    height: 60px;  /* Increased height to accommodate larger emojis */
-    margin-bottom: 1.5rem;
+    height: 60px;
+    margin-bottom: 1rem;  /* Reduced margin to keep things tight */
 }
 
 .floating-emojis span {
     position: absolute;
-    font-size: 3rem;  /* Increased from 2rem to 3rem */
+    font-size: 3rem;
     opacity: 0.8;
     animation-duration: 3s;
     animation-iteration-count: infinite;
@@ -301,12 +302,12 @@ p, span, div {
 }
 
 .float-left {
-    left: 5%;  /* Moved more to the left from 15% */
+    left: 5%;
     animation-name: floatLeft;
 }
 
 .float-right {
-    right: 5%;  /* Moved more to the right from 15% */
+    right: 5%;
     animation-name: floatRight;
 }
 
