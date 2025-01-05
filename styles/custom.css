@@ -20,19 +20,27 @@ header[data-testid="stHeader"] {
 
 /* Block container adjustments */
 .block-container {
-    padding-top: 3rem !important;
-    max-width: 1200px !important;
+    padding: 0 !important;
+    max-width: none !important;
+}
+
+/* Override Streamlit's default padding */
+.element-container, .stTextInput {
+    width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    max-width: none !important;
 }
 
 /* Search input styling */
 [data-testid="stTextInput"] {
     margin: 3rem auto !important;
-    width: 100% !important;
-    max-width: 800px !important;
+    padding: 0 2rem !important;
 }
 
 .stTextInput > div {
-    width: 100% !important;
+    max-width: 800px !important;
+    margin: 0 auto !important;
 }
 
 .stTextInput input {
@@ -77,6 +85,9 @@ header[data-testid="stHeader"] {
     margin-bottom: 1rem;
     line-height: 1.2;
 }
+
+/* Font imports */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 .subtitle {
     font-size: 1.25rem;
@@ -150,8 +161,6 @@ header[data-testid="stHeader"] {
     padding: 1rem !important;
 }
 
-/* Font imports */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 .results-header {
     font-size: 1.125rem;
@@ -349,13 +358,6 @@ header[data-testid="stHeader"] {
 p, span, div {
     color: var(--text-primary);
     font-family: 'Inter', sans-serif;
-}
-
-div[data-testid="block-container"] > div:first-child {
-    position: relative;
-    z-index: 100;
-    margin-top: 4rem !important;
-    background: transparent;
 }
 
 
