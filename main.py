@@ -116,8 +116,37 @@ if st.session_state.data_loaded and st.session_state.data is not None:
     # Most Common Issues Section
     st.markdown("<h3 style='text-align: center; margin: 2rem 0;'>⚠️ Most Common Issues</h3>", unsafe_allow_html=True)
 
-    # Group and count violation descriptions for the selected borough
-    violation_counts = filtered_df['violation_description'].value_counts().head(5)
+    def shorten_violation_description(desc):
+        """Create shorter versions of violation descriptions"""
+        if pd.isna(desc):
+            return "Other violation"
+
+        # Common mappings for violations
+        mappings = {
+            "mice": "Evidence of mice",
+            "roach": "Roach activity",
+            "filth flies": "Flies present",
+            "food contact surface": "Unclean surfaces",
+            "hand washing": "Improper hand washing",
+            "cold food": "Temperature violation",
+            "hot food": "Temperature violation",
+            "sanitized": "Poor sanitization",
+            "vermin": "Vermin issue",
+            "facilities": "Facility violation"
+        }
+
+        # Find the first matching key and return its shortened version
+        desc_lower = desc.lower()
+        for key, short_desc in mappings.items():
+            if key in desc_lower:
+                return short_desc
+
+        # If no specific mapping found, return first 50 characters
+        return desc[:50] + "..." if len(desc) > 50 else desc
+
+    # Create shortened violation descriptions
+    filtered_df['short_violation'] = filtered_df['violation_description'].apply(shorten_violation_description)
+    violation_counts = filtered_df['short_violation'].value_counts().head(5)
     fig_violations = px.bar(
         x=violation_counts.values,
         y=violation_counts.index,
