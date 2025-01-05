@@ -23,8 +23,8 @@ header[data-testid="stHeader"] {
 /* Header Styling */
 .simple-header {
     text-align: center;
-    padding: 0.5rem 0;  /* Reduced padding */
-    margin-bottom: 1rem;  /* Reduced margin */
+    padding: 1rem 0;
+    margin-bottom: 0.5rem;
     border-bottom: 1px solid var(--border-light);
     max-width: 800px;
     margin-left: auto;
@@ -39,7 +39,7 @@ header[data-testid="stHeader"] {
     font-weight: 600 !important;
     letter-spacing: -0.02em;
     line-height: 1.1;
-    margin: 0 0 1rem 0 !important;  /* Added bottom margin */
+    margin: 0 0 1.5rem 0 !important;
     padding-top: 0.5rem;
 }
 
@@ -48,9 +48,9 @@ header[data-testid="stHeader"] {
     font-family: 'Inter', sans-serif;
     font-size: 1.125rem;
     color: var(--text-secondary);
-    margin: 1rem auto !important;  /* Adjusted margins */
+    margin: 1.5rem auto 2rem !important;
     font-weight: 400;
-    max-width: 800px;
+    max-width: 600px;
     width: 100%;
     text-align: center;
 }
@@ -105,25 +105,30 @@ header[data-testid="stHeader"] {
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
 }
 
+.stTextInput > div {
+    margin-bottom: 1rem !important;
+}
+
 .stTextInput input {
     background: var(--bg-white) !important;
     border: 2px solid var(--border-light) !important;
     border-radius: 12px !important;
-    padding: 1.25rem 1.5rem !important;
+    padding: 0.75rem 1.25rem !important;
     font-family: 'Inter', sans-serif !important;
-    font-size: 1.125rem !important;
+    font-size: 1rem !important;
     color: var(--text-primary) !important;
     transition: all 0.2s ease;
     width: 100% !important;
-    max-width: 800px !important;
+    max-width: 600px !important;
     margin: 0 auto !important;
     display: block !important;
+    height: auto !important;
+    min-height: 45px !important;
 }
 
 .stTextInput input:focus {
     border-color: var(--text-primary) !important;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15) !important;
-    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
 }
 
 .stTextInput input::placeholder {
@@ -263,7 +268,7 @@ p, span, div {
     position: relative;
     width: 100%;
     height: 60px;
-    margin-bottom: 1rem;  /* Reduced margin to keep things tight */
+    margin-bottom: 1rem;
 }
 
 .floating-emojis span {
@@ -378,12 +383,12 @@ p, span, div {
     cursor: pointer !important;
     transition: all 0.2s ease !important;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
-    pointer-events: none !important;  /* Prevent text selection/editing */
+    pointer-events: none !important;
 }
 
 /* Make only the dropdown arrow clickable */
 .neighborhood-toggle .stSelectbox > div > div > div:last-child {
-    pointer-events: auto !important;  /* Allow clicking the dropdown arrow */
+    pointer-events: auto !important;
 }
 
 /* Style the dropdown arrow */
@@ -528,47 +533,4 @@ p, span, div {
 .streamlit-expanderContent {
     border: none !important;
     padding: 0.5rem !important;
-}
-
-/* Add these styles at the end of the file, after the existing footer styles */
-.footer {
-    margin-top: 4rem;
-    padding: 2rem;
-    background: white;
-    border-top: 1px solid var(--border-light);
-    text-align: center;
-}
-
-.footer-content {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.footer-links {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    color: var(--text-secondary);
-    font-size: 0.875rem;
-}
-
-.footer-links a {
-    color: var(--text-secondary);
-    text-decoration: none;
-    transition: color 0.2s ease;
-}
-
-.footer-links a:hover {
-    color: var(--text-primary);
-}
-
-.github-link {
-    display: flex;
-    align-items: center;
-}
-
-.github-link svg {
-    width: 24px;
-    height: 24px;
 }
