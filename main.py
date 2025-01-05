@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 from components.header import render_header, render_loading
 from components.search import render_search
-
+from components.maps import render_map_view
 from components.restaurant_details import render_restaurant_details
 from utils.data_loader import load_nyc_restaurant_data
 
@@ -89,6 +89,10 @@ if st.session_state.data_loaded and st.session_state.data is not None:
             f"{avg_score:.1f}",
             help="Lower score indicates better safety standards"
         )
+
+    # Interactive Map
+    st.markdown("<h3 style='text-align: center; margin: 2rem 0;'>📍 Restaurant Locations</h3>", unsafe_allow_html=True)
+    render_map_view(df)
 
     # Simple Safety Guide
     st.markdown("""
