@@ -48,10 +48,23 @@ st.markdown("""
             width: 100% !important;
             padding: 1rem !important;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+            overflow: hidden !important;
+            height: auto !important;
+            min-height: fit-content !important;
+        }
+        /* Make header elements stay in place */
+        .stApp > header > div {
+            position: relative !important;
+            overflow: hidden !important;
         }
         /* Add padding to main content to prevent overlap with fixed header */
         .main .block-container {
             padding-top: 5rem !important;
+        }
+        /* Prevent any scrolling within header elements */
+        .stApp > header *, .stApp > header div {
+            overflow: hidden !important;
+            max-height: none !important;
         }
     </style>
 """, unsafe_allow_html=True)
