@@ -23,8 +23,8 @@ header[data-testid="stHeader"] {
 /* Header Styling */
 .simple-header {
     text-align: center;
-    padding: 1.5rem 0 2.5rem;
-    margin-bottom: 2rem;
+    padding: 1.5rem 0 4rem;  /* Increased bottom padding */
+    margin-bottom: 3rem;     /* Increased bottom margin */
     border-bottom: 1px solid var(--border-light);
     max-width: 800px;
     margin-left: auto;
@@ -57,7 +57,7 @@ header[data-testid="stHeader"] {
 
 /* Search Input Container Styling */
 .stTextInput > div {
-    margin: 0 auto 1.5rem !important;
+    margin: 0 auto !important;
     max-width: 800px !important;
     padding: 0 1rem;
 }
@@ -104,8 +104,8 @@ div[data-testid="stFormSubmitButton"] button:focus,
 
 /* Add extra spacing between search and content */
 .search-results {
-    margin-top: 4rem !important;
-    padding-top: 2rem !important;
+    margin-top: 2rem !important;
+    padding-top: 1rem !important;
 }
 
 .header-links {
@@ -160,6 +160,7 @@ div[data-testid="stFormSubmitButton"] button:focus,
     font-family: 'Inter', sans-serif;
     font-weight: 500;
 }
+
 
 
 /* Metrics Styling */
