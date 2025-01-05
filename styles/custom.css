@@ -36,11 +36,15 @@ header[data-testid="stHeader"] {
 [data-testid="stTextInput"] {
     margin: 3rem auto 5rem !important;
     padding: 0 2rem !important;
+    position: relative !important;
+    z-index: 1000 !important;
 }
 
 .stTextInput > div {
     max-width: 900px !important;
     margin: 0 auto !important;
+    position: relative !important;
+    z-index: 1000 !important;
 }
 
 .stTextInput input {
@@ -55,21 +59,23 @@ header[data-testid="stHeader"] {
     min-height: 70px !important;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
     transition: all 0.2s ease-in-out !important;
+    position: relative !important;
+    z-index: 1000 !important;
 }
 
-.stTextInput input:focus {
-    border-color: var(--accent-color) !important;
-    box-shadow: 0 8px 24px rgba(59, 130, 246, 0.15) !important;
-    outline: none !important;
-    transform: translateY(-2px);
+/* Ensure search container is above other elements */
+.search-container {
+    position: relative !important;
+    z-index: 1000 !important;
+    background: var(--bg-white) !important;
 }
 
-.stTextInput input::placeholder {
-    color: var(--secondary-color) !important;
-    opacity: 0.8 !important;
+/* Ensure other elements stay below */
+.results-container, .content-wrapper {
+    position: relative !important;
+    z-index: 999 !important;
 }
 
-/* Content wrapper */
 .content-wrapper {
     text-align: center;
     padding: 2rem 1rem;
@@ -485,9 +491,9 @@ h2[id^="restaurant-safety-at-a-glance"] {
 }
 
 .search-container {
-    position: relative;
-    z-index: 1001;
-    background: var(--bg-white);
+    position: relative !important;
+    z-index: 1001 !important;
+    background: var(--bg-white) !important;
     padding: 0 1rem;
     margin: 0 auto 2rem;
     max-width: 800px;
