@@ -1,11 +1,15 @@
 import streamlit as st
 
 def render_header():
-    """Render the app header with simplified styling"""
+    """Render the app header with simplified styling and floating emojis"""
     st.markdown(
         """
         <div class="simple-header">
-            <h1>NYC Food Safety</h1>
+            <div class="emoji-container">
+                <span class="floating-emoji left">🍕</span>
+                <h1>NYC Food Safety</h1>
+                <span class="floating-emoji right">🗽</span>
+            </div>
         </div>
         """,
         unsafe_allow_html=True
