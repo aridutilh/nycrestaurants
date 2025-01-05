@@ -126,31 +126,15 @@ def search_restaurants(df, query):
         # Handle special characters in search
         query = query.replace("'", "''")  # Escape single quotes
 
-        # Create the search mask with error handling for each column
-        mask = pd.Series(False, index=df.index)
-
-        # Search in restaurant name
+        # Search only in restaurant name (dba column)
         try:
             name_mask = df['dba'].str.lower().str.contains(query, na=False)
-            mask = mask | name_mask
+            results = df[name_mask].head(1000)  # Limit to 1000 results for performance
+            return results.sort_values('inspection_date', ascending=False)
+
         except Exception as e:
             st.warning(f"Error searching restaurant names: {str(e)}")
-
-        # Search in address
-        try:
-            building_mask = df['building'].str.lower().str.contains(query, na=False)
-            street_mask = df['street'].str.lower().str.contains(query, na=False)
-            mask = mask | building_mask | street_mask
-        except Exception as e:
-            st.warning(f"Error searching addresses: {str(e)}")
-
-        # Apply the mask and limit results
-        results = df[mask].head(1000)  # Limit to 1000 results for performance
-
-        # Sort results by inspection date
-        results = results.sort_values('inspection_date', ascending=False)
-
-        return results
+            return pd.DataFrame()
 
     except Exception as e:
         st.error(f"Error during restaurant search: {str(e)}")
