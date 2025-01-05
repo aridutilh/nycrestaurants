@@ -8,14 +8,72 @@ def load_nyc_restaurant_data():
     """Load NYC restaurant inspection data from the Open Data API"""
     url = "https://data.cityofnewyork.us/resource/43nn-pn8j.csv"
 
-    # Set a large limit to get more restaurants
-    query_params = {
-        '$limit': 50000,  # Get up to 50,000 records
-        '$order': 'inspection_date DESC',
-        '$where': 'inspection_date IS NOT NULL'  # Ensure we get records with valid inspection dates
-    }
+    # Initialize empty list to store all dataframes
+    all_data = []
+    offset = 0
+    page_size = 1000
+    total_fetched = 0
 
-    return fetch_data(url, query_params)
+    while True:
+        # Set query parameters for pagination
+        query_params = {
+            '$limit': page_size,
+            '$offset': offset,
+            '$order': 'inspection_date DESC',
+            '$where': 'inspection_date IS NOT NULL'
+        }
+
+        # Fetch page of data
+        df_page = fetch_data(url, query_params)
+
+        # If page is empty or error occurred, break the loop
+        if df_page.empty:
+            break
+
+        all_data.append(df_page)
+        total_fetched += len(df_page)
+
+        # Update progress message
+        st.info(f"Loading restaurants... Retrieved {total_fetched:,} records so far")
+
+        # If we got less than page_size records, we've reached the end
+        if len(df_page) < page_size:
+            break
+
+        # Increment offset for next page
+        offset += page_size
+
+    # If we got no data at all, return empty DataFrame
+    if not all_data:
+        st.error("No data received from the API")
+        return pd.DataFrame()
+
+    # Combine all pages into single DataFrame
+    df = pd.concat(all_data, ignore_index=True)
+
+    # Clean and process the combined data
+    df['inspection_date'] = pd.to_datetime(df['inspection_date'], errors='coerce')
+    df = df.dropna(subset=['latitude', 'longitude'])  # Only drop rows missing coordinates
+
+    # Convert score to numeric, handling missing values
+    df['score'] = pd.to_numeric(df['score'], errors='coerce')
+    median_score = df['score'].median()
+    df['score'] = df['score'].fillna(median_score)
+
+    # Add year column for time-lapse
+    df['year'] = df['inspection_date'].dt.year
+
+    # Fill NA values in string columns with empty strings
+    string_columns = ['dba', 'building', 'street', 'grade']
+    df[string_columns] = df[string_columns].fillna('')
+
+    # Remove duplicate records keeping the latest inspection for each restaurant
+    df = df.sort_values('inspection_date', ascending=False).drop_duplicates(subset='camis')
+
+    # Log the final number of unique restaurants
+    st.success(f"Successfully loaded {len(df):,} unique restaurants from the API")
+
+    return df
 
 def fetch_data(url, query_params=None):
     """Fetch data from NYC Open Data API with optional query parameters"""
@@ -25,32 +83,7 @@ def fetch_data(url, query_params=None):
         response.raise_for_status()
 
         # Read CSV data
-        df = pd.read_csv(io.StringIO(response.text))
-
-        if df.empty:
-            st.error("No data received from the API")
-            return pd.DataFrame()
-
-        # Clean and process the data
-        df['inspection_date'] = pd.to_datetime(df['inspection_date'], errors='coerce')
-        df = df.dropna(subset=['latitude', 'longitude'])  # Only drop rows missing coordinates
-
-        # Convert score to numeric, handling missing values
-        df['score'] = pd.to_numeric(df['score'], errors='coerce')
-        median_score = df['score'].median()
-        df['score'] = df['score'].fillna(median_score)
-
-        # Add year column for time-lapse
-        df['year'] = df['inspection_date'].dt.year
-
-        # Fill NA values in string columns with empty strings
-        string_columns = ['dba', 'building', 'street', 'grade']
-        df[string_columns] = df[string_columns].fillna('')
-
-        # Log the number of restaurants for debugging
-        st.info(f"Loaded {len(df['camis'].unique())} unique restaurants from the API")
-
-        return df
+        return pd.read_csv(io.StringIO(response.text))
 
     except requests.RequestException as e:
         st.error(f"Error fetching data from API: {str(e)}")
