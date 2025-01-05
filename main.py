@@ -6,10 +6,15 @@ from utils.data_loader import load_nyc_restaurant_data, search_restaurants
 
 # Page configuration
 st.set_page_config(
-    page_title="NYC Restaurant Safety Explorer",
+    page_title="🍕 NYC Food Safety",
     page_icon="🍕",
     layout="wide",
-    initial_sidebar_state="collapsed"
+    initial_sidebar_state="collapsed",
+    menu_items={
+        'Get Help': 'https://github.com/aridutilh/nycrestaurants/issues',
+        'Report a bug': 'https://github.com/aridutilh/nycrestaurants/issues',
+        'About': "NYC Food Safety Explorer helps you discover restaurant inspection results across New York City. Data sourced from NYC Open Data."
+    }
 )
 
 # Load custom CSS
@@ -111,7 +116,7 @@ if st.session_state.data_loaded and st.session_state.data is not None:
             f"{avg_score:.1f}",
             help="Lower score indicates better safety standards"
         )
-    
+
     st.markdown("</div>", unsafe_allow_html=True)
 
     # Neighborhood Toggle Section
@@ -184,7 +189,7 @@ if st.session_state.data_loaded and st.session_state.data is not None:
     # Create centered container and columns for stats
     st.markdown("<div style='max-width: 800px; margin: 0 auto; padding: 0 1rem;'>", unsafe_allow_html=True)
     cols = st.columns([0.2, 1, 1, 0.1])  # Increased left padding
-    
+
     with cols[1]:
         st.metric(
             "🐀 Rats/Mice Reports",
@@ -208,7 +213,7 @@ if st.session_state.data_loaded and st.session_state.data is not None:
             pest_stats['vermin'],
             help="Number of other pest-related violations"
         )
-    
+
     st.markdown("</div>", unsafe_allow_html=True)
 
     # Add extra spacing
