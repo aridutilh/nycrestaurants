@@ -1,8 +1,8 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-from components.search import render_search_section
-from utils.data_loader import load_nyc_restaurant_data
+from components.header import render_header
+from utils.data_loader import load_nyc_restaurant_data, search_restaurants
 
 # Page configuration
 st.set_page_config(
@@ -39,10 +39,42 @@ if not st.session_state.data_loaded:
 if st.session_state.data_loaded and st.session_state.data is not None:
     df = st.session_state.data
 
-    # Render search section at the top
-    render_search_section(df)
+    # Render header with integrated search
+    render_header()
 
-    # Add spacing between search and main content
+    # Handle search results if there's a query
+    search_query = st.session_state.get('search_query', '').strip()
+    if search_query:
+        results = search_restaurants(df, search_query)
+        if results is None or results.empty:
+            st.warning("No restaurants found matching your search.")
+        else:
+            st.markdown(f"##### Found {len(results)} matching restaurants:")
+            st.markdown("<div class='search-results'>", unsafe_allow_html=True)
+
+            for idx, row in results.iterrows():
+                expander_label = (
+                    f"🏪 {row['dba']} - "
+                    f"{row['grade'] if pd.notna(row['grade']) else 'Grade N/A'} "
+                    f"(Score: {int(row['score']) if pd.notna(row['score']) else 'N/A'})"
+                )
+
+                with st.expander(expander_label, expanded=False):
+                    st.markdown(f"""
+                    <div class='restaurant-result'>
+                        <p>📍 {row['building']} {row['street']}, {row['boro']}</p>
+                        <p>📅 Inspected: {row['inspection_date'].strftime('%B %d, %Y')}</p>
+                        {f"<p class='violation'>❗ {row['violation_description']}</p>" if pd.notna(row['violation_description']) else ""}
+                        <div class='restaurant-details'>
+                            <span>🍽️ {row['cuisine_description'] if pd.notna(row['cuisine_description']) else 'N/A'}</span>
+                            {f"<span class='critical'>⚠️ {row['critical_flag']}</span>" if pd.notna(row['critical_flag']) else ""}
+                        </div>
+                    </div>
+                    """, unsafe_allow_html=True)
+
+            st.markdown("</div>", unsafe_allow_html=True)
+
+    # Add spacing between search results and main content
     st.markdown("<div style='margin-top: 3rem;'></div>", unsafe_allow_html=True)
 
     # Restaurant Safety at a Glance Section
@@ -211,5 +243,6 @@ if st.session_state.data_loaded and st.session_state.data is not None:
             </div>
         </div>
     """, unsafe_allow_html=True)
+
 else:
     st.warning("Please wait while we load the data...")

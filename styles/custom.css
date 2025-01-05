@@ -48,11 +48,64 @@ header[data-testid="stHeader"] {
     font-family: 'Inter', sans-serif;
     font-size: 1.125rem;
     color: var(--text-secondary);
-    margin: 0 auto 2.5rem !important;
+    margin: 0 auto 2rem !important;
     font-weight: 400;
     max-width: 600px;
     width: 100%;
     text-align: center;
+}
+
+/* Search Input Container Styling */
+.stTextInput > div {
+    margin: 0 auto 1.5rem !important;
+    max-width: 800px !important;
+    padding: 0 1rem;
+}
+
+.stTextInput input {
+    background: var(--bg-white) !important;
+    border: 2px solid var(--border-light) !important;
+    border-radius: 16px !important;
+    padding: 1.25rem 2rem !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 1.2rem !important;
+    color: var(--text-primary) !important;
+    transition: all 0.2s ease;
+    width: 100% !important;
+    max-width: 800px !important;
+    margin: 0 auto !important;
+    display: block !important;
+    height: auto !important;
+    min-height: 65px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Remove default focus outline and add custom styling */
+.stTextInput input:focus {
+    outline: none !important;
+    border-color: var(--text-primary) !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1) !important;
+    transform: translateY(-2px);
+}
+
+.stTextInput input::placeholder {
+    color: var(--text-secondary) !important;
+    opacity: 0.8 !important;
+    font-size: 1.2rem !important;
+}
+
+/* Additional styles to remove any Streamlit-specific focus outlines */
+div[data-testid="stText"] input:focus,
+div[data-testid="stFormSubmitButton"] button:focus,
+.stTextInput div[data-baseweb="input"] > div:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Add extra spacing between search and content */
+.search-results {
+    margin-top: 4rem !important;
+    padding-top: 2rem !important;
 }
 
 .header-links {
@@ -96,53 +149,7 @@ header[data-testid="stHeader"] {
 
 /* Input Styling */
 /* Enhanced Search Styling */
-.search-input-container {
-    max-width: 800px;
-    margin: 2rem auto;
-    padding: 1rem;
-    background: white;
-    border-radius: 16px;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
-}
 
-/* Search Input Container Styling */
-.stTextInput > div {
-    margin: 0 auto 1.5rem !important;
-    max-width: 800px !important;
-    padding: 0 1rem;
-}
-
-.stTextInput input {
-    background: var(--bg-white) !important;
-    border: 2px solid var(--border-light) !important;
-    border-radius: 16px !important;
-    padding: 1.25rem 2rem !important;
-    font-family: 'Inter', sans-serif !important;
-    font-size: 1.2rem !important;
-    color: var(--text-primary) !important;
-    transition: all 0.2s ease;
-    width: 100% !important;
-    max-width: 800px !important;
-    margin: 0 auto !important;
-    display: block !important;
-    height: auto !important;
-    min-height: 65px !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
-}
-
-/* Remove default focus outline and add custom styling */
-.stTextInput input:focus {
-    outline: none !important;
-    border-color: var(--text-primary) !important;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1) !important;
-    transform: translateY(-2px);
-}
-
-.stTextInput input::placeholder {
-    color: var(--text-secondary) !important;
-    opacity: 0.8 !important;
-    font-size: 1.2rem !important;
-}
 
 /* Search label styling */
 .search-label {
@@ -152,20 +159,6 @@ header[data-testid="stHeader"] {
     margin: 0.75rem 0 3rem !important;
     font-family: 'Inter', sans-serif;
     font-weight: 500;
-}
-
-/* Add extra spacing between search and content */
-.search-results {
-    margin-top: 4rem !important;
-    padding-top: 2rem !important;
-}
-
-/* Additional styles to remove any Streamlit-specific focus outlines */
-div[data-testid="stText"] input:focus,
-div[data-testid="stFormSubmitButton"] button:focus,
-.stTextInput div[data-baseweb="input"] > div:focus {
-    outline: none !important;
-    box-shadow: none !important;
 }
 
 

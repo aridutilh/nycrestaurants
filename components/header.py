@@ -17,7 +17,6 @@ def render_header():
             <p class="subheader">
                 Explore food safety ratings and inspection results across New York City
             </p>
-        </div>
         """,
         unsafe_allow_html=True
     )
@@ -30,6 +29,9 @@ def render_header():
         key="search_input",
         help="Enter restaurant name, address, or borough"
     )
+
+    # Close the header div after the search
+    st.markdown("</div>", unsafe_allow_html=True)
 
     # Update session state when search input changes
     if search_query != st.session_state.search_query:
