@@ -59,8 +59,17 @@ header[data-testid="stHeader"] {
     max-width: 800px !important;
     padding: 0 1rem;
     position: relative;
-    z-index: 1000;
+    z-index: 9999 !important;
     background: var(--bg-white);
+    pointer-events: auto !important;
+}
+
+.stApp > header {
+    z-index: 1 !important;
+}
+
+div[data-testid="stToolbar"] {
+    z-index: 1 !important;
 }
 
 /* Container for the entire search section */
