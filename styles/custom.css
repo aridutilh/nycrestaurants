@@ -560,9 +560,22 @@ p, span, div {
 }
 
 .search-container {
-    margin: 1rem 0 !important;
-    padding: 1rem 0 !important;
+    margin: 0 !important;
+    padding: 1rem 0 3rem !important;
     position: relative;
-    z-index: 50;
+    z-index: 100;
     background: var(--bg-white);
+    width: 100%;
+}
+
+/* Ensure content below search stays behind */
+.block-container {
+    padding-top: 1rem;
+    z-index: 1;
+    position: relative;
+}
+
+/* Fix streamlit elements positioning */
+.stApp > div:first-child {
+    z-index: auto !important;
 }
