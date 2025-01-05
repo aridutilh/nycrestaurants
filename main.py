@@ -106,7 +106,7 @@ if st.session_state.data_loaded and st.session_state.data is not None:
     filtered_df = df if selected_boro == "All NYC" else df[df['boro'] == selected_boro]
 
     # Grade Distribution Section
-    st.markdown("<h3 style='text-align: center; margin: 2rem 0;'>📊 Grade Distribution</h3>", unsafe_allow_html=True)
+    st.markdown("<h3 style='text-align: center; margin: 2rem 0;'>Grade Distribution</h3>", unsafe_allow_html=True)
     grade_dist = filtered_df[filtered_df['grade'].isin(['A', 'B', 'C'])]['grade'].value_counts()
     fig_grades = px.pie(
         values=grade_dist.values,
@@ -114,6 +114,14 @@ if st.session_state.data_loaded and st.session_state.data is not None:
         title=f'Restaurant Grades Distribution in {selected_boro}',
         color_discrete_sequence=['#2ECC71', '#F1C40F', '#E74C3C']
     )
+
+    # Update layout for clean background
+    fig_grades.update_layout(
+        plot_bgcolor='white',
+        paper_bgcolor='white',
+        margin=dict(t=40, b=20, l=20, r=20)
+    )
+
     st.plotly_chart(fig_grades, use_container_width=True)
 
     # Most Common Issues Section (now Biggest Icks)
