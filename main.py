@@ -17,9 +17,30 @@ st.set_page_config(
     }
 )
 
-# Load custom CSS
+# Load custom CSS and add viewport meta tag
 with open('styles/custom.css') as f:
     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+
+# Add viewport meta tag for mobile responsiveness
+st.markdown("""
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+""", unsafe_allow_html=True)
+
+# Adjust container width for mobile responsiveness
+st.markdown("""
+    <style>
+        .element-container, .stApp {
+            width: 100% !important;
+            padding: 0 !important;
+            max-width: 100vw !important;
+            overflow-x: hidden !important;
+        }
+        [data-testid="stSidebarContent"] {
+            width: 100% !important;
+            max-width: 100vw !important;
+        }
+    </style>
+""", unsafe_allow_html=True)
 
 # Initialize session state for data loading
 if 'data_loaded' not in st.session_state:
