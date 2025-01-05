@@ -65,6 +65,15 @@
     text-shadow: 2px 2px 0px rgba(250, 145, 29, 0.2);
 }
 
+.garfield-quote {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.2rem;
+    color: #666;
+    margin-top: 0.5rem;
+    font-style: italic;
+    text-shadow: 1px 1px 0px rgba(250, 145, 29, 0.1);
+}
+
 /* Search container and results */
 .search-container {
     background: rgba(255, 255, 255, 0.95);
@@ -360,14 +369,17 @@ p, span, div {
 }
 
 /* Loading animation */
-@keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(250, 145, 29, 0.1);
+    border-top: 5px solid #FA911D;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 2rem auto;
 }
 
-.loading-icon {
-    font-size: 3rem;
-    display: inline-block;
-    animation: float 2s ease-in-out infinite;
-    margin: 1rem 0;
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
