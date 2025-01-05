@@ -28,8 +28,7 @@ header[data-testid="stHeader"] {
 [data-testid="stTextInput"] {
     margin: 3rem auto !important;
     width: 100% !important;
-    max-width: 700px !important;
-    padding: 0 2rem !important;
+    max-width: 800px !important;
 }
 
 .stTextInput > div {
@@ -38,7 +37,6 @@ header[data-testid="stHeader"] {
 
 .stTextInput input {
     width: 100% !important;
-    max-width: none !important;
     background: var(--background-color) !important;
     border: 2px solid var(--border-color) !important;
     border-radius: 12px !important;
@@ -49,7 +47,6 @@ header[data-testid="stHeader"] {
     min-height: 70px !important;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
     transition: all 0.2s ease-in-out !important;
-    margin: 0 !important;
 }
 
 .stTextInput input:focus {
@@ -72,13 +69,6 @@ header[data-testid="stHeader"] {
     margin: 0 auto;
 }
 
-/* Content wrapper */
-.content-wrapper {
-    text-align: center;
-    padding: 2rem 1rem;
-    max-width: 800px;
-    margin: 0 auto;
-}
 .content-wrapper h1 {
     font-family: 'Inter', -apple-system, system-ui, sans-serif;
     font-size: 3rem;
