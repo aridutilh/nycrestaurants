@@ -155,7 +155,7 @@ if st.session_state.data_loaded and st.session_state.data is not None:
     st.markdown("""
         <h3 style='text-align: center; margin: 2rem 0 0.5rem;'>🪳 Top Icks Report</h3>
         <p style='text-align: center; font-size: 0.9rem; color: #666; margin-bottom: 2rem;'>
-            These statistics show reported violations involving pests during health inspections. 
+            These statistics show reported violations involving pests during health inspections from the past 12 months. 
             Multiple violations may be reported for the same establishment.
         </p>
     """, unsafe_allow_html=True)
