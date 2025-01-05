@@ -134,10 +134,10 @@ if st.session_state.data_loaded and st.session_state.data is not None:
         color_discrete_sequence=['#2ECC71', '#F1C40F', '#E74C3C']
     )
 
-    # Update layout for clean background
+    # Update layout for transparent background
     fig_grades.update_layout(
-        plot_bgcolor='white',
-        paper_bgcolor='white',
+        plot_bgcolor='rgba(0,0,0,0)',
+        paper_bgcolor='rgba(0,0,0,0)',
         margin=dict(t=40, b=20, l=20, r=20)
     )
 
