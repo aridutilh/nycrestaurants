@@ -43,8 +43,6 @@ if 'is_loading' not in st.session_state:
 if not st.session_state.data_loaded:
     try:
         st.session_state.is_loading = True
-        if st.session_state.is_loading:
-            render_loading()  # Only show loading when actively fetching
         data = load_nyc_restaurant_data()
         if not data.empty:
             st.session_state.data = data

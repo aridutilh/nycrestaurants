@@ -17,7 +17,6 @@ def load_nyc_restaurant_data():
         cached_data = load_from_cache()
         if cached_data is not None:
             metadata = get_cache_metadata()
-            st.success(f"Loaded {metadata['unique_restaurants']:,} restaurants from cache (Last updated: {metadata['last_updated']})")
             return cached_data
 
     # Initialize empty list to store all dataframes
@@ -48,9 +47,6 @@ def load_nyc_restaurant_data():
 
             all_data.append(df_page)
             total_fetched += len(df_page)
-
-            # Update progress message
-            st.info(f"Loading restaurants from API... Retrieved {total_fetched:,} records so far")
 
             # If we got less than page_size records, we've reached the end
             if len(df_page) < page_size:
@@ -92,9 +88,6 @@ def load_nyc_restaurant_data():
 
         # Save the processed data to cache
         save_to_cache(df)
-
-        # Log the final number of unique restaurants
-        st.success(f"Successfully loaded {len(df):,} unique restaurants from API and updated cache")
 
         return df
     finally:

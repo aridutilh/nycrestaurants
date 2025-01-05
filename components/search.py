@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 from utils.data_loader import search_restaurants
-from components.header import render_loading
 from components.restaurant_details import render_restaurant_details
 
 def render_search(df):
@@ -24,8 +23,6 @@ def render_search(df):
 
     if search_query:
         st.session_state.is_loading = True
-        if st.session_state.is_loading:
-            render_loading()
         try:
             results = search_restaurants(df, search_query)
 
