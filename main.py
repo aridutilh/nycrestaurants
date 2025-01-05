@@ -81,11 +81,11 @@ if st.session_state.data_loaded and st.session_state.data is not None:
     st.markdown("<h2 style='text-align: center; margin-bottom: 2rem;'>🍽️ Restaurant Safety at a Glance</h2>", unsafe_allow_html=True)
 
     # Add container with max-width for better centering
-    st.markdown("<div style='max-width: 1000px; margin: 0 auto; padding: 0 1rem;'>", unsafe_allow_html=True)
+    st.markdown("<div style='max-width: 800px; margin: 0 auto; padding: 0 1rem;'>", unsafe_allow_html=True)
 
-    # Metrics in two rows
-    col1, col2 = st.columns(2)
-    with col1:
+    # Metrics in two rows with padding columns
+    cols = st.columns([0.1, 1, 1, 0.1])  # Add padding columns
+    with cols[1]:
         st.metric(
             "Active Restaurants",
             f"{len(df['camis'].unique()):,}",
@@ -98,7 +98,7 @@ if st.session_state.data_loaded and st.session_state.data is not None:
             help="Percentage of restaurants with Grade A rating"
         )
 
-    with col2:
+    with cols[2]:
         recent_inspections = len(df[df['inspection_date'] >= (pd.Timestamp.now() - pd.Timedelta(days=30))])
         st.metric(
             "Recent Inspections",
@@ -182,10 +182,10 @@ if st.session_state.data_loaded and st.session_state.data is not None:
         pest_stats[pest_type] = len(pest_df[mask])
 
     # Create centered container and columns for stats
-    st.markdown("<div style='max-width: 1000px; margin: 0 auto; padding: 0 1rem;'>", unsafe_allow_html=True)
-    col1, col2 = st.columns(2)
-
-    with col1:
+    st.markdown("<div style='max-width: 800px; margin: 0 auto; padding: 0 1rem;'>", unsafe_allow_html=True)
+    cols = st.columns([0.1, 1, 1, 0.1])  # Add padding columns
+    
+    with cols[1]:
         st.metric(
             "🐀 Rats/Mice Reports",
             pest_stats['rats/mice'],
@@ -197,7 +197,7 @@ if st.session_state.data_loaded and st.session_state.data is not None:
             help="Number of fly-related violations"
         )
 
-    with col2:
+    with cols[2]:
         st.metric(
             "🪳 Cockroach Reports",
             pest_stats['cockroaches'],
