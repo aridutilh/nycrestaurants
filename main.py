@@ -26,7 +26,7 @@ st.markdown("""
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 """, unsafe_allow_html=True)
 
-# Adjust container width for mobile responsiveness
+# Adjust container width for mobile responsiveness and fix header
 st.markdown("""
     <style>
         .element-container, .stApp {
@@ -38,6 +38,20 @@ st.markdown("""
         [data-testid="stSidebarContent"] {
             width: 100% !important;
             max-width: 100vw !important;
+        }
+        /* Fix header at top */
+        .stApp > header {
+            position: fixed !important;
+            top: 0 !important;
+            z-index: 999 !important;
+            background: white !important;
+            width: 100% !important;
+            padding: 1rem !important;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+        }
+        /* Add padding to main content to prevent overlap with fixed header */
+        .main .block-container {
+            padding-top: 5rem !important;
         }
     </style>
 """, unsafe_allow_html=True)
