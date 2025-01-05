@@ -23,8 +23,8 @@ header[data-testid="stHeader"] {
 /* Header Styling */
 .simple-header {
     text-align: center;
-    padding: 0.5rem 0 1.5rem;  /* Reduced top padding significantly */
-    margin-bottom: 3rem;
+    padding: 0.5rem 0;  /* Reduced padding */
+    margin-bottom: 1rem;  /* Reduced margin */
     border-bottom: 1px solid var(--border-light);
     max-width: 800px;
     margin-left: auto;
@@ -39,15 +39,16 @@ header[data-testid="stHeader"] {
     font-weight: 600 !important;
     letter-spacing: -0.02em;
     line-height: 1.1;
-    margin: 0 !important;
-    padding-top: 0.5rem;  /* Small padding to prevent touching the top */
+    margin: 0 0 1rem 0 !important;  /* Added bottom margin */
+    padding-top: 0.5rem;
 }
 
+/* Updated subheader styling */
 .subheader {
     font-family: 'Inter', sans-serif;
     font-size: 1.125rem;
     color: var(--text-secondary);
-    margin: 1rem auto 2rem;  /* Adjusted margins */
+    margin: 1rem auto !important;  /* Adjusted margins */
     font-weight: 400;
     max-width: 800px;
     width: 100%;
@@ -530,7 +531,6 @@ p, span, div {
 }
 
 /* Add these styles at the end of the file, after the existing footer styles */
-
 .footer {
     margin-top: 4rem;
     padding: 2rem;

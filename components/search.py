@@ -4,7 +4,7 @@ from utils.data_loader import search_restaurants
 
 def render_search_section(df):
     """Render the search section including header and results"""
-    # Header section
+    # Header section with integrated search
     st.markdown(
         """
         <div class="simple-header">
@@ -13,28 +13,31 @@ def render_search_section(df):
                 <span class="float-right">👨‍🍳</span>
             </div>
             <h1>NYC Restaurant Safety</h1>
-            <p class="subheader">
-                Explore food safety ratings and inspection results across New York City
-            </p>
         </div>
         """,
         unsafe_allow_html=True
     )
 
-    # Initialize session state
-    if 'search_query' not in st.session_state:
-        st.session_state.search_query = ''
-
-    # Search input using native Streamlit component
+    # Search input using native Streamlit component - now directly below title
     search_query = st.text_input(
         label="Search restaurants",
-        value=st.session_state.search_query,
+        value=st.session_state.get('search_query', ''),
         placeholder="🔍 Enter restaurant name...",
         key="search_input_field"
     )
 
+    # Subheader after search
+    st.markdown(
+        """
+        <p class="subheader">
+            Explore food safety ratings and inspection results across New York City
+        </p>
+        """,
+        unsafe_allow_html=True
+    )
+
     # Update search state
-    if search_query != st.session_state.search_query:
+    if 'search_query' not in st.session_state or search_query != st.session_state.search_query:
         st.session_state.search_query = search_query
 
     # Display results section only if there's a search query
