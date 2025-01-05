@@ -2,6 +2,10 @@ import streamlit as st
 
 def render_header():
     """Render the app header with minimalist styling"""
+    # Initialize search query in session state if not present
+    if 'search_query' not in st.session_state:
+        st.session_state.search_query = ''
+
     st.markdown(
         """
         <div class="simple-header">
@@ -18,7 +22,9 @@ def render_header():
                 <input type="text" 
                     class="search-input" 
                     placeholder="Search any restaurant in NYC..."
+                    value=""
                     onchange="handleSearchChange(this.value)"
+                    oninput="this.dispatchEvent(new Event('change'))"
                     aria-label="Search restaurants"
                 />
             </div>
@@ -26,11 +32,13 @@ def render_header():
 
         <script>
         function handleSearchChange(value) {
-            if (window.parent.stStreamlitPyObject) {
-                window.parent.stStreamlitPyObject.sendBackMsg({
-                    type: "streamlit:setComponentValue",
-                    value: value
-                });
+            // Send the value to Streamlit using the correct event format
+            const data = {
+                search_query: value
+            };
+
+            if (window.parent.streamlit) {
+                window.parent.streamlit.setComponentValue(data);
             }
         }
         </script>

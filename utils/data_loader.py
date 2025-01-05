@@ -111,18 +111,50 @@ def fetch_data(url, query_params=None):
         return pd.DataFrame()
 
 def search_restaurants(df, query):
-    """Search restaurants using loaded data"""
-    if not query:
+    """Search restaurants using loaded data with improved error handling"""
+    try:
+        if df is None or df.empty:
+            st.warning("No restaurant data available for search.")
+            return pd.DataFrame()
+
+        if not query:
+            return pd.DataFrame()
+
+        # Clean and normalize the search query
+        query = query.lower().strip()
+
+        # Handle special characters in search
+        query = query.replace("'", "''")  # Escape single quotes
+
+        # Create the search mask with error handling for each column
+        mask = pd.Series(False, index=df.index)
+
+        # Search in restaurant name
+        try:
+            name_mask = df['dba'].str.lower().str.contains(query, na=False)
+            mask = mask | name_mask
+        except Exception as e:
+            st.warning(f"Error searching restaurant names: {str(e)}")
+
+        # Search in address
+        try:
+            building_mask = df['building'].str.lower().str.contains(query, na=False)
+            street_mask = df['street'].str.lower().str.contains(query, na=False)
+            mask = mask | building_mask | street_mask
+        except Exception as e:
+            st.warning(f"Error searching addresses: {str(e)}")
+
+        # Apply the mask and limit results
+        results = df[mask].head(1000)  # Limit to 1000 results for performance
+
+        # Sort results by inspection date
+        results = results.sort_values('inspection_date', ascending=False)
+
+        return results
+
+    except Exception as e:
+        st.error(f"Error during restaurant search: {str(e)}")
         return pd.DataFrame()
-
-    query = query.lower().strip()
-    mask = (
-        df['dba'].str.lower().str.contains(query, na=False) |
-        df['building'].str.lower().str.contains(query, na=False) |
-        df['street'].str.lower().str.contains(query, na=False)
-    )
-
-    return df[mask].head(1000)  # Limit to 1000 results for performance
 
 def filter_data_by_year(df, year):
     """Filter dataset by specific year"""
