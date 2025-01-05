@@ -34,58 +34,47 @@ header[data-testid="stHeader"] {
 
 /* Search input styling */
 [data-testid="stTextInput"] {
-    margin: 4rem 2rem 6rem !important;
+    margin: 2rem auto !important;
     position: relative !important;
     z-index: 1000 !important;
-    width: calc(100% - 4rem) !important;
-    max-width: none !important;
+    width: calc(100% - 8rem) !important;
+    max-width: 800px !important;
 }
 
 .stTextInput > div {
     margin: 0 auto !important;
     position: relative !important;
     z-index: 1000 !important;
-    max-width: 1400px !important;
+    max-width: 800px !important;
     background: white !important;
-    border-radius: 32px !important;
-    box-shadow: 0 16px 60px rgba(0, 0, 0, 0.15) !important;
-    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
-}
-
-.stTextInput > div:hover {
-    transform: translateY(-4px) !important;
-    box-shadow: 0 20px 70px rgba(0, 0, 0, 0.18) !important;
+    border-radius: 4px !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
 }
 
 .stTextInput input {
     width: 100% !important;
     background: transparent !important;
-    border: 2px solid rgba(0, 0, 0, 0.08) !important;
-    border-radius: 32px !important;
-    padding: 2.5rem 3rem !important;
-    font-size: 1.75rem !important;
+    border: 1px solid rgba(0, 0, 0, 0.15) !important;
+    border-radius: 4px !important;
+    padding: 1rem 1.5rem !important;
+    font-size: 1.25rem !important;
     color: var(--primary-color) !important;
     height: auto !important;
-    min-height: 110px !important;
-    transition: all 0.2s ease-in-out !important;
-    position: relative !important;
-    z-index: 1000 !important;
-    backdrop-filter: blur(8px) !important;
+    min-height: 60px !important;
+    transition: border-color 0.2s ease-in-out !important;
 }
 
 .stTextInput input:focus {
     outline: none !important;
     border-color: var(--accent-color) !important;
-    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1) !important;
-    transform: none !important;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1) !important;
 }
 
 .stTextInput input::placeholder {
     color: var(--secondary-color) !important;
     opacity: 0.7 !important;
-    font-size: 1.6rem !important;
+    font-size: 1.1rem !important;
     font-weight: 400 !important;
-    letter-spacing: -0.01em !important;
 }
 
 /* Ensure other elements stay below */
