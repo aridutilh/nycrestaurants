@@ -8,6 +8,9 @@ enableXsrfProtection = false
 maxUploadSize = 200
 gatherUsageStats = false
 
+[ui]
+hideTopBar = true
+
 [theme]
 primaryColor = "#FA911D"  # Warm accent orange
 backgroundColor = "#F5F5F5"  # Light gray background
